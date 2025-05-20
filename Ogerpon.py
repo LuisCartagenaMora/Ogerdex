@@ -2,52 +2,6 @@ from bs4 import BeautifulSoup
 import requests
 import json
 
-def scrapeWebsite(link):
-    request = requests.get(link)
-    print(request.status_code)
-    return request.text
-
-# ------------------------------------------------------------------
-# Basic scraping without sending headers, User-Agents
-
-country_link = "https://www.scrapethissite.com/pages/simple/"
-hockey_link = "https://www.scrapethissite.com/pages/forms/"
-
-def getCountries(countries_html):
-    soup = BeautifulSoup(countries_html, 'html.parser')
-    for country in soup.select(".country"):
-        country_info = country.get_text(",", True)
-        print(country_info)
-
-def getHockeyTeams(hockeyTeams_html):
-    soup = BeautifulSoup(hockeyTeams_html, 'html.parser')
-    for team in soup.select(".team"):
-        team_info = team.get_text(",",True)
-        print(team_info)
-
-# ------
-# returns the html text from the websites.
-# scraped_countries = scrapeWebsite(country_link)
-# scraped_hockey = scrapeWebsite(hockey_link)
-
-# ------
-# prints the scpecified information from each html.
-# getCountries(scraped_countries)
-# getHockeyTeams(scraped_hockey)
-
-# ------------------------------------------------------------------
-# Unable to do requests this was because it gets blocked. Might need to use headers? 
-# Otherwise, use Amazons API to extract information.
-
-# pokemon_link ="https://www.amazon.com/s?k=crown+zenith&crid=274XAVGR41D08&sprefix=crown+zenith%2Caps%2C142&ref=nb_sb_noss_1"
-
-# scraped_pokemon = scrapeWebsite(pokemon_link)
-# print(scraped_pokemon)
-
-
-# ------------------------------------------------------------------
-# Get pokemon?
-
 def getPokemonInfo(criteria, pokemon):
     request = requests.get("https://pokeapi.co/api/v2/" + criteria + "/" + str(pokemon) + "/")
     json_string = request.text
@@ -160,13 +114,29 @@ def getEvolution(pokemon):
 def getPokemonEvolutionChain(chainId):
     response = requests.get("https://pokeapi.co/api/v2/evolution-chain/" + str(chainId) + "/")
     evo_data = response.json()
-    if evo_data["chain"]["evolves_to"] != 'None':
-        print(evo_data["chain"]["species"])
+    evo_chain = {
+        0: "None",
+        1: "None",
+        2: "None"
+    }
+    # Stores the initial pokemon in the evolution chain.
+    evo_chain[0] = evo_data["chain"]["species"]
+    # Stores the initial pokemon in the evolution chain. If a pokemon does not,
+    # continue the chain it returns the object with one pokemon.
+    if evo_data["chain"]["evolves_to"]:
         print(evo_data["chain"]["evolves_to"][0]["species"]) 
-        if evo_data["chain"]["evolves_to"][0]["evolves_to"] != 'None':
-            print(evo_data["chain"]["evolves_to"][0]["evolves_to"][0]["species"])
+        evo_chain[1] = evo_data["chain"]["evolves_to"][0]["species"]
+
+    # Stores the initial pokemon in the evolution chain. If a pokemon does not,
+    # continue the chain it returns the object with two pokemon.
+    if evo_data["chain"]["evolves_to"][0]["evolves_to"] :
+        print(evo_data["chain"]["evolves_to"][0]["evolves_to"][0]["species"])
+        evo_chain[2] = evo_data["chain"]["evolves_to"][0]["evolves_to"][0]["species"]
+
+    return evo_chain
 
 
+# getPokemonMoves func works, but takes takes a while before fetching limited number of moves.
 def getPokemon(pokemon):
     name = getPokemonName(pokemon)
     types = getPokemonType(pokemon)
@@ -181,4 +151,4 @@ def getPokemon(pokemon):
     # print("Moves: " + str(moves))
     print("Evolutions: " + str(evo))
 
-getPokemon(100)
+getPokemon(134)
