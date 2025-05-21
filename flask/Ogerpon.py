@@ -150,5 +150,12 @@ def getPokemon(pokemon):
     print("Stats: " + str(stats))
     # print("Moves: " + str(moves))
     print("Evolutions: " + str(evo))
+    return {
+        "name": name,
+        "type": types,
+        "ability": ability,
+        "stats": stats,
+        "evo": evo
+    }
 
 getPokemon(134)
