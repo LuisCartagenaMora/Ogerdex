@@ -94,19 +94,22 @@ async function getPokemonMoves(pokemon, config) {
 async function getEvolution(pokemon) {
   const res = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemon}/`);
   const data = await res.json();
-  const evolution_chain = {
-    pre_evo: 'None'
-  };
-  if (data.evolves_from_species) {
-    evolution_chain.pre_evo = data.evolves_from_species.name;
-  } else {
-    return 'None';
-  }
-  return evolution_chain;
+  const url = data.evolution_chain['url']
+  return getPokemonEvolutionChain(url)
+  // const evolution_chain = {
+  //   pre_evo: 'None'
+  // };
+  // if (data.evolves_from_species) {
+  //   evolution_chain.pre_evo = data.evolves_from_species.name;
+  // } else {
+  //   return 'None';
+  // }
+  // return evolution_chain;
 }
 
-async function getPokemonEvolutionChain(chainId) {
-  const res = await fetch(`https://pokeapi.co/api/v2/evolution-chain/${chainId}/`);
+//
+async function getPokemonEvolutionChain(url) {
+  const res = await fetch(url);
   const data = await res.json();
   const evo_chain = {
     0: "None",
@@ -128,9 +131,9 @@ export default async function getPokemon(pokemon) {
   const types = await getPokemonType(pokemon);
   const ability = await getPokemonAbilities(pokemon);
   const stats = await pokemonStats(pokemon);
-  const evo = await getPokemonEvolutionChain(pokemon); // should be evolution-chain ID, not pokemon ID
+  const evo = await getEvolution(pokemon); // should be evolution-chain ID, not pokemon ID
 
-  console.log("Name: " + name);
+  console.log("Name: " + JSON.stringify(name));
   console.log("Type: " + JSON.stringify(types));
   console.log("Abilities: " + JSON.stringify(ability));
   console.log("Stats: " + JSON.stringify(stats));
@@ -146,4 +149,4 @@ export default async function getPokemon(pokemon) {
 }
 
 // Example usage:
-getPokemon(134);
+getPokemon('eevee');

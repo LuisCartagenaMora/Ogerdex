@@ -11,9 +11,9 @@ app.get('/', (req, res) => {
   res.send("Welcome to the Ogerdex")
 })
 
-app.get('/pokemon/:pokeId', async (req, res) => {
-  const pokeId = req.params.pokeId
-  const pokemon = await getPokemon(2)
+app.get('/pokemon/:pokemonName', async (req, res) => {
+  const name = req.params.pokemonName
+  const pokemon = await getPokemon(name)
   res.send(pokemon)
 })
 
