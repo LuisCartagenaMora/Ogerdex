@@ -133,15 +133,14 @@ export default async function getPokemon(pokemon) {
   const stats = await pokemonStats(pokemon);
   const evo = await getEvolution(pokemon); // should be evolution-chain ID, not pokemon ID
 
-  console.log("Name: " + JSON.stringify(name));
+  console.log("Name: " + name);
   console.log("Type: " + JSON.stringify(types));
   console.log("Abilities: " + JSON.stringify(ability));
   console.log("Stats: " + JSON.stringify(stats));
   console.log("Evolutions: " + JSON.stringify(evo));
 
   return {
-    name,
-    type: types,
+    name, type: types,
     ability,
     stats,
     evo

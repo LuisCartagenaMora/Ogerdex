@@ -1,0 +1,144 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../assets/emerald_map.jpeg"); /* Replace with your image path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Optional: makes the image stay fixed during scroll */
+}
+
+.landing-page-container {
+  display: flex;
+  justify-content: center; /* Horizontal centering */
+  align-items: center; /* Vertical centering */
+  height: 50vh; /* Full viewport height */
+}
+
+.title-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* .app-description {
+  height: 100px;
+  width: 100px;
+} */
+
+.welcome-text {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  font-size: 85px;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.welcome-title {
+  padding-left: 10px;
+  align-content: center;
+  font-size: 85px;
+  max-width: min-content;
+  color: red;
+}
+
+.app-description {
+  font-size: x-large;
+  max-width: 55vw;
+}
+
+.description-container {
+  max-height: fit-content;
+  max-width: fit-content;
+  background-color: white;
+  opacity: 0.8;
+}
+
+.description-container > * {
+  opacity: 1;
+}
+
+/* ------------------------------------------------ */
+/* Incomplete pokedex  */
+/* ------------------------------------------------ */
+.pokedex-shell {
+  padding-left: 20px;
+}
+
+.pokedex-text {
+  font-size: 320%;
+  transform: skew(20deg);
+  color: black;
+}
+
+.pokedex-outer {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-auto-flow: column;
+  border: solid 2px;
+  height: 32vh;
+  width: 20vw;
+  transform: skew(-20deg);
+  background-color: red;
+}
+
+.pokedex-inner {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 18vw;
+  border: solid 2px;
+  background-color: white;
+}
+
+.cyan-circle {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  transform: skew(20deg);
+  background-color: cyan;
+}
+
+.white-circle {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  transform: skew(20deg);
+  background-color: white;
+}
+
+.red-circle {
+  height: 30px;
+  width: 30px;
+  padding-left: 20px;
+  border-radius: 50%;
+  transform: skew(20deg);
+  background-color: rgb(165, 0, 0);
+}
+
+.green-circle {
+  height: 30px;
+  width: 30px;
+  padding: 40px;
+  border-radius: 50%;
+  transform: skew(20deg);
+  background-color: greenyellow;
+}
+
+.yellow-circle {
+  height: 30px;
+  width: 30px;
+  padding: 60px;
+  border-radius: 50%;
+  transform: skew(20deg);
+  background-color: yellow;
+}

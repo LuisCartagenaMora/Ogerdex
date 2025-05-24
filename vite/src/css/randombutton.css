@@ -1,0 +1,11 @@
+.random-button {
+  margin-top: 10px;
+  height: 50px;
+  width: 200px;
+  border-radius: 25px;
+  background-color: red;
+}
+
+.random-button:hover {
+  background-color: rgb(150, 2, 2);
+}
