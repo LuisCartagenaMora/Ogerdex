@@ -1,0 +1,12 @@
+.details-box {
+  height: 300px;
+  max-width: 300px;
+  background-color: white;
+}
+
+.pokemon-sprite {
+  margin-top: 10px;
+  border-radius: 50%;
+  height: 200px;
+  background-color: rgb(218, 218, 218);
+}

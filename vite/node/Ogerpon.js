@@ -13,6 +13,14 @@ async function getPokemonName(pokemon) {
   return data.name;
 }
 
+async function getPokemonSprite(pokemon) {
+  const data = await getPokemonInfo("pokemon", pokemon);
+  const generations = Object.keys(data.sprites.versions)
+  const currentGen = generations[7].icons
+  return data.sprites.versions["generation-viii"].icons.front_default
+  // return data.sprites.front_default
+}
+
 async function getPokemonType(pokemon) {
   const data = await getPokemonInfo("pokemon", pokemon);
   return data.types.map(t => t.type.name);
@@ -21,6 +29,7 @@ async function getPokemonType(pokemon) {
 async function pokemonStats(pokemon) {
   const statsData = await getPokemonInfo("pokemon", pokemon);
   const stats = statsData.stats;
+  console.log("THIS: " + stats)
   return {
     hp: stats[0].base_stat,
     attack: stats[1].base_stat,
@@ -128,24 +137,17 @@ async function getPokemonEvolutionChain(url) {
 
 export default async function getPokemon(pokemon) {
   const name = await getPokemonName(pokemon);
+  const sprite = await getPokemonSprite(pokemon)
   const types = await getPokemonType(pokemon);
   const ability = await getPokemonAbilities(pokemon);
   const stats = await pokemonStats(pokemon);
   const evo = await getEvolution(pokemon); // should be evolution-chain ID, not pokemon ID
 
-  console.log("Name: " + name);
-  console.log("Type: " + JSON.stringify(types));
-  console.log("Abilities: " + JSON.stringify(ability));
-  console.log("Stats: " + JSON.stringify(stats));
-  console.log("Evolutions: " + JSON.stringify(evo));
-
   return {
     name, type: types,
+    sprite,
     ability,
     stats,
     evo
   };
 }
-
-// Example usage:
-getPokemon('eevee');

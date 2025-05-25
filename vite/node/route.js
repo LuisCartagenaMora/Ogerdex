@@ -1,19 +1,24 @@
 
 // Load HTTP module
 
-import getPokemon from '../node/Ogerpon.js';
+import getPokemon from './Ogerpon.js';
 import express from 'express';
 const app = express();
 const hostname = "127.0.0.1";
 const port = 3000;
 
-app.get('/', (req, res) => {
+app.get('/home', (req, res) => {
   res.send("Welcome to the Ogerdex")
 })
 
-app.get('/pokemon/:pokemonName', async (req, res) => {
+app.get('/pokemon/name/:pokemonName', async (req, res) => {
   const name = req.params.pokemonName
   const pokemon = await getPokemon(name)
+  res.send(pokemon)
+})
+app.get('/pokemon/id/:pokemonId', async (req, res) => {
+  const id = req.params.pokemonId
+  const pokemon = await getPokemon(id)
   res.send(pokemon)
 })
 

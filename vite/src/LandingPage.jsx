@@ -1,7 +1,9 @@
 import '../src/css/Welcome Page.css'
 import '../src/css/searchbar.css'
 import '../src/css/randombutton.css'
-function App() {
+import RandomButton from '../src/components/RandomButton.jsx'
+import SearchBar from '../src/components/SearchBar.jsx'
+function LandingPage() {
 
   return (
     <>
@@ -19,8 +21,8 @@ function App() {
               "bulbasaur" or by its unique id "1".
             </p>
           </div>
-          <input className='search-bar' placeholder='Type pokemons name/id'></input>
-          <button className='random-button' onMo>RANDOM POKEMON</button>
+          <SearchBar />
+          <RandomButton />
         </div>
 
         {/* <div className='pokedex-shell'>
@@ -42,4 +44,4 @@ function App() {
   )
 }
 
-export default App
+export default LandingPage

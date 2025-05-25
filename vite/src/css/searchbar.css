@@ -1,5 +1,9 @@
 .search-bar {
   margin-top: 20px;
-  height: 30px;
+  height: 40px;
   width: 400px;
+  font-size: large;
+  text-indent: 10px;
+  border: none;
+  border-radius: 50px;
 }
