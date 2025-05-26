@@ -10,6 +10,12 @@ img {
   padding-right: 0;
 }
 
+.pokemon-cards-section {
+  display: flex;
+  justify-content: space-around;
+  flex-flow: row;
+}
+
 .details-card {
   display: grid;
   grid-template-columns: 6 6;

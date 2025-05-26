@@ -15,8 +15,8 @@ function PokemonCard({ pokemonId }) {
   useEffect(() => {
     async function fetchPokemon() {
       try {
+        if (!pokemonId) return;
         const pokemon = await getPokemon(pokemonId);
-        console.log(pokemon);
         setPokemonDetails(pokemon);
         const statLabels = Object.keys(pokemon.stats);
         const values = Object.values(pokemon.stats);
@@ -30,7 +30,6 @@ function PokemonCard({ pokemonId }) {
 
   return (
     <>
-      {console.log(pokemonDetails?.evo)}
       <div className="details-card">
         {pokemonDetails?.sprite && (
           <img

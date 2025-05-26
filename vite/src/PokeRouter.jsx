@@ -7,7 +7,7 @@ function PokeRouter() {
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/pokemon/id/:pokemonId" element={<PokemonInfo />} />
-      <Route path="/pokemon/name/:pokemonName" element={<PokemonInfo />} />
+      {/* <Route path="/pokemon/name/:pokemonName" element={<PokemonInfo />} /> */}
     </Routes>
   );
 }
