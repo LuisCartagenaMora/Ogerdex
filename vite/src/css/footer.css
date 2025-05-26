@@ -1,5 +1,8 @@
 .footer-box {
-  height: 80px;
-  max-width: 100%;
-  background-color: red;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 10vh;
+  width: 100%;
+  background-color: #ee1515;
 }

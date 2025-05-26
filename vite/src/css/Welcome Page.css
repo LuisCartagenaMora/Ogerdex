@@ -47,7 +47,7 @@ body {
   align-content: center;
   font-size: 85px;
   max-width: min-content;
-  color: red;
+  color: #ee1515;
 }
 
 .app-description {
@@ -88,7 +88,7 @@ body {
   height: 32vh;
   width: 20vw;
   transform: skew(-20deg);
-  background-color: red;
+  background-color: #ee1515;
 }
 
 .pokedex-inner {
