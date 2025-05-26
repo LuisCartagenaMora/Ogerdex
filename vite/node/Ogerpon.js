@@ -150,7 +150,7 @@ async function getPokemonForms(pokemon) {
     `https://pokeapi.co/api/v2/pokemon-species/${pokemon}/`
   );
   const data = await res.json();
-  return data.varieties;
+  console.log(data.varieties);
 }
 
 export default async function getPokemon(pokemon) {
@@ -174,5 +174,3 @@ export default async function getPokemon(pokemon) {
     forms,
   };
 }
-
-getPokemon(5);
