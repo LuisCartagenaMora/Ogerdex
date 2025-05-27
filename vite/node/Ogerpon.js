@@ -140,11 +140,15 @@ async function getPokemonEvolutionChain(url) {
     }
     return evo_chain;
   } else {
+    console.log(data.chain.species.url.slice(42).replace('/', ''))
     const evoChain = evoLength.map((evo) => {
+      evo.species.id = evo.species.url.slice(42).replace('/', '')
       return evo.species;
     });
 
-    evoChain[0] = data.chain.species;
+    //Necessary for the eeveelutions, since eevee isn't inserted in the map function.
+    evoChain.unshift(data.chain.species);
+    evoChain[0].id = data.chain.species.url.slice(42).replace('/', '')
     return evoChain;
   }
 }
@@ -162,8 +166,8 @@ export default async function getPokemon(pokemon) {
   const name = await getPokemonName(pokemonData);
   const sprite = await getPokemonSprite(pokemonData);
   const types = await getPokemonType(pokemonData);
-  const ability = await getPokemonAbilities(pokemonData);
-  const stats = await pokemonStats(pokemonData);
+  const ability = getPokemonAbilities(pokemonData);
+  const stats = pokemonStats(pokemonData);
   const totalStat = await getPokemonTotalStat(pokemonData);
   const evo = await getEvolution(speciesData);
   const forms = await getPokemonForms(speciesData);
