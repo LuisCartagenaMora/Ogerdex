@@ -26,6 +26,16 @@ img {
   text-transform: capitalize;
 }
 
+.details-card-highlight {
+  display: grid;
+  grid-template-columns: 6 6;
+  grid-template-rows: 3 3 3 3;
+  height: max-content;
+  max-width: max-content;
+  text-transform: capitalize;
+  background-color: rgb(182, 137, 137);
+}
+
 .pokemon-details-box {
   grid-column-start: 2;
 }

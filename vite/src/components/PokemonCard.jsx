@@ -5,7 +5,7 @@ import "../css/details.css";
 
 import typeIcons from "../assets/typeIcons.jsx";
 
-function PokemonCard({ pokemonId }) {
+function PokemonCard({ pokemonId, selected }) {
   const [pokemonDetails, setPokemonDetails] = useState(null);
   const [chartDetails, setChartDetails] = useState({
     labels: [],
@@ -30,7 +30,9 @@ function PokemonCard({ pokemonId }) {
 
   return (
     <>
-      <div className="details-card">
+      {console.log(selected)}
+      <div className={"details-card" + selected}>
+        {console.log("details-card" + selected)}
         {pokemonDetails?.sprite && (
           <img
             className="pokemon-sprite"

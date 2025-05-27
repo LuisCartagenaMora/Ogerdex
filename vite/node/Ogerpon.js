@@ -1,40 +1,40 @@
-async function getPokemonInfo(criteria, pokemon) {
-  const response = await fetch(
-    `https://pokeapi.co/api/v2/${criteria}/${pokemon}/`
+async function fetchPokemonInfo(pokeId) {
+  const dataResponse = await fetch(
+    `https://pokeapi.co/api/v2/pokemon/${pokeId}/`
   );
-  const data = await response.json();
-  return data;
+  return await dataResponse.json();
+}
+
+async function fetchPokemonSpecies(pokeId) {
+  const speciesResponse = await fetch(
+    `https://pokeapi.co/api/v2/pokemon-species/${pokeId}/`
+  );
+  // console.log(await speciesResponse.json())
+  return await speciesResponse.json();
 }
 
 function calcBaseStat(...args) {
   return args.reduce((total, stat) => total + stat, 0);
 }
 
-async function getPokemonName(pokemon) {
-  const data = await getPokemonInfo("pokemon", pokemon);
-  return data?.name;
+function getPokemonName(pokeData) {
+  return pokeData?.name || null;
 }
 
-async function getPokemonId(pokemon) {
-  const data = await getPokemonInfo("pokemon", pokemon);
-  return data.id;
+function getPokemonId(pokeId) {
+  return pokeId || null;
 }
 
-async function getPokemonSprite(pokemon) {
-  const data = await getPokemonInfo("pokemon", pokemon);
-  return data.sprites.front_default;
-  // return data.sprites.front_default
+function getPokemonSprite(pokeData) {
+  return pokeData?.sprites?.front_default || null;
 }
 
-async function getPokemonType(pokemon) {
-  const data = await getPokemonInfo("pokemon", pokemon);
-  return data.types.map((t) => t.type.name);
+function getPokemonType(pokeData) {
+  return pokeData?.types.map((p) => p?.type?.name);
 }
 
-async function pokemonStats(pokemon) {
-  const statsData = await getPokemonInfo("pokemon", pokemon);
-  // return statsData.stats;
-  const stats = statsData.stats;
+function pokemonStats(pokeData) {
+  const stats = pokeData.stats;
   return {
     hp: stats[0].base_stat,
     attack: stats[1].base_stat,
@@ -45,8 +45,8 @@ async function pokemonStats(pokemon) {
   };
 }
 
-async function getPokemonTotalStat(pokemon) {
-  const stats = await pokemonStats(pokemon);
+function getPokemonTotalStat(pokemon) {
+  const stats = pokemonStats(pokemon);
   return calcBaseStat(
     stats.hp,
     stats.attack,
@@ -57,14 +57,13 @@ async function getPokemonTotalStat(pokemon) {
   );
 }
 
-async function getPokemonAbilities(pokemon) {
-  const data = await getPokemonInfo("pokemon", pokemon);
+function getPokemonAbilities(pokeData) {
   const abilities = {
     ability: ["none", "none"],
     hidden_ability: "none",
   };
   let slot = 0;
-  data.abilities.forEach((ability) => {
+  pokeData?.abilities.forEach((ability) => {
     if (ability.is_hidden) {
       abilities.hidden_ability = ability.ability.name;
     } else {
@@ -75,7 +74,7 @@ async function getPokemonAbilities(pokemon) {
   return abilities;
 }
 
-async function getMove(move, config) {
+async function getMove(move) {
   const res = await fetch(`https://pokeapi.co/api/v2/move/${move}/`);
   const data = await res.json();
   if (config === "name") {
@@ -89,55 +88,54 @@ async function getMove(move, config) {
     };
   } else if (config === "all") {
     return {
-      name: data.name,
-      type: data.type.name,
-      damage_class: data.damage_class.name,
-      power: data.power,
-      accuracy: data.accuracy,
-      pp: data.pp,
-      priority: data.priority,
+      name: data?.name || null,
+      type: data?.type?.name || null,
+      damage_class: data?.damage_class?.name || null,
+      power: data?.power || null,
+      accuracy: data?.accuracy || null,
+      pp: data?.pp || null,
+      priority: data?.priority || null,
       effect:
-        data.effect_entries.length > 0
-          ? data.effect_entries[0].short_effect
+        data?.effect_entries?.length > 0
+          ? data?.effect_entries[0]?.short_effect
           : null,
     };
   }
 }
 
-// async function getPokemonMoves(pokemon, config) {
-//   const data = await getPokemonInfo("pokemon", pokemon);
+// async function getPokemonMoves(pokeData) {
 //   const moves = await Promise.all(
-//     data.moves.slice(0, 5).map((m) => getMove(m.move.name, config))
+//     pokeData?.moves.slice(0, 5).map((m) => getMove(m?.move?.name, config))
 //   );
 //   return moves;
 // }
 
-async function getEvolution(pokemon) {
-  const res = await fetch(
-    `https://pokeapi.co/api/v2/pokemon-species/${pokemon}/`
-  );
-  const data = await res.json();
+async function getEvolution(data, pokeId) {
   const url = data.evolution_chain["url"];
-  return getPokemonEvolutionChain(url);
+  return getPokemonEvolutionChain(url, pokeId);
 }
 
 //
 async function getPokemonEvolutionChain(url) {
-  const res = await fetch(url);
+  const res = await fetch(url); // /evolution-chain/ endpoint is called here
   const data = await res.json();
-  const evo_chain = {
-    0: "None",
-    1: "None",
-    2: "None",
-  };
+  const evo_chain = []
+
+  // IF evolves_to is < 1 (i.e. length is 0) the pokemon doesnt evolver any further.
+  // if(data.chain.evolves_to.length < 1){
+  //   evoChain.push(data.chain.species)
+  // } 
 
   const evoLength = data.chain.evolves_to;
   if (evoLength.length <= 2) {
     evo_chain[0] = data.chain.species;
+    evo_chain[0].id = evo_chain[0].url.slice(42).replace('/', '')
     if (data.chain.evolves_to.length > 0) {
       evo_chain[1] = data.chain.evolves_to[0].species;
+      evo_chain[1].id = evo_chain[1].url.slice(42).replace('/', '')
       if (data.chain.evolves_to[0].evolves_to.length > 0) {
         evo_chain[2] = data.chain.evolves_to[0].evolves_to[0].species;
+        evo_chain[2].id = evo_chain[2].url.slice(42).replace('/', '')
       }
     }
     return evo_chain;
@@ -149,30 +147,26 @@ async function getPokemonEvolutionChain(url) {
     evoChain[0] = data.chain.species;
     return evoChain;
   }
-  // -----------------------------------------------
-  //Succesfully fetches the eeveelutions.
-  // -----------------------------------------------
 }
 
-async function getPokemonForms(pokemon) {
-  const res = await fetch(
-    `https://pokeapi.co/api/v2/pokemon-species/${pokemon}/`
-  );
-  const data = await res.json();
+async function getPokemonForms(data) {
   return data;
 }
 
 export default async function getPokemon(pokemon) {
   const id = await getPokemonId(pokemon);
-  const name = await getPokemonName(id);
-  console.log(name);
-  const sprite = await getPokemonSprite(id);
-  const types = await getPokemonType(id);
-  const ability = await getPokemonAbilities(id);
-  const stats = await pokemonStats(id);
-  const totalStat = await getPokemonTotalStat(id);
-  const evo = await getEvolution(id);
-  const forms = await getPokemonForms(id);
+
+  const pokemonData = await fetchPokemonInfo(id)
+  const speciesData = await fetchPokemonSpecies(id)
+
+  const name = await getPokemonName(pokemonData);
+  const sprite = await getPokemonSprite(pokemonData);
+  const types = await getPokemonType(pokemonData);
+  const ability = await getPokemonAbilities(pokemonData);
+  const stats = await pokemonStats(pokemonData);
+  const totalStat = await getPokemonTotalStat(pokemonData);
+  const evo = await getEvolution(speciesData);
+  const forms = await getPokemonForms(speciesData);
 
   return {
     id,
