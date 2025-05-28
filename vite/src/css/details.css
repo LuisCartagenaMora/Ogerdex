@@ -23,6 +23,7 @@ img {
 .pokemon-cards-section {
   display: flex;
   justify-content: space-evenly;
+  align-content: center;
   row-gap: 2vh;
   flex-flow: row wrap;
   margin-left: 14vw;
@@ -64,11 +65,15 @@ img {
   border-style: none none none solid;
 }
 
+.sprite-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .pokemon-sprite {
-  margin-top: 15px;
-  margin-left: 15px;
+  width: 90%;
   border-radius: 50%;
-  height: 200px;
   background-color: rgb(218, 218, 218);
 }
 
@@ -80,7 +85,7 @@ img {
   height: fit-content;
   width: 100%;
   border-radius: 50px;
-  background-color: aqua;
+  font-weight: bold;
 }
 
 .pokemon-types-box {
@@ -104,50 +109,32 @@ img {
   border-radius: 50px;
 }
 
-.pokemon-abilities-section {
-  display: flex;
+.pokemon-abilities-box {
   justify-items: center;
-  flex-direction: row;
   margin-top: 20px;
-  gap: 2px;
-  padding: 3px;
-  height: fit-content;
-  width: fit-content;
   font-size: large;
-  border: solid 3px #f00000;
+  border-width: 4px;
+  border-color: #222224;
+  border-style: solid none solid none;
+  height: auto;
+  width: 1fr;
 }
 
-.pokemon-regular-abilities-box {
-  padding: 5px;
-  justify-items: center;
-  border: solid 4px;
-}
-
-.regular-abilities-title {
-  border: solid 2px #222224;
-  height: fit-content;
-  max-width: max-content;
+.abilities-title {
+  display: flex;
+  justify-content: center;
+  border-color: #222224;
+  border-width: 2px;
+  border-style: none none solid none;
+  justify-self: center;
+  font-weight: bold;
+  width: 100%;
+  background-color: #fcfc55;
 }
 
 .pokemon-abilities {
   padding: 0;
   flex-direction: column;
-}
-
-.pokemon-hidden-abilities-box {
-  padding: 5px;
-  justify-items: center;
-  border: solid 4px #222224;
-}
-
-.hidden-abilities-title {
-  border: solid 2px #222224;
-  height: fit-content;
-}
-
-.pokemon-hidden-abilities {
-  justify-self: center;
-  padding-left: 0;
 }
 
 .pokedex-background {
@@ -162,6 +149,7 @@ img {
   border-top: #222224;
   border-width: 5px;
   border-style: solid none solid none;
+  gap: 2vw;
 }
 
 .stat-chart-box {
@@ -170,41 +158,8 @@ img {
   align-items: center;
   height: 250px;
   width: 500px;
+  background-color: #f0f0f0;
 }
-
-/* .stat-chart-inner-box {
-  height: 200px;
-  width: 450px;
-  border: solid 2px #222224;
-}
-
-.stat-chart-inner-box-title {
-  text-align: center;
-  border-style: none none solid none;
-  border-color: #222224;
-  border-width: 2px;
-}
-
-.stat-chart-inner-box-stats {
-  display: flex;
-  flex-flow: column;
-  border: 2px #222224;
-  border-style: none solid solid none;
-  width: 7vw;
-}
-
-.individual-stat-label {
-  height: 5vh;
-  width: min-content;
-}
-
-.individual-stat-box {
-  display: flex;
-  flex-flow: row;
-  justify-content: space-between;
-  border-width: 1px;
-  border-style: solid none none none;
-} */
 
 .stat-chart-inner-box {
   display: grid;
@@ -212,6 +167,7 @@ img {
   grid-template-rows: auto auto;
   height: 250px;
   border: solid 2px #222224;
+  background-color: #f0f0f0;
 }
 
 .stat-chart-inner-box-title {
@@ -223,14 +179,18 @@ img {
   border-style: none solid solid none;
   border-color: #222224;
   border-width: 2px;
+  background-color: #fcfc55;
+  font-weight: bold;
 }
 
-.empty-space-lol {
+.total-base-stat {
   grid-column: 2;
   grid-row: 1;
   border-color: #222224;
   border-width: 2px;
   border-style: none none solid none;
+  background-color: #fcfc55;
+  font-weight: bold;
 }
 
 .stat-chart-inner-box-stats {
@@ -262,7 +222,11 @@ img {
   grid-column-start: 2;
   grid-row-start: 2;
   height: 287px;
-  width: 255px;
+  width: 100%;
+}
+
+.individual-stat-bar {
+  width: 200px;
 }
 
 .individual-stat-bar {
@@ -276,5 +240,4 @@ img {
 
 .stat-chart-inner-box-stats-total {
   height: auto;
-  background-color: red;
 }

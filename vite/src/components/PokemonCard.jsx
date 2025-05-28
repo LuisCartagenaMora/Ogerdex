@@ -52,11 +52,12 @@ function PokemonCard({ pokemonId, selected }) {
       >
         <div className={"details-card" + selected}>
           {pokemonDetails?.sprite && (
-            <img
+            <div className="sprite-box"><img
               className="pokemon-sprite"
               src={pokemonDetails?.sprite}
               alt={`${pokemonDetails?.name} sprite`}
-            />
+            /></div>
+
           )}
           <div className="pokemon-details-box">
             <div className="pokemon-name">{pokemonDetails?.name ?? "N/A"}</div>
@@ -81,7 +82,7 @@ function PokemonCard({ pokemonId, selected }) {
               </div>
             </div>
 
-            <div className="pokemon-abilities-section">
+            {/* <div className="pokemon-abilities-section">
               <div className="pokemon-regular-abilities-box">
                 <span className="regular-abilities-title">Abilities</span>
                 <ul className="pokemon-abilities">
@@ -101,7 +102,32 @@ function PokemonCard({ pokemonId, selected }) {
                   {<li>{pokemonDetails?.ability?.hidden_ability}</li> ?? ""}
                 </ul>
               </div>
+            </div> */}
+            {/* ------------------------------------------------- */}
+            <div className="pokemon-abilities-section">
+              <div className="pokemon-abilities-box">
+                <div className="abilities-title">Abilities</div>
+                <ul className="pokemon-abilities">
+                  {pokemonDetails?.ability?.ability[1] == "none" ? (
+                    <li>{pokemonDetails?.ability?.ability[0]}</li>
+                  ) : (
+                    <>
+                      <li>{pokemonDetails?.ability?.ability[0] ?? ''}</li>
+                      <li>{pokemonDetails?.ability?.ability[1] ?? ''}</li>
+                      <li><img src="star.png" />{pokemonDetails?.ability?.hidden_ability ?? ''}</li>
+
+                    </>
+                  )}
+                </ul>
+              </div>
+              {/* <div className="pokemon-hidden-abilities-box">
+                <span className="hidden-abilities-title">Hidden Ability</span>
+                <ul className="pokemon-hidden-abilities">
+                  {<li>{pokemonDetails?.ability?.hidden_ability}</li> ?? ""}
+                </ul>
+              </div> */}
             </div>
+            {/* ------------------------------------------------- */}
           </div>
           <StatChart
             chartDetails={chartDetails}

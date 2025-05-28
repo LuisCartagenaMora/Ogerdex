@@ -1,4 +1,6 @@
 .footer-box {
+  display: flex;
+  justify-content: center;
   bottom: 0;
   left: 0;
   height: 6vh;
@@ -6,4 +8,10 @@
   margin-top: 2vh;
   position: fixed;
   background-color: #ee1515;
+}
+
+.footer-content {
+  align-content: center;
+  grid-column-start: 2;
+  background-color: aqua;
 }

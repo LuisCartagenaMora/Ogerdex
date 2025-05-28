@@ -2,7 +2,7 @@ import '../css/footer.css'
 function Footer() {
     return (
         <>
-            <div className="footer-box">Created by Luis Caratgena 2025</div>
+            <div className="footer-box"><span className='footer-content'>Created by Luis G. Cartagena Mora 2025</span></div>
         </>
     )
 }
