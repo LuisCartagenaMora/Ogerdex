@@ -22,31 +22,36 @@ img {
 
 .pokemon-cards-section {
   display: flex;
-  justify-content: baseline;
-  row-gap: 10px;
+  justify-content: space-evenly;
+  row-gap: 2vh;
   flex-flow: row wrap;
-  margin-top: 1vh;
-  margin-left: 20vw;
-  margin-right: 20vw;
+  margin-left: 14vw;
+  margin-right: 14vw;
 }
 
 .details-card {
   display: grid;
-  grid-template-columns: 6 6;
-  grid-template-rows: 6 6;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: auto;
   background-color: #f0f0f0;
   text-transform: capitalize;
+  height: 550px;
+  width: 500px;
+  border: solid 5px;
   margin-left: 2vw;
   margin-right: 2vw;
 }
 .details-cardhighlight {
   display: grid;
-  grid-template-columns: 6 6;
-  grid-template-rows: 6 6;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: auto;
   text-transform: capitalize;
-  box-sizing: border-box;
+  height: 550px;
+  width: 500px;
+  border: solid 5px;
+  /* box-sizing: border-box; 
   border: solid 10px;
-  animation: highlight 1.7s ease-in-out infinite;
+  animation: highlight 1.7s ease-in-out infinite; */
   background-color: #f0f0f0;
   margin-left: 2vw;
   margin-right: 2vw;
@@ -54,7 +59,9 @@ img {
 
 .pokemon-details-box {
   grid-column-start: 2;
-  margin-right: 15px;
+  border-color: #222224;
+  border-width: 5px;
+  border-style: none none none solid;
 }
 
 .pokemon-sprite {
@@ -88,7 +95,6 @@ img {
   padding-right: 10px;
   font-size: x-large;
   border-radius: 50px;
-  background-color: red;
 }
 .pokemon-secondary-type {
   height: fit-content;
@@ -96,7 +102,6 @@ img {
   padding-right: 5px;
   font-size: x-large;
   border-radius: 50px;
-  background-color: rgb(0, 255, 157);
 }
 
 .pokemon-abilities-section {
@@ -143,4 +148,42 @@ img {
 .pokemon-hidden-abilities {
   justify-self: center;
   padding-left: 0;
+}
+
+.pokedex-background {
+  border: solid 5px;
+  padding-top: 4vh;
+  padding-bottom: 4vh;
+}
+
+.stat-chart-section {
+  height: 250px;
+  width: 500px;
+  border-top: #222224;
+  border-width: 5px;
+  border-style: solid none solid none;
+}
+
+.stat-chart-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 250px;
+  width: 500px;
+}
+
+.stat-chart-inner-box {
+  height: 200px;
+  width: 450px;
+  border: solid 5px red;
+}
+
+.stat-chart-inner-box-title {
+  text-align: center;
+  border: solid 5px #222224;
+}
+
+.individual-stat-label {
+  height: 20px;
+  width: 20px;
 }

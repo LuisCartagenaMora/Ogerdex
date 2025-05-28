@@ -119,36 +119,36 @@ async function getEvolution(data, pokeId) {
 async function getPokemonEvolutionChain(url) {
   const res = await fetch(url); // /evolution-chain/ endpoint is called here
   const data = await res.json();
-  const evo_chain = []
+  const evo_chain = [];
 
   // IF evolves_to is < 1 (i.e. length is 0) the pokemon doesnt evolver any further.
   // if(data.chain.evolves_to.length < 1){
   //   evoChain.push(data.chain.species)
-  // } 
+  // }
 
   const evoLength = data.chain.evolves_to;
   if (evoLength.length <= 2) {
     evo_chain[0] = data.chain.species;
-    evo_chain[0].id = evo_chain[0].url.slice(42).replace('/', '')
+    evo_chain[0].id = evo_chain[0].url.slice(42).replace("/", "");
     if (data.chain.evolves_to.length > 0) {
       evo_chain[1] = data.chain.evolves_to[0].species;
-      evo_chain[1].id = evo_chain[1].url.slice(42).replace('/', '')
+      evo_chain[1].id = evo_chain[1].url.slice(42).replace("/", "");
       if (data.chain.evolves_to[0].evolves_to.length > 0) {
         evo_chain[2] = data.chain.evolves_to[0].evolves_to[0].species;
-        evo_chain[2].id = evo_chain[2].url.slice(42).replace('/', '')
+        evo_chain[2].id = evo_chain[2].url.slice(42).replace("/", "");
       }
     }
     return evo_chain;
   } else {
-    console.log(data.chain.species.url.slice(42).replace('/', ''))
+    console.log(data.chain.species.url.slice(42).replace("/", ""));
     const evoChain = evoLength.map((evo) => {
-      evo.species.id = evo.species.url.slice(42).replace('/', '')
+      evo.species.id = evo.species.url.slice(42).replace("/", "");
       return evo.species;
     });
 
     //Necessary for the eeveelutions, since eevee isn't inserted in the map function.
     evoChain.unshift(data.chain.species);
-    evoChain[0].id = data.chain.species.url.slice(42).replace('/', '')
+    evoChain[0].id = data.chain.species.url.slice(42).replace("/", "");
     return evoChain;
   }
 }
@@ -160,8 +160,8 @@ async function getPokemonForms(data) {
 export default async function getPokemon(pokemon) {
   const id = await getPokemonId(pokemon);
 
-  const pokemonData = await fetchPokemonInfo(id)
-  const speciesData = await fetchPokemonSpecies(id)
+  const pokemonData = await fetchPokemonInfo(id);
+  const speciesData = await fetchPokemonSpecies(id);
 
   const name = await getPokemonName(pokemonData);
   const sprite = await getPokemonSprite(pokemonData);
