@@ -172,18 +172,109 @@ img {
   width: 500px;
 }
 
-.stat-chart-inner-box {
+/* .stat-chart-inner-box {
   height: 200px;
   width: 450px;
-  border: solid 5px red;
+  border: solid 2px #222224;
 }
 
 .stat-chart-inner-box-title {
   text-align: center;
-  border: solid 5px #222224;
+  border-style: none none solid none;
+  border-color: #222224;
+  border-width: 2px;
+}
+
+.stat-chart-inner-box-stats {
+  display: flex;
+  flex-flow: column;
+  border: 2px #222224;
+  border-style: none solid solid none;
+  width: 7vw;
 }
 
 .individual-stat-label {
-  height: 20px;
-  width: 20px;
+  height: 5vh;
+  width: min-content;
+}
+
+.individual-stat-box {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  border-width: 1px;
+  border-style: solid none none none;
+} */
+
+.stat-chart-inner-box {
+  display: grid;
+  grid-template-columns: 3fr 8fr;
+  grid-template-rows: auto auto;
+  height: 250px;
+  border: solid 2px #222224;
+}
+
+.stat-chart-inner-box-title {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row: 1;
+  align-content: center;
+  text-align: center;
+  border-style: none solid solid none;
+  border-color: #222224;
+  border-width: 2px;
+}
+
+.empty-space-lol {
+  grid-column: 2;
+  grid-row: 1;
+  border-color: #222224;
+  border-width: 2px;
+  border-style: none none solid none;
+}
+
+.stat-chart-inner-box-stats {
+  grid-row-start: 2;
+  display: flex;
+  flex-flow: column;
+  height: 231px;
+  border: 2px #222224;
+}
+
+.individual-stat-label {
+  height: auto;
+  width: min-content;
+  padding-left: 1px;
+  padding-right: 1px;
+}
+
+.individual-stat-box {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  border-width: 2px;
+  border-style: none solid solid none;
+  height: 200px;
+  padding-top: 5px;
+}
+
+.stat-chart-inner-box-bars {
+  grid-column-start: 2;
+  grid-row-start: 2;
+  height: 287px;
+  width: 255px;
+}
+
+.individual-stat-bar {
+  display: flex;
+  flex-flow: row;
+  height: 13%;
+  width: max-content;
+  border-width: 1px;
+  border-style: none solid solid none;
+}
+
+.stat-chart-inner-box-stats-total {
+  height: auto;
+  background-color: red;
 }
