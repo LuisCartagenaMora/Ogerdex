@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import getPokemon from "../../node/Ogerpon.js";
 import StatChart from "./StatChart.jsx";
 import "../css/details.css";
+import goldenStar from "../assets/star.svg";
+
 
 import typeIcons from "../assets/typeIcons.jsx";
 import { maxWidth } from "@mui/system";
@@ -51,6 +53,7 @@ function PokemonCard({ pokemonId, selected }) {
         }}
       >
         <div className={"details-card" + selected}>
+          {console.log(pokemonDetails?.sprite)}
           {pokemonDetails?.sprite && (
             <div className="sprite-box"><img
               className="pokemon-sprite"
@@ -114,7 +117,7 @@ function PokemonCard({ pokemonId, selected }) {
                     <>
                       <li>{pokemonDetails?.ability?.ability[0] ?? ''}</li>
                       <li>{pokemonDetails?.ability?.ability[1] ?? ''}</li>
-                      <li><img src="star.png" />{pokemonDetails?.ability?.hidden_ability ?? ''}</li>
+                      <li><img className={"hidden-ability-icon"}src={goldenStar}/>{pokemonDetails?.ability?.hidden_ability ?? ''}</li>
 
                     </>
                   )}

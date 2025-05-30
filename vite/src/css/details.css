@@ -240,4 +240,14 @@ img {
 
 .stat-chart-inner-box-stats-total {
   height: auto;
+
+}
+
+.hidden-ability-icon{
+  height: 20px;
+  width: 20px;
+  margin-right: 5px;
+  
+
+  
 }
