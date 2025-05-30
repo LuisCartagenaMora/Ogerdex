@@ -1,3 +1,17 @@
+async function fetchInfo(id){
+  const pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+  const speciesInfo = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`)
+
+  try{
+    const x = await Promise.all([pokemon, speciesInfo])
+    const pokemonData = await x[0].json;
+    const speciesData = await x[1].json;
+    return [pokemonData, speciesData]
+  }catch(e){
+    console.error(e)
+  }
+}
+
 async function fetchPokemonInfo(pokeId) {
   const dataResponse = await fetch(
     `https://pokeapi.co/api/v2/pokemon/${pokeId}/`
@@ -160,8 +174,9 @@ async function getPokemonForms(data) {
 export default async function getPokemon(pokemon) {
   const id = await getPokemonId(pokemon);
 
-  const pokemonData = await fetchPokemonInfo(id);
-  const speciesData = await fetchPokemonSpecies(id);
+  //const pokemonData = await fetchPokemonInfo(id);
+  //const speciesData = await fetchPokemonSpecies(id)
+  const[pokemonData, speciesData] = fetchInfo(id)
 
   const name = await getPokemonName(pokemonData);
   const sprite = await getPokemonSprite(pokemonData);
