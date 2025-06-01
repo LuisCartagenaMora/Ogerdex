@@ -1,11 +1,13 @@
-import { BarChart } from "@mui/x-charts/BarChart";
 import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import getPokemon from "../../node/Ogerpon.js";
+import Sprite from "./Sprite.jsx";
+import Type from "./Type.jsx";
+import Ability from "./Ability.jsx";
 import StatChart from "./StatChart.jsx";
 import "../css/details.css";
 
 import typeIcons from "../assets/typeIcons.jsx";
-import { maxWidth } from "@mui/system";
 
 function borderColor(pokemonDetails) {
   const type1Color = typeIcons[pokemonDetails?.type[0]]?.color;
@@ -19,147 +21,46 @@ const linearGradient = (color1, color2) => {
 };
 
 function PokemonCard({ pokemonId, selected }) {
-  const [pokemonDetails, setPokemonDetails] = useState(null);
   const [chartDetails, setChartDetails] = useState({
     labels: [],
     values: [],
   });
 
+  const { data, error } = useQuery({
+    queryKey: ["pokemon", pokemonId],
+    queryFn: () => getPokemon(pokemonId),
+  });
+
   useEffect(() => {
-    async function fetchPokemon() {
-      try {
-        if (!pokemonId) return;
-        const pokemon = await getPokemon(pokemonId);
-        setPokemonDetails(pokemon);
-        const statLabels = Object.keys(pokemon.stats);
-        const values = Object.values(pokemon.stats);
-        setChartDetails({ labels: statLabels, values: values });
-      } catch (e) {
-        console.error("Failed to fetch Pokémon:", e);
-      }
+    if (data && data.stats) {
+      setChartDetails({
+        labels: Object.keys(data.stats),
+        values: Object.values(data.stats),
+      });
     }
-    fetchPokemon();
-  }, [pokemonId]);
+  }, [data]);
+
+  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <>
-      {console.log(pokemonDetails?.type.length < 2)}
       <div
         className="pokedex-background"
         style={{
-          backgroundImage: borderColor(pokemonDetails),
+          backgroundImage: borderColor(data),
         }}
       >
         <div className={"details-card" + selected}>
-          {pokemonDetails?.sprite && (
-            <div className="sprite-box"><img
-              className="pokemon-sprite"
-              src={pokemonDetails?.sprite}
-              alt={`${pokemonDetails?.name} sprite`}
-            /></div>
-
-          )}
+          <Sprite data={data} />
           <div className="pokemon-details-box">
-            <div className="pokemon-name">{pokemonDetails?.name ?? "N/A"}</div>
-            <div className="pokemon-types-box">
-              <div
-                className="pokemon-primary-type"
-                style={{
-                  backgroundColor: typeIcons[pokemonDetails?.type?.[0]]?.color,
-                }}
-              >
-                {typeIcons[pokemonDetails?.type?.[0]]?.icon}
-                {pokemonDetails?.type?.[0] ?? ""}
-              </div>
-              <div
-                className="pokemon-secondary-type"
-                style={{
-                  backgroundColor: typeIcons[pokemonDetails?.type?.[1]]?.color,
-                }}
-              >
-                {typeIcons[pokemonDetails?.type?.[1]]?.icon}
-                {pokemonDetails?.type?.[1] ?? ""}
-              </div>
-            </div>
-
-            {/* <div className="pokemon-abilities-section">
-              <div className="pokemon-regular-abilities-box">
-                <span className="regular-abilities-title">Abilities</span>
-                <ul className="pokemon-abilities">
-                  {pokemonDetails?.ability?.ability[1] == "none" ? (
-                    <li>{pokemonDetails?.ability?.ability[0]}</li>
-                  ) : (
-                    <>
-                      <li>{pokemonDetails?.ability?.ability[0]}</li>
-                      <li>{pokemonDetails?.ability?.ability[1]}</li>
-                    </>
-                  )}
-                </ul>
-              </div>
-              <div className="pokemon-hidden-abilities-box">
-                <span className="hidden-abilities-title">Hidden Ability</span>
-                <ul className="pokemon-hidden-abilities">
-                  {<li>{pokemonDetails?.ability?.hidden_ability}</li> ?? ""}
-                </ul>
-              </div>
-            </div> */}
-            {/* ------------------------------------------------- */}
-            <div className="pokemon-abilities-section">
-              <div className="pokemon-abilities-box">
-                <div className="abilities-title">Abilities</div>
-                <ul className="pokemon-abilities">
-                  {pokemonDetails?.ability?.ability[1] == "none" ? (
-                    <li>{pokemonDetails?.ability?.ability[0]}</li>
-                  ) : (
-                    <>
-                      <li>{pokemonDetails?.ability?.ability[0] ?? ''}</li>
-                      <li>{pokemonDetails?.ability?.ability[1] ?? ''}</li>
-                      <li><img src="star.png" />{pokemonDetails?.ability?.hidden_ability ?? ''}</li>
-
-                    </>
-                  )}
-                </ul>
-              </div>
-              {/* <div className="pokemon-hidden-abilities-box">
-                <span className="hidden-abilities-title">Hidden Ability</span>
-                <ul className="pokemon-hidden-abilities">
-                  {<li>{pokemonDetails?.ability?.hidden_ability}</li> ?? ""}
-                </ul>
-              </div> */}
-            </div>
-            {/* ------------------------------------------------- */}
+            <div className="pokemon-name">{data?.name ?? "N/A"}</div>
+            <Type data={data} />
+            <Ability data={data} />
           </div>
           <StatChart
             chartDetails={chartDetails}
-            color={typeIcons[pokemonDetails?.type[0]]?.color}
+            color={typeIcons[data?.type[0]]?.color}
           />
-          {/* <div className="stat-chart">
-            <BarChart
-              layout="horizontal"
-              yAxis={[
-                {
-                  id: "stats",
-                  data: chartDetails.labels,
-                  scaleType: "band",
-                },
-              ]}
-              xAxis={[
-                {
-                  id: "values",
-                  scaleType: "linear",
-                  hide: true,
-                },
-              ]}
-              series={[
-                {
-                  data: chartDetails.values,
-                  color: "#3b82f6",
-                  valueFormatter: (value) => `${value}`,
-                },
-              ]}
-              height={250}
-            />
-          </div> */}
         </div>
       </div>
     </>

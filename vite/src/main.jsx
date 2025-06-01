@@ -1,11 +1,19 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
-import PokeRouter from './PokeRouter'
-import LandingPage from './LandingPage'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import ReactDOM from "react-dom/client";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import PokeRouter from "./PokeRouter";
+import LandingPage from "./LandingPage";
 
-createRoot(document.getElementById('root')).render(
+const queryClient = new QueryClient();
+
+createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter><PokeRouter /></BrowserRouter>
+    <BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <PokeRouter />
+      </QueryClientProvider>
+    </BrowserRouter>
   </StrictMode>
-)
+);

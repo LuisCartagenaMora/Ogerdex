@@ -3,6 +3,7 @@ body {
 }
 
 li {
+  display: flex;
   list-style-type: none;
 }
 
@@ -137,6 +138,11 @@ img {
   flex-direction: column;
 }
 
+.hidden-ability-icon {
+  height: 20px;
+  width: 20px;
+}
+
 .pokedex-background {
   border: solid 5px;
   padding-top: 4vh;
@@ -163,7 +169,7 @@ img {
 
 .stat-chart-inner-box {
   display: grid;
-  grid-template-columns: 3fr 8fr;
+  grid-template-columns: 4fr 8fr;
   grid-template-rows: auto auto;
   height: 250px;
   border: solid 2px #222224;
@@ -221,20 +227,16 @@ img {
 .stat-chart-inner-box-bars {
   grid-column-start: 2;
   grid-row-start: 2;
-  height: 287px;
+  height: 281px;
   width: 100%;
-}
-
-.individual-stat-bar {
-  width: 200px;
 }
 
 .individual-stat-bar {
   display: flex;
   flex-flow: row;
-  height: 13%;
+  height: 36.5px;
   width: max-content;
-  border-width: 1px;
+  border-width: 2px;
   border-style: none solid solid none;
 }
 
