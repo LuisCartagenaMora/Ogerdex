@@ -1,31 +1,32 @@
-async function fetchInfo(id){
-  const pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
-  const speciesInfo = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`)
+async function fetchInfo(id) {
+  const pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`);
+  const speciesInfo = await fetch(
+    `https://pokeapi.co/api/v2/pokemon-species/${id}/`
+  );
 
-  try{
-    const x = await Promise.all([pokemon, speciesInfo])
-    const pokemonData = await x[0].json;
-    const speciesData = await x[1].json;
-    return [pokemonData, speciesData]
-  }catch(e){
-    console.error(e)
+  try {
+    const [pokemonRes, speciesRes] = await Promise.all([pokemon, speciesInfo]);
+    const pokemonData = await pokemonRes.json();
+    const speciesData = await speciesRes.json();
+    return [pokemonData, speciesData];
+  } catch (e) {
+    console.error(e);
   }
 }
+// async function fetchPokemonInfo(pokeId) {
+//   const dataResponse = await fetch(
+//     `https://pokeapi.co/api/v2/pokemon/${pokeId}/`
+//   );
+//   return await dataResponse.json();
+// }
 
-async function fetchPokemonInfo(pokeId) {
-  const dataResponse = await fetch(
-    `https://pokeapi.co/api/v2/pokemon/${pokeId}/`
-  );
-  return await dataResponse.json();
-}
-
-async function fetchPokemonSpecies(pokeId) {
-  const speciesResponse = await fetch(
-    `https://pokeapi.co/api/v2/pokemon-species/${pokeId}/`
-  );
-  // console.log(await speciesResponse.json())
-  return await speciesResponse.json();
-}
+// async function fetchPokemonSpecies(pokeId) {
+//   const speciesResponse = await fetch(
+//     `https://pokeapi.co/api/v2/pokemon-species/${pokeId}/`
+//   );
+//   // console.log(await speciesResponse.json())
+//   return await speciesResponse.json();
+// }
 
 function calcBaseStat(...args) {
   return args.reduce((total, stat) => total + stat, 0);
@@ -53,8 +54,8 @@ function pokemonStats(pokeData) {
     hp: stats[0].base_stat,
     attack: stats[1].base_stat,
     defense: stats[2].base_stat,
-    'sp.Atk': stats[3].base_stat,
-    'sp.Def': stats[4].base_stat,
+    "sp.Atk": stats[3].base_stat,
+    "sp.Def": stats[4].base_stat,
     speed: stats[5].base_stat,
   };
 }
@@ -173,10 +174,12 @@ async function getPokemonForms(data) {
 
 export default async function getPokemon(pokemon) {
   const id = await getPokemonId(pokemon);
+  console.log(id);
 
-  //const pokemonData = await fetchPokemonInfo(id);
-  //const speciesData = await fetchPokemonSpecies(id)
-  const[pokemonData, speciesData] = fetchInfo(id)
+  // Await fetchInfo here!
+  const [pokemonData, speciesData] = await fetchInfo(id);
+  console.log(pokemonData);
+  console.log(speciesData);
 
   const name = await getPokemonName(pokemonData);
   const sprite = await getPokemonSprite(pokemonData);

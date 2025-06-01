@@ -6,7 +6,6 @@ import Type from "./Type.jsx";
 import Ability from "./Ability.jsx";
 import StatChart from "./StatChart.jsx";
 import "../css/details.css";
-import goldenStar from "../assets/star.svg";
 
 import typeIcons from "../assets/typeIcons.jsx";
 

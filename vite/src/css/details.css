@@ -29,6 +29,7 @@ img {
   flex-flow: row wrap;
   margin-left: 14vw;
   margin-right: 14vw;
+  padding-bottom: 8vh;
 }
 
 .details-card {
@@ -242,14 +243,10 @@ img {
 
 .stat-chart-inner-box-stats-total {
   height: auto;
-
 }
 
-.hidden-ability-icon{
+.hidden-ability-icon {
   height: 20px;
   width: 20px;
   margin-right: 5px;
-  
-
-  
 }
