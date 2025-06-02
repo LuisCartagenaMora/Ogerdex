@@ -4,14 +4,20 @@
 // import LoadingIcon from "./components/LoadingIcon.jsx";
 // import "./css/details.css";
 
+import { useNavigate } from "react-router-dom";
 import PokemonInfo from "../PokemonInfo.jsx";
 
-function handleInput(name) {
-  console.log(name);
-  return <PokemonInfo pokemonId={name} />;
-}
+/*function handleInput(name) {
+  //if(typeof name == "string") return <PokemonInfo pokemon={name} />
+  //Otherwise, should return <ErrorMessage />
+}*/
 
 function SearchBar() {
+  const navigate = useNavigate()
+
+  function handleInput(name){
+    if(typeof name == "string") return navigate(`/pokemon/name/${name}`)
+  }
   return (
     <>
       <input

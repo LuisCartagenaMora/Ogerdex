@@ -4,11 +4,11 @@ import Footer from "../src/components/Footer.jsx";
 import { useParams } from "react-router-dom";
 
 function Pokedex() {
-  const { pokemonId } = useParams();
+  const { pokemon } = useParams();
   return (
     <>
       <Header />
-      <PokemonInfo pokemonId={pokemonId} />
+      <PokemonInfo pokemon={pokemon} />
       <Footer />
     </>
   );

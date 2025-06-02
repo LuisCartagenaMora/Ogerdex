@@ -148,6 +148,7 @@ async function getPokemonEvolutionChain(url) {
     if (data.chain.evolves_to.length > 0) {
       evo_chain[1] = data.chain.evolves_to[0].species;
       evo_chain[1].id = evo_chain[1].url.slice(42).replace("/", "");
+      evo_chain[1].id = evo_chain[1].url.slice(42).replace("/", "");
       if (data.chain.evolves_to[0].evolves_to.length > 0) {
         evo_chain[2] = data.chain.evolves_to[0].evolves_to[0].species;
         evo_chain[2].id = evo_chain[2].url.slice(42).replace("/", "");
@@ -172,12 +173,16 @@ async function getPokemonForms(data) {
   return data;
 }
 
-export default async function getPokemonById(pokemon) {
-  const id = await getPokemonId(pokemon);
-  console.log(id);
+export default async function getPokemon(pokemon) {
+  const pokemonType = ""
+  // Verifies if pokemon is a number, fetch by id.
+  if(typeof pokemon == "string"){
+    pokemonType = await getPokemonId(pokemon);
+  }
+
 
   // Await fetchInfo here!
-  const [pokemonData, speciesData] = await fetchInfo(id);
+  const [pokemonData, speciesData] = await fetchInfo(pokemonType);
   console.log(pokemonData);
   console.log(speciesData);
 
