@@ -4,7 +4,8 @@ import Footer from "../src/components/Footer.jsx";
 import { useParams } from "react-router-dom";
 
 function Pokedex() {
-  const { pokemon } = useParams();
+  const { pokemonId, pokemonName } = useParams();
+  const pokemon = pokemonId ?? pokemonName;
   return (
     <>
       <Header />

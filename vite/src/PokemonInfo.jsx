@@ -10,7 +10,7 @@ function PokemonInfo({ pokemon }) {
   //   const { pokemonId } = useParams();
 
   const { data, error, isLoading } = useQuery({
-    queryKey: ["pokemon", pokemonId],
+    queryKey: ["pokemon", pokemon],
     queryFn: () => getPokemon(pokemon),
   });
 
@@ -23,7 +23,7 @@ function PokemonInfo({ pokemon }) {
       <PokemonCard
         key={i}
         pokemonId={evo?.id}
-        selected={evo?.id == pokemonId ? "highlight" : ""}
+        selected={evo?.id == pokemon ? "highlight" : ""}
       />
     ));
   }

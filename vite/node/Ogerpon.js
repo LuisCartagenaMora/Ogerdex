@@ -174,15 +174,10 @@ async function getPokemonForms(data) {
 }
 
 export default async function getPokemon(pokemon) {
-  const pokemonType = ""
-  // Verifies if pokemon is a number, fetch by id.
-  if(typeof pokemon == "string"){
-    pokemonType = await getPokemonId(pokemon);
-  }
-
+  const id = await getPokemonId(pokemon);
 
   // Await fetchInfo here!
-  const [pokemonData, speciesData] = await fetchInfo(pokemonType);
+  const [pokemonData, speciesData] = await fetchInfo(id);
   console.log(pokemonData);
   console.log(speciesData);
 
