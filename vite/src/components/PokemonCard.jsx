@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import getPokemon from "../../node/Ogerpon.js";
+import getPokemonById from "../../node/Ogerpon.js";
 import Sprite from "./Sprite.jsx";
 import Type from "./Type.jsx";
 import Ability from "./Ability.jsx";
@@ -28,7 +28,7 @@ function PokemonCard({ pokemonId, selected }) {
 
   const { data, error } = useQuery({
     queryKey: ["pokemon", pokemonId],
-    queryFn: () => getPokemon(pokemonId),
+    queryFn: () => getPokemonById(pokemonId),
   });
 
   useEffect(() => {

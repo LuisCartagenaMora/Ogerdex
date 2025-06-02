@@ -89,34 +89,34 @@ function getPokemonAbilities(pokeData) {
   return abilities;
 }
 
-async function getMove(move) {
-  const res = await fetch(`https://pokeapi.co/api/v2/move/${move}/`);
-  const data = await res.json();
-  if (config === "name") {
-    return { name: data.name };
-  } else if (config === "basic") {
-    return {
-      name: data.name,
-      type: data.type.name,
-      damage_class: data.damage_class.name,
-      power: data.power,
-    };
-  } else if (config === "all") {
-    return {
-      name: data?.name || null,
-      type: data?.type?.name || null,
-      damage_class: data?.damage_class?.name || null,
-      power: data?.power || null,
-      accuracy: data?.accuracy || null,
-      pp: data?.pp || null,
-      priority: data?.priority || null,
-      effect:
-        data?.effect_entries?.length > 0
-          ? data?.effect_entries[0]?.short_effect
-          : null,
-    };
-  }
-}
+// async function getMove(move) {
+//   const res = await fetch(`https://pokeapi.co/api/v2/move/${move}/`);
+//   const data = await res.json();
+//   if (config === "name") {
+//     return { name: data.name };
+//   } else if (config === "basic") {
+//     return {
+//       name: data.name,
+//       type: data.type.name,
+//       damage_class: data.damage_class.name,
+//       power: data.power,
+//     };
+//   } else if (config === "all") {
+//     return {
+//       name: data?.name || null,
+//       type: data?.type?.name || null,
+//       damage_class: data?.damage_class?.name || null,
+//       power: data?.power || null,
+//       accuracy: data?.accuracy || null,
+//       pp: data?.pp || null,
+//       priority: data?.priority || null,
+//       effect:
+//         data?.effect_entries?.length > 0
+//           ? data?.effect_entries[0]?.short_effect
+//           : null,
+//     };
+//   }
+// }
 
 // async function getPokemonMoves(pokeData) {
 //   const moves = await Promise.all(
@@ -172,7 +172,7 @@ async function getPokemonForms(data) {
   return data;
 }
 
-export default async function getPokemon(pokemon) {
+export default async function getPokemonById(pokemon) {
   const id = await getPokemonId(pokemon);
   console.log(id);
 

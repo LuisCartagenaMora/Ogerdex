@@ -1,7 +1,7 @@
 // import { useParams } from "react-router-dom";
 // import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import getPokemon from "../node/Ogerpon.js";
+import getPokemonById from "../node/Ogerpon.js";
 import PokemonCard from "../src/components/PokemonCard.jsx";
 import LoadingIcon from "./components/LoadingIcon.jsx";
 import "./css/details.css";
@@ -11,7 +11,7 @@ function PokemonInfo({ pokemonId }) {
 
   const { data, error, isLoading } = useQuery({
     queryKey: ["pokemon", pokemonId],
-    queryFn: () => getPokemon(pokemonId),
+    queryFn: () => getPokemonById(pokemonId),
   });
 
   if (isLoading) return <LoadingIcon />;
