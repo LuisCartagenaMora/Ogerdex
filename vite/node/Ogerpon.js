@@ -170,7 +170,9 @@ async function getPokemonEvolutionChain(url) {
 }
 
 async function getPokemonForms(data) {
-  return data;
+  return data?.varieties?.map((form) => {
+    return form?.pokemon
+  });
 }
 
 export default async function getPokemon(pokemon) {
@@ -181,7 +183,7 @@ export default async function getPokemon(pokemon) {
   console.log(pokemonData);
   console.log(speciesData);
 
-  const name = await getPokemonName(pokemonData);
+  const name = await getPokemonName(speciesData);
   const sprite = await getPokemonSprite(pokemonData);
   const types = await getPokemonType(pokemonData);
   const ability = getPokemonAbilities(pokemonData);

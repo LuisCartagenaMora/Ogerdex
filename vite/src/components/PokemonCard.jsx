@@ -44,6 +44,8 @@ function PokemonCard({ pokemonId, selected }) {
 
   return (
     <>
+    {console.log("HERE: ")}
+    {console.log(data)}
       <div
         className="pokedex-background"
         style={{
