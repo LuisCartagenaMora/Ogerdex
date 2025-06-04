@@ -18,7 +18,6 @@ const barColors = {
 
 function calcTotal(values) {
   const total = (values || []).reduce((acc, value) => acc + value, 0);
-  console.log("Total:", total);
   return total || "Nothing to show";
 }
 

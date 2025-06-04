@@ -7,8 +7,6 @@ import LoadingIcon from "./components/LoadingIcon.jsx";
 import "./css/details.css";
 
 function PokemonInfo({ pokemon }) {
-  //   const { pokemonId } = useParams();
-
   const { data, error, isLoading } = useQuery({
     queryKey: ["pokemon", pokemon],
     queryFn: () => getPokemon(pokemon),
@@ -19,29 +17,26 @@ function PokemonInfo({ pokemon }) {
 
   function numberOfEvolutions() {
     const PokemonEvolutions = Object.values(data?.evo);
-    console.log("Evolutions: ")
-    console.log(PokemonEvolutions)
+    console.log("Evolutions: ");
+    console.log(PokemonEvolutions);
     return PokemonEvolutions.map((evo, i) => (
       <PokemonCard
         key={i}
-        pokemonId={evo?.id}
+        pokemon={evo?.id}
         selected={evo?.id == pokemon ? "highlight" : ""}
       />
     ));
   }
 
   function numberOfForms() {
-    if (!data || !data.forms) return null; // Prevents error when data is not ready
-    const PokemonForms = Object.values(data.forms);
+    const PokemonForms = Object.values(data?.forms);
+    console.log("Forms: ");
+    console.log(PokemonForms);
     return PokemonForms.map((form, i) => {
-      if (!form?.url) return null; // Skip if url is missing
-      const match = form.url.match(/\/pokemon\/(\d+)\//);
-      const id = match ? match[1] : null;
-      if (!id) return null; // Skip if id is invalid
-      return <PokemonCard key={i} pokemonId={Number(id)} />;
+      console.log(form?.id);
+      return <PokemonCard key={i} altPokemon={form} />;
     });
   }
-  
 
   return (
     <>

@@ -13,20 +13,17 @@ async function fetchInfo(id) {
     console.error(e);
   }
 }
-// async function fetchPokemonInfo(pokeId) {
-//   const dataResponse = await fetch(
-//     `https://pokeapi.co/api/v2/pokemon/${pokeId}/`
-//   );
-//   return await dataResponse.json();
-// }
 
-// async function fetchPokemonSpecies(pokeId) {
-//   const speciesResponse = await fetch(
-//     `https://pokeapi.co/api/v2/pokemon-species/${pokeId}/`
-//   );
-//   // console.log(await speciesResponse.json())
-//   return await speciesResponse.json();
-// }
+async function fetchAltInfo(id) {
+  const pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`);
+
+  try {
+    const pokemonData = await pokemon.json();
+    return pokemonData;
+  } catch (e) {
+    console.error(e);
+  }
+}
 
 function calcBaseStat(...args) {
   return args.reduce((total, stat) => total + stat, 0);
@@ -156,7 +153,6 @@ async function getPokemonEvolutionChain(url) {
     }
     return evo_chain;
   } else {
-    console.log(data.chain.species.url.slice(42).replace("/", ""));
     const evoChain = evoLength.map((evo) => {
       evo.species.id = evo.species.url.slice(42).replace("/", "");
       return evo.species;
@@ -170,20 +166,48 @@ async function getPokemonEvolutionChain(url) {
 }
 
 async function getPokemonForms(data) {
-  return data?.varieties?.map((form) => {
-    return form?.pokemon
+  const promises = (data?.varieties ?? []).map(async (form) => {
+    if (data?.name !== form?.pokemon?.name) {
+      const x = await getAltPokemon(
+        form?.pokemon?.url.slice(34).replace("/", "")
+      );
+      return x;
+    }
+    return undefined;
   });
+  // Wait for all promises to resolve, then filter out undefined
+  const results = await Promise.all(promises);
+  return results.filter(Boolean);
+}
+
+async function getAltPokemon(pokemon) {
+  const id = await getPokemonId(pokemon);
+  const pokemonData = await fetchAltInfo(id);
+
+  const name = await getPokemonName(pokemonData);
+  const sprite = await getPokemonSprite(pokemonData);
+  const types = await getPokemonType(pokemonData);
+  const ability = getPokemonAbilities(pokemonData);
+  const stats = pokemonStats(pokemonData);
+  const totalStat = await getPokemonTotalStat(pokemonData);
+
+  return {
+    id,
+    name,
+    type: types,
+    sprite,
+    ability,
+    stats,
+    totalStat,
+  };
 }
 
 export default async function getPokemon(pokemon) {
   const id = await getPokemonId(pokemon);
-
   // Await fetchInfo here!
   const [pokemonData, speciesData] = await fetchInfo(id);
-  console.log(pokemonData);
-  console.log(speciesData);
 
-  const name = await getPokemonName(speciesData);
+  const name = await getPokemonName(pokemonData);
   const sprite = await getPokemonSprite(pokemonData);
   const types = await getPokemonType(pokemonData);
   const ability = getPokemonAbilities(pokemonData);
