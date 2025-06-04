@@ -3,6 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 import getPokemon from "../node/Ogerpon.js";
 import PokemonCard from "../src/components/PokemonCard.jsx";
+import AltPokemonCard from "./components/AltPokemonCard.jsx";
 import LoadingIcon from "./components/LoadingIcon.jsx";
 import "./css/details.css";
 
@@ -31,20 +32,18 @@ function PokemonInfo({ pokemon }) {
   }
 
   function numberOfForms() {
-    if (!data || !data.forms) return null; // Prevents error when data is not ready
-    const PokemonForms = Object.values(data.forms);
+    const PokemonForms = Object.values(data?.forms);
     return PokemonForms.map((form, i) => {
-      if (!form?.url) return null; // Skip if url is missing
-      const match = form.url.match(/\/pokemon\/(\d+)\//);
-      const id = match ? match[1] : null;
-      if (!id) return null; // Skip if id is invalid
-      return <PokemonCard key={i} pokemonId={Number(id)} />;
+      if(data?.name !== form?.name)
+      return <AltPokemonCard key={i} url={form?.url} />;
     });
   }
   
 
   return (
     <>
+    {console.log("FORMS:")}
+    {console.log(data?.forms)}
       <div className="pokemon-cards-section">{numberOfEvolutions()}</div>
       <div className="pokemon-cards-section">{numberOfForms()}</div>
     </>

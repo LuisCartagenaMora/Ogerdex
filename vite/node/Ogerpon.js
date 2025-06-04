@@ -171,8 +171,34 @@ async function getPokemonEvolutionChain(url) {
 
 async function getPokemonForms(data) {
   return data?.varieties?.map((form) => {
-    return form?.pokemon
+    return form?.pokemon;
   });
+}
+
+export async function getAltPokemon(url) {
+  try {
+    const response = await fetch(url);
+    const pokemonData = await response.json();
+
+    const name = await getPokemonName(pokemonData);
+    const sprite = await getPokemonSprite(pokemonData);
+    const types = await getPokemonType(pokemonData);
+    const ability = getPokemonAbilities(pokemonData);
+    const stats = pokemonStats(pokemonData);
+    const totalStat = getPokemonTotalStat(pokemonData);
+
+    return {
+      id: url.slice(34).replace("/", ""),
+      name,
+      sprite,
+      type: types,
+      ability,
+      stats,
+      totalStat,
+    };
+  } catch (e) {
+    console.error(e);
+  }
 }
 
 export default async function getPokemon(pokemon) {

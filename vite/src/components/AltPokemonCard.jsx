@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import getPokemonById from "../../node/Ogerpon.js";
+import {getAltPokemon} from "../../node/Ogerpon.js";
 import Sprite from "./Sprite.jsx";
 import Type from "./Type.jsx";
 import Ability from "./Ability.jsx";
@@ -20,15 +20,15 @@ const linearGradient = (color1, color2) => {
   return `linear-gradient(${color1}, ${color2})`;
 };
 
-function PokemonCard({ pokemonId, selected }) {
+function AltPokemonCard({ url}) {
   const [chartDetails, setChartDetails] = useState({
     labels: [],
     values: [],
   });
 
   const { data, error } = useQuery({
-    queryKey: ["pokemon", pokemonId],
-    queryFn: () => getPokemonById(pokemonId),
+    queryKey: ["pokemon", url.slice(34).replace("/","")],
+    queryFn: () => getAltPokemon(url),
   });
 
   useEffect(() => {
@@ -50,10 +50,10 @@ function PokemonCard({ pokemonId, selected }) {
           backgroundImage: borderColor(data),
         }}
       >
-        <div className={"details-card" + selected}>
+        <div className={"details-card"}>
           <Sprite data={data} />
           <div className="pokemon-details-box">
-            <div className="pokemon-name">{data?.name ?? "N/A"} #{data?.id}</div>
+            <div className="pokemon-name">{data?.name ?? "N/A"}</div>
             <Type data={data} />
             <Ability data={data} />
           </div>
@@ -67,4 +67,4 @@ function PokemonCard({ pokemonId, selected }) {
   );
 }
 
-export default PokemonCard;
+export default AltPokemonCard;
