@@ -1,0 +1,45 @@
+.poke-char-section {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  width: 50%;
+  background-color: red;
+}
+
+.poke-name-box {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(218, 218, 218);
+}
+
+.poke-sprite-box {
+  display: grid;
+  grid: auto auto auto/ auto;
+  border: solid 5px green;
+}
+
+.cry {
+  justify-content: start;
+  height: 20%;
+  width: 20%;
+}
+
+.sprites {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  background-color: rgb(218, 218, 218);
+}
+
+.norm-sprite {
+  height: 20%;
+  width: 20%;
+  border-radius: 0;
+}
+
+.shiny-sprite {
+  height: 20%;
+  width: 20%;
+  border-radius: 0;
+}

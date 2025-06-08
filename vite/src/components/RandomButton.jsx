@@ -6,7 +6,7 @@ function RandomButton() {
   async function handleClick() {
     // Gen 1 - 9
     const randNum = Math.floor(Math.random() * MAX_POKEMON);
-    navigate("/pokemon/id/" + String(randNum));
+    navigate("/pokemon/random/" + String(randNum));
   }
   return (
     <>

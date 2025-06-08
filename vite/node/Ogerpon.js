@@ -127,6 +127,7 @@ function getPokemonAbilities(pokeData) {
 
 async function getEvolution(data, pokeId) {
   const url = data.evolution_chain["url"];
+  console.log(url);
   return getPokemonEvolutionChain(url, pokeId);
 }
 
@@ -175,6 +176,19 @@ async function getPokemonForms(data) {
   });
 }
 
+async function testEnd(url) {
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log("--------------------------");
+    console.log("ENDPOINT DATA");
+    console.log(data);
+    console.log("--------------------------");
+  } catch (e) {
+    console.error(e);
+  }
+}
+
 export async function getAltPokemon(url) {
   try {
     const response = await fetch(url);
@@ -206,7 +220,9 @@ export default async function getPokemon(pokemon) {
 
   // Await fetchInfo here!
   const [pokemonData, speciesData] = await fetchInfo(id);
+  console.log("Pokemon endpoint");
   console.log(pokemonData);
+  console.log("Species endpoint");
   console.log(speciesData);
 
   const name = await getPokemonName(speciesData);
@@ -230,3 +246,7 @@ export default async function getPokemon(pokemon) {
     forms,
   };
 }
+
+// testEnd("https://pokeapi.co/api/v2/pokemon/1/");
+// testEnd("https://pokeapi.co/api/v2/pokemon-species/1/");
+testEnd("https://pokeapi.co/api/v2/move/100/");
