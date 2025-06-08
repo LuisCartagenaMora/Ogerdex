@@ -33,8 +33,39 @@ function getPokemonName(pokeData) {
   return pokeData?.name || null;
 }
 
-function getPokemonId(pokeId) {
-  return pokeId || null;
+function getPokemonCry(pokeData) {
+  return pokeData?.cries?.latest || null;
+}
+
+function getPokemonGenera(pokeData) {
+  //English version
+  return pokeData?.genera[7]?.genus || null;
+}
+
+function getPokemonFlavorText(pokeData) {
+  return pokeData?.flavor_text_entries[91]?.flavor_text || null;
+}
+
+function getPokemonMass(pokeData) {
+  const height = pokeData?.height;
+  const weight = pokeData?.weight;
+  return [height, weight];
+}
+
+function getPokemonBaseHappines(pokeData) {
+  return pokeData?.base_happiness || null;
+}
+
+function getPokemonEggGroup(pokeData) {
+  return pokeData?.egg_groups;
+}
+
+function getPokemonCaptureRate(pokeData) {
+  return pokeData?.capture_rate || null;
+}
+
+function getPokemonId(speciesData) {
+  return speciesData?.id || null;
 }
 
 function getPokemonSprite(pokeData) {
@@ -165,6 +196,39 @@ async function getPokemonEvolutionChain(url) {
   }
 }
 
+async function testEnd(url) {
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log("--------------------------");
+    console.log("ENDPOINT DATA");
+    console.log(data);
+    console.log("--------------------------");
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+async function getAltPokemon(pokemon) {
+  const pokemonData = await fetchAltInfo(pokemon);
+
+  const name = await getPokemonName(pokemonData);
+  const sprite = await getPokemonSprite(pokemonData);
+  const types = await getPokemonType(pokemonData);
+  const ability = getPokemonAbilities(pokemonData);
+  const stats = pokemonStats(pokemonData);
+  const totalStat = await getPokemonTotalStat(pokemonData);
+
+  return {
+    name,
+    type: types,
+    sprite,
+    ability,
+    stats,
+    totalStat,
+  };
+}
+
 async function getPokemonForms(data) {
   const promises = (data?.varieties ?? []).map(async (form) => {
     if (data?.name !== form?.pokemon?.name) {
@@ -180,33 +244,52 @@ async function getPokemonForms(data) {
   return results.filter(Boolean);
 }
 
-async function getAltPokemon(pokemon) {
-  const id = await getPokemonId(pokemon);
-  const pokemonData = await fetchAltInfo(id);
+export async function getPokemonDetailed(pokemon) {
+  // Await fetchInfo here!
+  const [pokemonData, speciesData] = await fetchInfo(pokemon);
 
+  const id = await getPokemonId(speciesData);
   const name = await getPokemonName(pokemonData);
+  const cry = await getPokemonCry(pokemonData);
+  const mass = await getPokemonMass(pokemonData);
+  const genera = await getPokemonGenera(speciesData);
+  const flavorText = await getPokemonFlavorText(speciesData);
+  const baseHappines = await getPokemonBaseHappines(speciesData);
+  const eggGroup = await getPokemonEggGroup(speciesData);
+  const captureRate = await getPokemonCaptureRate(speciesData);
   const sprite = await getPokemonSprite(pokemonData);
   const types = await getPokemonType(pokemonData);
   const ability = getPokemonAbilities(pokemonData);
   const stats = pokemonStats(pokemonData);
   const totalStat = await getPokemonTotalStat(pokemonData);
+  const evo = await getEvolution(speciesData);
+  const forms = await getPokemonForms(speciesData);
 
   return {
     id,
     name,
+    cry,
+    mass,
+    genera,
+    flavorText,
+    baseHappines,
+    eggGroup,
+    captureRate,
     type: types,
     sprite,
     ability,
     stats,
     totalStat,
+    evo,
+    forms,
   };
 }
 
 export default async function getPokemon(pokemon) {
-  const id = await getPokemonId(pokemon);
   // Await fetchInfo here!
-  const [pokemonData, speciesData] = await fetchInfo(id);
+  const [pokemonData, speciesData] = await fetchInfo(pokemon);
 
+  const id = await getPokemonId(speciesData);
   const name = await getPokemonName(pokemonData);
   const sprite = await getPokemonSprite(pokemonData);
   const types = await getPokemonType(pokemonData);
@@ -228,3 +311,7 @@ export default async function getPokemon(pokemon) {
     forms,
   };
 }
+
+testEnd(`https://pokeapi.co/api/v2/pokemon-species/1/`);
+const x = getPokemonDetailed(1);
+console.log(x);

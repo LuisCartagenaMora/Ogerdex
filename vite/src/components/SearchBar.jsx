@@ -13,16 +13,16 @@ import PokemonInfo from "../PokemonInfo.jsx";
 }*/
 
 function SearchBar() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  function handleInput(name){
-    if(typeof name == "string") return navigate(`/pokemon/name/${name}`)
+  function handleInput(input) {
+    if (input) return navigate(`/pokemon/view/${input}`);
   }
   return (
     <>
       <input
         className="search-bar"
-        placeholder="Type pokemons name/id"
+        placeholder="Type pokemon's name/id"
         type="text"
         onKeyDown={(e) => {
           if (e.key === "Enter") {

@@ -1,0 +1,67 @@
+.pokeview {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  text-transform: capitalize;
+}
+
+.poke-char-section {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  width: 50%;
+}
+
+.poke-name-box {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(218, 218, 218);
+}
+
+.poke-sprite-box {
+  display: grid;
+  grid: auto auto auto/ auto;
+}
+
+.cry {
+  grid-row-start: 1;
+  grid-column-start: 1;
+  height: min-content;
+  width: min-content;
+  justify-content: start;
+  background-color: rgb(173, 173, 173);
+}
+
+.cry > img {
+  height: 5vh;
+  width: 5vw;
+}
+
+.sprites {
+  display: grid;
+  grid: auto auto auto/ auto auto;
+  background-color: rgb(218, 218, 218);
+}
+
+.norm-sprite {
+  grid-row-start: 2;
+  grid-column-start: 1;
+  height: 20%;
+  width: 20%;
+  border-radius: 0;
+}
+
+.shiny-sprite {
+  grid-row-start: 2;
+  grid-column-start: 2;
+  height: 20%;
+  width: 20%;
+  border-radius: 0;
+}
+
+.flavor-text {
+  grid-row-start: 3;
+  grid-column-start: 1;
+  text-transform: none;
+}
