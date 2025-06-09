@@ -45,9 +45,6 @@ function PokeViewer() {
   if (error) return <p>Error: {error.message}</p>;
   return (
     <>
-      {console.log("DATA THING HERE")}
-      {console.log(data)}
-
       <Header />
       <div className="pokeview">
         <div className="poke-char-section">
@@ -66,47 +63,44 @@ function PokeViewer() {
               <a className="cry" onClick={() => handleClick(data?.cry)}>
                 <img src={CryIcon} alt="Cry Icon" />
               </a>
-              <div className="norm-sprite">
-                <Sprite data={data} />
-              </div>
-              <div className="shiny-sprite">
-                <Sprite data={data} />
-              </div>
-              <div className="flavor-text">
-                <span>{data?.flavorText}</span>
-              </div>
+
+              <Sprite className="sprite" data={data} />
+            </div>
+            <div className="flavor-text">
+              <span>{data?.flavorText}</span>
             </div>
           </div>
-          <div className="types">
-            <Type data={data} />
-          </div>
-          <div className="abilities">
-            <Ability data={data} />
-          </div>
-          <div className="poke-mass">
-            <span>
-              Height: {data?.mass[0]}, Weight: {data?.mass[1]}
-            </span>
-          </div>
-          <div className="happines">
-            <span>{data?.baseHappines}</span>
-          </div>
-          <div className="egg-group">
-            <span>{data?.eggGroup[0]?.name}, </span>
-            <span>{data?.eggGroup[1]?.name}</span>
-          </div>
-          <div className="capture-rate">
-            <span>{data?.captureRate}</span>
-          </div>
         </div>
-        <div className="poke-stats-box">
-          <StatChart
-            chartDetails={chartDetails}
-            color={typeIcons[data?.type[0]]?.color}
-          />
+        <div className="types">
+          <Type data={data} />
         </div>
-        <div className="poke-moves-box"></div>
+        <div className="abilities">
+          <Ability data={data} />
+        </div>
+        <div className="poke-mass">
+          <span>
+            Height: {data?.mass[0]}, Weight: {data?.mass[1]}
+          </span>
+        </div>
+        <div className="happines">
+          <span>{data?.baseHappines}</span>
+        </div>
+        <div className="egg-group">
+          <span>{data?.eggGroup[0]?.name}, </span>
+          <span>{data?.eggGroup[1]?.name}</span>
+        </div>
+        <div className="capture-rate">
+          <span>{data?.captureRate}</span>
+        </div>
       </div>
+      <div className="poke-stats-box">
+        <StatChart
+          chartDetails={chartDetails}
+          color={typeIcons[data?.type[0]]?.color}
+        />
+      </div>
+      <div className="poke-moves-box"></div>
+
       <Footer />
     </>
   );

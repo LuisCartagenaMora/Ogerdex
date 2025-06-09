@@ -69,7 +69,9 @@ function getPokemonId(speciesData) {
 }
 
 function getPokemonSprite(pokeData) {
-  return pokeData?.sprites?.front_default || null;
+  return (
+    [pokeData?.sprites?.front_default, pokeData?.sprites?.front_shiny] || null
+  );
 }
 
 function getPokemonType(pokeData) {

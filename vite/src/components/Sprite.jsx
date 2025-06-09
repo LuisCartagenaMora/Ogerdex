@@ -1,12 +1,36 @@
+import { useState } from "react";
+
+function toggleImages(state, data) {
+  if (state === true) {
+    return (
+      <img
+        className="pokemon-sprite"
+        src={data?.sprite[0]}
+        alt={`${data?.name} sprite`}
+      />
+    );
+  } else {
+    return (
+      <img
+        className="pokemon-sprite"
+        src={data?.sprite[1]}
+        alt={`${data?.name} sprite`}
+      />
+    );
+  }
+}
+
 function Sprite({ data }) {
+  const [toggle, setToggle] = useState(true);
   return (
     data?.sprite && (
-      <div className="sprite-box">
-        <img
-          className="pokemon-sprite"
-          src={data?.sprite}
-          alt={`${data?.name} sprite`}
-        />
+      <div
+        className="sprite-box"
+        onClick={() => {
+          setToggle(toggle ? false : true);
+        }}
+      >
+        {toggleImages(toggle, data)}
       </div>
     )
   );
