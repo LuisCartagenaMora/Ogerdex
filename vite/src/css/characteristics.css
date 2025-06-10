@@ -3,7 +3,9 @@
   justify-content: center;
   align-content: center;
   flex-direction: column;
+  width: fit-content;
   text-transform: capitalize;
+  margin: 0 auto; /* Center the main pokeview container horizontally */
 }
 
 .poke-char-section {
@@ -11,13 +13,18 @@
   justify-content: center;
   align-content: center;
   flex-direction: column;
-  width: 50%;
+  width: 30vw;
+  margin: 0 auto;
+  border: solid 5px;
+  background-color: rgb(218, 218, 218);
 }
 
 .poke-name-box {
   display: flex;
   justify-content: center;
-  background-color: rgb(218, 218, 218);
+  font-size: xx-large;
+  width: 100%;
+  margin: 0 auto; /* Center the poke-name-box horizontally */
 }
 
 .poke-sprite-box {
@@ -27,8 +34,8 @@
   justify-content: center;
   align-content: center;
   flex-direction: column;
-  /* height: 50%;
-  width: 50%; */
+  width: 80%;
+  margin: 0 auto; /* Center the poke-sprite-box horizontally */
 }
 
 .cry {
@@ -36,31 +43,247 @@
   grid-column-start: 1; */
   height: min-content;
   width: min-content;
-  background-color: rgb(173, 173, 173);
+  background-color: rgb(218, 218, 218);
 }
 
 .cry > img {
   height: 5vh;
   width: 5vw;
+  justify-content: flex-start;
 }
 
 .sprites {
   /* display: grid;
   grid: auto auto auto/ auto auto; */
+  width: 50%;
   background-color: rgb(218, 218, 218);
+  margin: 0 auto; /* Center the sprites box horizontally */
 }
 
-.sprite {
-  /* grid-row-start: 1;
-  grid-column-start: 1; */
-  height: 20%;
-  width: 20%;
-  border-radius: 0;
+.sprite-box {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* .pokemon-sprite {
+  height: 100%;
+  width: 100%;
+} */
+
+.flavor-text-box {
+  padding: 1%;
 }
 
 .flavor-text {
   /* grid-row-start: 3; */
   /* grid-column-start: 1; */
   text-transform: none;
+  font-style: italic;
+  width: 100%;
   background-color: rgb(218, 218, 218);
+}
+
+.pokemon-types-box {
+  padding: 2%;
+  margin: 0;
+  /* border: solid 3px;
+  background-color: rgb(218, 218, 218); */
+}
+
+.poke-types-title {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  width: auto;
+  border: solid 4px;
+  background-color: #fcfc55;
+}
+
+.types > * {
+  border-style: none solid solid solid;
+  border-width: 4px;
+  background-color: rgb(218, 218, 218);
+}
+
+.abilities > * {
+  border-style: none solid none solid;
+  border-width: 4px;
+  background-color: rgb(218, 218, 218);
+}
+
+.pokemon-detailed-info {
+  margin-top: 20px;
+  display: grid;
+  grid: auto / auto;
+  border-style: none solid solid solid;
+  border-width: 4px;
+  background-color: rgb(218, 218, 218);
+}
+
+.poke-mass-section {
+  display: grid;
+  grid: auto/auto;
+}
+
+.poke-mass-title {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  width: 100%;
+  border-style: solid none solid none;
+  background-color: #fcfc55;
+}
+
+.poke-mass {
+  display: flex;
+  justify-content: center;
+  margin: 5px;
+}
+
+.poke-happiness-section {
+  display: grid;
+  grid: auto/auto;
+}
+
+.poke-happiness-title {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  width: 100%;
+  border-style: solid none solid none;
+  background-color: #fcfc55;
+}
+
+.poke-happiness {
+  display: flex;
+  justify-content: center;
+  margin: 5px;
+}
+
+.poke-egg-group-section {
+  display: grid;
+  grid: auto/auto;
+}
+
+.poke-egg-group-title {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  width: 100%;
+  border-style: solid none solid none;
+  background-color: #fcfc55;
+}
+
+.poke-egg-group {
+  display: flex;
+  justify-content: center;
+  margin: 5px;
+}
+
+.poke-capture-rate-section {
+  display: grid;
+  grid: auto/auto;
+}
+
+.poke-capture-rate-title {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  width: 100%;
+  border-style: solid none solid none;
+  background-color: #fcfc55;
+}
+
+.poke-capture-rate {
+  display: flex;
+  justify-content: center;
+  margin: 5px;
+}
+
+.poke-stats-box {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  border-style: none solid none solid;
+  border-width: 4px;
+}
+
+.poke-stats-box > * {
+  border: solid 4px;
+}
+
+.poke-moves-box {
+  display: grid;
+  grid: auto auto auto auto auto auto auto auto / auto auto;
+  height: fit-content;
+  width: auto;
+  background-color: #fcfc55;
+  padding-bottom: 300px;
+}
+
+.move-name-title {
+}
+
+.move-name {
+  grid-column-start: 1;
+  grid-row-start: 2;
+  background-color: red;
+}
+
+.move-type-title {
+}
+.move-type {
+  grid-column-start: 2;
+  grid-row-start: 2;
+  background-color: red;
+}
+
+.move-damage-class-title {
+}
+.move-damage-class {
+  grid-column-start: 3;
+  grid-row-start: 2;
+  background-color: red;
+}
+
+.move-power-title {
+}
+.move-power {
+  grid-column-start: 4;
+  grid-row-start: 2;
+  background-color: red;
+}
+
+.move-accuracy-title {
+}
+.move-accuracy {
+  grid-column-start: 5;
+  grid-row-start: 2;
+  background-color: red;
+}
+
+.move-pp-title {
+}
+.move-pp {
+  grid-column-start: 6;
+  grid-row-start: 2;
+  background-color: red;
+}
+
+.move-priority-title {
+}
+.move-priority {
+  grid-column-start: 7;
+  grid-row-start: 2;
+  background-color: red;
+}
+
+.move-effect-title {
+}
+.move-effect {
+  grid-column-start: 8;
+  grid-row-start: 2;
+  background-color: red;
 }

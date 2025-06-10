@@ -63,7 +63,7 @@ function PokemonCard({ pokemon, selected, altPokemon }) {
           <div className="pokemon-details-box">
             <div className="pokemon-name">{displayData?.name ?? "N/A"}</div>
             <Type data={displayData} />
-            <Ability data={displayData} />
+            <Ability data={displayData} color={borderColor(displayData)} />
           </div>
           <StatChart
             chartDetails={chartDetails}

@@ -69,9 +69,7 @@ function getPokemonId(speciesData) {
 }
 
 function getPokemonSprite(pokeData) {
-  return (
-    [pokeData?.sprites?.front_default, pokeData?.sprites?.front_shiny] || null
-  );
+  return [pokeData?.sprites?.front_default, pokeData?.sprites?.front_shiny];
 }
 
 function getPokemonType(pokeData) {
@@ -119,41 +117,31 @@ function getPokemonAbilities(pokeData) {
   return abilities;
 }
 
-// async function getMove(move) {
-//   const res = await fetch(`https://pokeapi.co/api/v2/move/${move}/`);
-//   const data = await res.json();
-//   if (config === "name") {
-//     return { name: data.name };
-//   } else if (config === "basic") {
-//     return {
-//       name: data.name,
-//       type: data.type.name,
-//       damage_class: data.damage_class.name,
-//       power: data.power,
-//     };
-//   } else if (config === "all") {
-//     return {
-//       name: data?.name || null,
-//       type: data?.type?.name || null,
-//       damage_class: data?.damage_class?.name || null,
-//       power: data?.power || null,
-//       accuracy: data?.accuracy || null,
-//       pp: data?.pp || null,
-//       priority: data?.priority || null,
-//       effect:
-//         data?.effect_entries?.length > 0
-//           ? data?.effect_entries[0]?.short_effect
-//           : null,
-//     };
-//   }
-// }
+async function getMove(move) {
+  const res = await fetch(`https://pokeapi.co/api/v2/move/${move}/`);
+  const data = await res.json();
 
-// async function getPokemonMoves(pokeData) {
-//   const moves = await Promise.all(
-//     pokeData?.moves.slice(0, 5).map((m) => getMove(m?.move?.name, config))
-//   );
-//   return moves;
-// }
+  return {
+    name: data?.name || null,
+    type: data?.type?.name || null,
+    damage_class: data?.damage_class?.name || null,
+    power: data?.power || null,
+    accuracy: data?.accuracy || null,
+    pp: data?.pp || null,
+    priority: data?.priority || null,
+    effect:
+      data?.effect_entries?.length > 0
+        ? data?.effect_entries[0]?.short_effect
+        : null,
+  };
+}
+
+async function getPokemonMoves(pokeData) {
+  const moves = await Promise.all(
+    pokeData?.moves.map((m) => getMove(m?.move?.name))
+  );
+  return moves;
+}
 
 async function getEvolution(data, pokeId) {
   const url = data.evolution_chain["url"];
@@ -215,7 +203,7 @@ async function getAltPokemon(pokemon) {
   const pokemonData = await fetchAltInfo(pokemon);
 
   const name = await getPokemonName(pokemonData);
-  const sprite = await getPokemonSprite(pokemonData);
+  const sprite = getPokemonSprite(pokemonData);
   const types = await getPokemonType(pokemonData);
   const ability = getPokemonAbilities(pokemonData);
   const stats = pokemonStats(pokemonData);
@@ -253,13 +241,14 @@ export async function getPokemonDetailed(pokemon) {
   const id = await getPokemonId(speciesData);
   const name = await getPokemonName(pokemonData);
   const cry = await getPokemonCry(pokemonData);
-  const mass = await getPokemonMass(pokemonData);
+  const mass = getPokemonMass(pokemonData);
   const genera = await getPokemonGenera(speciesData);
   const flavorText = await getPokemonFlavorText(speciesData);
   const baseHappines = await getPokemonBaseHappines(speciesData);
   const eggGroup = await getPokemonEggGroup(speciesData);
   const captureRate = await getPokemonCaptureRate(speciesData);
-  const sprite = await getPokemonSprite(pokemonData);
+  const moves = await getPokemonMoves(pokemonData);
+  const sprite = getPokemonSprite(pokemonData);
   const types = await getPokemonType(pokemonData);
   const ability = getPokemonAbilities(pokemonData);
   const stats = pokemonStats(pokemonData);
@@ -277,6 +266,7 @@ export async function getPokemonDetailed(pokemon) {
     baseHappines,
     eggGroup,
     captureRate,
+    moves,
     type: types,
     sprite,
     ability,

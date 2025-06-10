@@ -1,10 +1,18 @@
 import goldStar from "../assets/star.png";
 
-function Ability({ data }) {
+function Ability({ data, color }) {
+  console.log(color);
   return (
     <div className="pokemon-abilities-section">
       <div className="pokemon-abilities-box">
-        <div className="abilities-title">Abilities</div>
+        <div
+          className="abilities-title"
+          style={{
+            backgroundImage: color,
+          }}
+        >
+          Abilities
+        </div>
         <ul className="pokemon-abilities">
           {data?.ability?.ability[1] == "none" ? (
             <li>{data?.ability?.ability[0]}</li>
