@@ -151,6 +151,7 @@ function PokeViewer() {
         <div className="move-pp-title">PP</div>
         <div className="move-priority-title">Priority</div>
         <div className="move-effect-title">Effect</div>
+
         {/* <div className="move-name">{data?.moves[0]?.name}</div>
         <div className="move-type">{data?.moves[0]?.type}</div>
         <div className="move-damage-class">{data?.moves[0]?.damage_class}</div>
@@ -180,7 +181,7 @@ function PokeViewer() {
               {move?.pp}
             </div>
             <div className="move-priority" style={{ gridRowStart: i + 2 }}>
-              {move?.priority}
+              {move?.priority ?? 0}
             </div>
             <div className="move-effect" style={{ gridRowStart: i + 2 }}>
               {move?.effect}

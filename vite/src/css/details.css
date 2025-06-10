@@ -86,13 +86,13 @@ img {
   font-size: x-large;
   height: fit-content;
   width: 100%;
-  border-radius: 50px;
   font-weight: bold;
 }
 
 .pokemon-types-box {
   display: flex;
   margin-top: 10px;
+  padding: 0%;
   justify-content: center;
   gap: 10px;
 }
@@ -142,6 +142,13 @@ img {
 .hidden-ability-icon {
   height: 20px;
   width: 20px;
+}
+
+.pokemon-link {
+  display: flex;
+  justify-content: center;
+  font-size: large;
+  margin-top: 5%;
 }
 
 .pokedex-background {
@@ -238,7 +245,7 @@ img {
   height: 36.5px;
   width: max-content;
   border-width: 2px;
-  border-style: none solid solid none;
+  border-style: none none solid none;
 }
 
 .stat-chart-inner-box-stats-total {

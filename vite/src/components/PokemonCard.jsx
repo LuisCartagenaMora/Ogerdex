@@ -64,6 +64,12 @@ function PokemonCard({ pokemon, selected, altPokemon }) {
             <div className="pokemon-name">{displayData?.name ?? "N/A"}</div>
             <Type data={displayData} />
             <Ability data={displayData} color={borderColor(displayData)} />
+            <a
+              className="pokemon-link"
+              href={`/pokemon/view/${displayData?.name}`}
+            >
+              More about this pokemon
+            </a>
           </div>
           <StatChart
             chartDetails={chartDetails}

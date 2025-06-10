@@ -7,9 +7,10 @@ function Ability({ data, color }) {
       <div className="pokemon-abilities-box">
         <div
           className="abilities-title"
-          style={{
-            backgroundImage: color,
-          }}
+          // Uncomment to include gradient in Abilities title
+          // style={{
+          //   backgroundImage: color,
+          // }}
         >
           Abilities
         </div>
