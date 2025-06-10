@@ -133,7 +133,6 @@
   font-weight: bold;
   width: 100%;
   border-style: solid none solid none;
-  background-color: #fcfc55;
 }
 
 .poke-mass {
@@ -153,7 +152,6 @@
   font-weight: bold;
   width: 100%;
   border-style: solid none solid none;
-  background-color: #fcfc55;
 }
 
 .poke-happiness {
@@ -173,7 +171,6 @@
   font-weight: bold;
   width: 100%;
   border-style: solid none solid none;
-  background-color: #fcfc55;
 }
 
 .poke-egg-group {
@@ -193,7 +190,6 @@
   font-weight: bold;
   width: 100%;
   border-style: solid none solid none;
-  background-color: #fcfc55;
 }
 
 .poke-capture-rate {
@@ -216,74 +212,131 @@
 
 .poke-moves-box {
   display: grid;
-  grid: auto auto auto auto auto auto auto auto / auto auto;
-  height: fit-content;
-  width: auto;
+  grid-template-columns: 1.2fr 0.8fr 0.7fr 0.5fr 0.6fr 0.3fr 0.6fr 3fr; /* 8 columns for each move property */
+  grid-auto-rows: minmax(
+    2.5em,
+    auto
+  ); /* Each row auto-sizes, but not too small */
+  width: 80%;
+  max-width: 1200px;
+  margin: 30px auto 0 auto; /* Center horizontally, add top margin */
+  font-size: small;
+  text-transform: capitalize;
+  border: solid 4px #222;
+  border-radius: 10px;
   background-color: #fcfc55;
-  padding-bottom: 300px;
+  box-shadow: 0 2px 12px #0002;
+  padding: 1em 0 4em 0;
+  overflow-x: auto;
 }
 
+/* .poke-moves-box {
+  display: grid;
+  grid: auto auto auto auto auto auto auto auto / auto auto;
+  height: auto;
+  width: 80%;
+  margin: 0 auto;
+  font-size: x-small;
+  text-transform: capitalize;
+  border: solid 4px;
+  padding-bottom: 300px;
+  background-color: #fcfc55;
+} */
+
 .move-name-title {
+  grid-column-start: 1;
+  grid-row-start: 1;
 }
 
 .move-name {
   grid-column-start: 1;
-  grid-row-start: 2;
-  background-color: red;
+  /* grid-row-start: 2; */
+  border-style: solid none none none;
+  border-width: 3px;
+  background-color: #dadada;
 }
 
 .move-type-title {
+  grid-column-start: 2;
+  grid-row-start: 1;
 }
 .move-type {
   grid-column-start: 2;
-  grid-row-start: 2;
-  background-color: red;
+  /* grid-row-start: 2; */
+  border-style: solid none none none;
+  border-width: 3px;
+  background-color: #dadada;
 }
 
 .move-damage-class-title {
+  grid-column-start: 3;
+  grid-row-start: 1;
 }
 .move-damage-class {
   grid-column-start: 3;
-  grid-row-start: 2;
-  background-color: red;
+  /* grid-row-start: 2; */
+  border-style: solid none none none;
+  border-width: 3px;
+  background-color: #dadada;
 }
 
 .move-power-title {
+  grid-column-start: 4;
+  grid-row-start: 1;
 }
 .move-power {
   grid-column-start: 4;
-  grid-row-start: 2;
-  background-color: red;
+  /* grid-row-start: 2; */
+  border-style: solid none none none;
+  border-width: 3px;
+  background-color: #dadada;
 }
 
 .move-accuracy-title {
+  grid-column-start: 5;
+  grid-row-start: 1;
 }
 .move-accuracy {
   grid-column-start: 5;
-  grid-row-start: 2;
-  background-color: red;
+  /* grid-row-start: 2; */
+  border-style: solid none none none;
+  border-width: 3px;
+  background-color: #dadada;
 }
 
 .move-pp-title {
+  grid-column-start: 6;
+  grid-row-start: 1;
 }
 .move-pp {
   grid-column-start: 6;
-  grid-row-start: 2;
-  background-color: red;
+  /* grid-row-start: 2; */
+  border-style: solid none none none;
+  border-width: 3px;
+  background-color: #dadada;
 }
 
 .move-priority-title {
+  grid-column-start: 7;
+  grid-row-start: 1;
 }
 .move-priority {
   grid-column-start: 7;
-  grid-row-start: 2;
-  background-color: red;
+  /* grid-row-start: 2; */
+  border-style: solid none none none;
+  border-width: 3px;
+  background-color: #dadada;
 }
 
 .move-effect-title {
+  grid-column-start: 8;
+  grid-row-start: 1;
 }
 .move-effect {
   grid-column-start: 8;
-  grid-row-start: 2;
-  background-color: red;
+  /* grid-row-start: 2; */
+  border-style: solid none none none;
+  border-width: 3px;
+
+  background-color: #dadada;
 }
