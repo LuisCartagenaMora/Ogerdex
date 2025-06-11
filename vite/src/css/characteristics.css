@@ -16,15 +16,18 @@
   width: 30vw;
   margin: 0 auto;
   border: solid 5px;
-  background-color: rgb(218, 218, 218);
+  background-color: #ffffff;
 }
 
 .poke-name-box {
   display: flex;
   justify-content: center;
-  font-size: xx-large;
+  font-size: x-large;
   width: 100%;
-  margin: 0 auto; /* Center the poke-name-box horizontally */
+  border-style: none none solid none;
+  border-width: 3px;
+  border-color: #0002;
+  /* margin: 0 auto;*/
 }
 
 .poke-sprite-box {
@@ -43,7 +46,7 @@
   grid-column-start: 1; */
   height: min-content;
   width: min-content;
-  background-color: rgb(218, 218, 218);
+  background-color: #ffffff;
 }
 
 .cry > img {
@@ -56,7 +59,7 @@
   /* display: grid;
   grid: auto auto auto/ auto auto; */
   width: 50%;
-  background-color: rgb(218, 218, 218);
+  background-color: #ffffff;
   margin: 0 auto; /* Center the sprites box horizontally */
 }
 
@@ -66,13 +69,20 @@
   width: 100%;
 }
 
+.sprite-box > img {
+  background-color: #ffffff;
+}
+
 /* .pokemon-sprite {
   height: 100%;
   width: 100%;
 } */
 
 .flavor-text-box {
-  padding: 1%;
+  padding: 0.6em;
+  border-style: solid solid solid solid;
+  border-width: 3px;
+  border-color: #0002;
 }
 
 .flavor-text {
@@ -81,7 +91,8 @@
   text-transform: none;
   font-style: italic;
   width: 100%;
-  background-color: rgb(218, 218, 218);
+
+  background-color: #ffffff;
 }
 
 .pokemon-types-box {
@@ -98,19 +109,20 @@
   font-weight: bold;
   width: auto;
   border: solid 4px;
+
   background-color: #fcfc55;
 }
 
 .types > * {
   border-style: none solid solid solid;
   border-width: 4px;
-  background-color: rgb(218, 218, 218);
+  background-color: #ffffff;
 }
 
 .abilities > * {
   border-style: none solid none solid;
   border-width: 4px;
-  background-color: rgb(218, 218, 218);
+  background-color: #ffffff;
 }
 
 .pokemon-detailed-info {
@@ -119,7 +131,7 @@
   grid: auto / auto;
   border-style: none solid solid solid;
   border-width: 4px;
-  background-color: rgb(218, 218, 218);
+  background-color: #ffffff;
 }
 
 .poke-mass-section {
@@ -133,6 +145,7 @@
   font-weight: bold;
   width: 100%;
   border-style: solid none solid none;
+  background-color: #fcfc55;
 }
 
 .poke-mass {
@@ -152,6 +165,7 @@
   font-weight: bold;
   width: 100%;
   border-style: solid none solid none;
+  background-color: #fcfc55;
 }
 
 .poke-happiness {
@@ -171,6 +185,7 @@
   font-weight: bold;
   width: 100%;
   border-style: solid none solid none;
+  background-color: #fcfc55;
 }
 
 .poke-egg-group {
@@ -190,6 +205,7 @@
   font-weight: bold;
   width: 100%;
   border-style: solid none solid none;
+  background-color: #fcfc55;
 }
 
 .poke-capture-rate {
@@ -212,11 +228,12 @@
 
 .poke-moves-box {
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr 0.7fr 0.5fr 0.6fr 0.3fr 0.6fr 3fr; /* 8 columns for each move property */
+  grid-template-columns: 1.2fr 1fr 0.9fr 0.7fr 0.8fr 0.5fr 0.7fr 3fr; /* 8 columns for each move property */
   grid-auto-rows: minmax(
     2.5em,
     auto
   ); /* Each row auto-sizes, but not too small */
+  height: min-content;
   width: 80%;
   max-width: 1200px;
   margin: 30px auto 0 auto; /* Center horizontally, add top margin */
@@ -230,120 +247,53 @@
   overflow-x: auto;
 }
 
-/* .poke-moves-box {
-  display: grid;
-  grid: auto auto auto auto auto auto auto auto / auto auto;
-  height: auto;
-  width: 80%;
-  margin: 0 auto;
-  font-size: x-small;
-  text-transform: capitalize;
-  border: solid 4px;
-  padding-bottom: 300px;
-  background-color: #fcfc55;
-} */
-
-.move-name-title {
-  grid-column-start: 1;
-  grid-row-start: 1;
+/* Common styles for all cells in the moves box */
+.poke-moves-box > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0.5em;
 }
 
-.move-name {
-  grid-column-start: 1;
-  /* grid-row-start: 2; */
-  border-style: solid none none solid;
-  border-width: 1px;
-  border-color: #0002;
-  background-color: #dadada;
-}
-
-.move-type-title {
-  grid-column-start: 2;
-  grid-row-start: 1;
-}
-.move-type {
-  grid-column-start: 2;
-  /* grid-row-start: 2; */
-  border-style: solid none none solid;
-  border-width: 1px;
-  border-color: #0002;
-  background-color: #dadada;
-}
-
-.move-damage-class-title {
-  grid-column-start: 3;
-  grid-row-start: 1;
-}
-.move-damage-class {
-  grid-column-start: 3;
-  /* grid-row-start: 2; */
-  border-style: solid none none solid;
-  border-width: 1px;
-  border-color: #0002;
-  background-color: #dadada;
-}
-
-.move-power-title {
-  grid-column-start: 4;
-  grid-row-start: 1;
-}
-.move-power {
-  grid-column-start: 4;
-  /* grid-row-start: 2; */
-  border-style: solid none none solid;
-  border-width: 1px;
-  border-color: #0002;
-  background-color: #dadada;
-}
-
-.move-accuracy-title {
-  grid-column-start: 5;
-  grid-row-start: 1;
-}
-.move-accuracy {
-  grid-column-start: 5;
-  /* grid-row-start: 2; */
-  border-style: solid none none solid;
-  border-width: 1px;
-  border-color: #0002;
-  background-color: #dadada;
-}
-
-.move-pp-title {
-  grid-column-start: 6;
-  grid-row-start: 1;
-}
-.move-pp {
-  grid-column-start: 6;
-  /* grid-row-start: 2; */
-  border-style: solid none none solid;
-  border-width: 1px;
-  border-color: #0002;
-  background-color: #dadada;
-}
-
-.move-priority-title {
-  grid-column-start: 7;
-  grid-row-start: 1;
-}
-.move-priority {
-  grid-column-start: 7;
-  /* grid-row-start: 2; */
-  border-style: solid none none solid;
-  border-width: 1px;
-  border-color: #0002;
-  background-color: #dadada;
-}
-
+/* Title cells specific styles */
+.move-name-title,
+.move-type-title,
+.move-damage-class-title,
+.move-power-title,
+.move-accuracy-title,
+.move-pp-title,
+.move-priority-title,
 .move-effect-title {
-  grid-column-start: 8;
-  grid-row-start: 1;
+  font-weight: bold;
+  background-color: #fcfc55;
+  border-bottom: 2px solid #222;
 }
+
+/* Move cells common styles */
+.move-name,
+.move-type,
+.move-damage-class,
+.move-power,
+.move-accuracy,
+.move-pp,
+.move-priority,
 .move-effect {
-  grid-column-start: 8;
-  /* grid-row-start: 2; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   border-style: solid none none solid;
   border-width: 1px;
   border-color: #0002;
-  background-color: #dadada;
+  background-color: #ffffff;
+  padding: 0.5em;
+  min-height: 2.5em;
+}
+
+/* Special handling for effect text */
+.move-effect {
+  text-align: left;
+  justify-content: flex-start;
+  padding: 0.5em 1em;
 }

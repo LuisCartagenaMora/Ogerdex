@@ -5,6 +5,7 @@ import { getPokemonDetailed } from "../node/Ogerpon";
 import Sprite from "./components/Sprite.jsx";
 import Type from "./components/Type.jsx";
 import Ability from "./components/Ability.jsx";
+import Evolution from "./components/Evolution.jsx";
 import StatChart from "./components/StatChart.jsx";
 import LoadingIcon from "./components/LoadingIcon.jsx";
 import typeIcons from "./assets/typeIcons.jsx";
@@ -136,6 +137,10 @@ function PokeViewer() {
         </div>
       </div>
 
+      <div className="poke-evo-line">
+        <Evolution data={data} />
+      </div>
+      <div className="poke-alt-forms">Alterante forms</div>
       <div className="poke-stats-box">
         <StatChart
           chartDetails={chartDetails}
@@ -152,30 +157,29 @@ function PokeViewer() {
         <div className="move-priority-title">Priority</div>
         <div className="move-effect-title">Effect</div>
 
-        {/* <div className="move-name">{data?.moves[0]?.name}</div>
-        <div className="move-type">{data?.moves[0]?.type}</div>
-        <div className="move-damage-class">{data?.moves[0]?.damage_class}</div>
-        <div className="move-power">{data?.moves[0]?.power}</div>
-        <div className="move-accuracy">{data?.moves[0]?.accuracy}</div>
-        <div className="move-pp">{data?.moves[0]?.pp}</div>
-        <div className="move-priority">{data?.moves[0]?.priority}</div>
-        <div className="move-effect">{data?.moves[0]?.effect}</div> */}
         {data?.moves.map((move, i) => (
           <>
             <div className="move-name" style={{ gridRowStart: i + 2 }}>
               {move?.name}
             </div>
-            <div className="move-type" style={{ gridRowStart: i + 2 }}>
+            <div
+              className="move-type"
+              style={{
+                gridRowStart: i + 2,
+                backgroundColor: typeIcons[move?.type]?.color || "#eee", // fallback color
+              }}
+            >
+              {typeIcons[move?.type].icon}
               {move?.type}
             </div>
             <div className="move-damage-class" style={{ gridRowStart: i + 2 }}>
               {move?.damage_class}
             </div>
             <div className="move-power" style={{ gridRowStart: i + 2 }}>
-              {move?.power}
+              {move?.power ?? "-"}
             </div>
             <div className="move-accuracy" style={{ gridRowStart: i + 2 }}>
-              {move?.accuracy}
+              {move?.accuracy ?? "-"}
             </div>
             <div className="move-pp" style={{ gridRowStart: i + 2 }}>
               {move?.pp}

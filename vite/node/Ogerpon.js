@@ -186,6 +186,29 @@ async function getPokemonEvolutionChain(url) {
   }
 }
 
+async function getEvolutionV2(pokemonData, speciesData) {
+  console.log("INSIDE EVO V2");
+  console.log(speciesData);
+  const evoChain = [];
+  const speciesResponse = await fetch(speciesData?.evolution_chain["url"]);
+  const speciesChain = await speciesResponse.json();
+  while (speciesChain?.evolves_to !== 0) {
+    //Extract the current pokemon's name
+    let name = pokemonData?.name;
+    //Extract the current pokemon's id
+    let id = speciesChain?.id;
+    //Extract the current pokemon's sprite
+    let sprite = pokemonData?.sprites?.front_default;
+    //Extract the current pokemon's evolution requirements
+    for (let detail in speciesChain?.chain?.evolution_details) {
+      console.log(detail);
+    }
+    console.log(pokemonData);
+    console.log({ id, name, sprite });
+    evoChain.push({ id, name, sprite });
+  }
+}
+
 async function testEnd(url) {
   try {
     const response = await fetch(url);
@@ -304,6 +327,8 @@ export default async function getPokemon(pokemon) {
   };
 }
 
-testEnd(`https://pokeapi.co/api/v2/pokemon-species/1/`);
-const x = getPokemonDetailed(1);
-console.log(x);
+testEnd(`https://pokeapi.co/api/v2/pokemon-species/67/`);
+// testEnd(`https://pokeapi.co/api/v2/evolution-chain/67/`);
+
+const [pokemonData, speciesData] = await fetchInfo(25);
+getEvolutionV2(pokemonData, speciesData);
