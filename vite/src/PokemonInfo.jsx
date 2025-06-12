@@ -28,8 +28,9 @@ function PokemonInfo({ pokemon }) {
     ));
   }
 
+  //Currently only extracting a pokemon's Battle Form
   function numberOfForms() {
-    const PokemonForms = Object.values(data?.forms);
+    const PokemonForms = Object.values(data?.battleForms);
     console.log("Forms: ");
     console.log(PokemonForms);
     return PokemonForms.map((form, i) => {

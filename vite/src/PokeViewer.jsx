@@ -6,6 +6,7 @@ import Sprite from "./components/Sprite.jsx";
 import Type from "./components/Type.jsx";
 import Ability from "./components/Ability.jsx";
 import Evolution from "./components/Evolution.jsx";
+import AltForm from "./components/AltForm.jsx";
 import StatChart from "./components/StatChart.jsx";
 import LoadingIcon from "./components/LoadingIcon.jsx";
 import typeIcons from "./assets/typeIcons.jsx";
@@ -140,7 +141,9 @@ function PokeViewer() {
       <div className="poke-evo-line">
         <Evolution data={data} />
       </div>
-      <div className="poke-alt-forms">Alterante forms</div>
+      <div className="poke-alt-forms">
+        <AltForm data={data} />
+      </div>
       <div className="poke-stats-box">
         <StatChart
           chartDetails={chartDetails}

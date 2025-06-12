@@ -143,70 +143,99 @@ async function getPokemonMoves(pokeData) {
   return moves;
 }
 
-async function getEvolution(data, pokeId) {
-  const url = data.evolution_chain["url"];
-  return getPokemonEvolutionChain(url, pokeId);
-}
+// async function getEvolution(data, pokeId) {
+//   const url = data.evolution_chain["url"];
+//   // return getPokemonEvolutionChain(url, pokeId);
+//   return getEvolutionV2(url)
+// }
 
 //
-async function getPokemonEvolutionChain(url) {
-  const res = await fetch(url); // /evolution-chain/ endpoint is called here
-  const data = await res.json();
-  const evo_chain = [];
+// async function getPokemonEvolutionChain(url) {
+//   const res = await fetch(url); // /evolution-chain/ endpoint is called here
+//   const data = await res.json();
+//   const evo_chain = [];
 
-  // IF evolves_to is < 1 (i.e. length is 0) the pokemon doesnt evolver any further.
-  // if(data.chain.evolves_to.length < 1){
-  //   evoChain.push(data.chain.species)
-  // }
+//   // IF evolves_to is < 1 (i.e. length is 0) the pokemon doesnt evolver any further.
+//   // if(data.chain.evolves_to.length < 1){
+//   //   evoChain.push(data.chain.species)
+//   // }
 
-  const evoLength = data.chain.evolves_to;
-  if (evoLength.length <= 2) {
-    evo_chain[0] = data.chain.species;
-    evo_chain[0].id = evo_chain[0].url.slice(42).replace("/", "");
-    if (data.chain.evolves_to.length > 0) {
-      evo_chain[1] = data.chain.evolves_to[0].species;
-      evo_chain[1].id = evo_chain[1].url.slice(42).replace("/", "");
-      evo_chain[1].id = evo_chain[1].url.slice(42).replace("/", "");
-      if (data.chain.evolves_to[0].evolves_to.length > 0) {
-        evo_chain[2] = data.chain.evolves_to[0].evolves_to[0].species;
-        evo_chain[2].id = evo_chain[2].url.slice(42).replace("/", "");
-      }
-    }
-    return evo_chain;
-  } else {
-    const evoChain = evoLength.map((evo) => {
-      evo.species.id = evo.species.url.slice(42).replace("/", "");
-      return evo.species;
-    });
+//   const evoLength = data.chain.evolves_to;
+//   if (evoLength.length <= 2) {
+//     evo_chain[0] = data.chain.species;
+//     evo_chain[0].id = evo_chain[0].url.slice(42).replace("/", "");
+//     if (data.chain.evolves_to.length > 0) {
+//       evo_chain[1] = data.chain.evolves_to[0].species;
+//       evo_chain[1].id = evo_chain[1].url.slice(42).replace("/", "");
+//       evo_chain[1].id = evo_chain[1].url.slice(42).replace("/", "");
+//       if (data.chain.evolves_to[0].evolves_to.length > 0) {
+//         evo_chain[2] = data.chain.evolves_to[0].evolves_to[0].species;
+//         evo_chain[2].id = evo_chain[2].url.slice(42).replace("/", "");
+//       }
+//     }
+//     return evo_chain;
+//   } else {
+//     const evoChain = evoLength.map((evo) => {
+//       evo.species.id = evo.species.url.slice(42).replace("/", "");
+//       return evo.species;
+//     });
 
-    //Necessary for the eeveelutions, since eevee isn't inserted in the map function.
-    evoChain.unshift(data.chain.species);
-    evoChain[0].id = data.chain.species.url.slice(42).replace("/", "");
-    return evoChain;
-  }
-}
+//     //Necessary for the eeveelutions, since eevee isn't inserted in the map function.
+//     evoChain.unshift(data.chain.species);
+//     evoChain[0].id = data.chain.species.url.slice(42).replace("/", "");
+//     return evoChain;
+//   }
+// }
 
-async function getEvolutionV2(pokemonData, speciesData) {
-  console.log("INSIDE EVO V2");
-  console.log(speciesData);
+async function getEvolutionV2(speciesData) {
   const evoChain = [];
+  console.log(speciesData?.evolution_chain["url"])
   const speciesResponse = await fetch(speciesData?.evolution_chain["url"]);
   const speciesChain = await speciesResponse.json();
-  while (speciesChain?.evolves_to !== 0) {
-    //Extract the current pokemon's name
-    let name = pokemonData?.name;
-    //Extract the current pokemon's id
-    let id = speciesChain?.id;
-    //Extract the current pokemon's sprite
-    let sprite = pokemonData?.sprites?.front_default;
-    //Extract the current pokemon's evolution requirements
-    for (let detail in speciesChain?.chain?.evolution_details) {
-      console.log(detail);
-    }
-    console.log(pokemonData);
-    console.log({ id, name, sprite });
-    evoChain.push({ id, name, sprite });
+
+  // Helper to get sprite by id or name
+  async function getSprite(idOrName) {
+    const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${idOrName}/`);
+    const data = await res.json();
+    return data?.sprites?.front_default || null;
   }
+
+  // Helper to parse evolution requirements
+  function parseEvolutionDetails(details) {
+    if (!details || details.length === 0) return "None";
+    const d = details[0];
+    if (d.trigger?.name === "level-up" && d.min_happiness)
+      return `Level up with ${d.min_happiness} happiness`;
+    if (d.trigger?.name === "level-up" && d.min_level)
+      return `Level ${d.min_level}`;
+    if (d.trigger?.name === "use-item" && d.item)
+      return `Use ${d.item.name.replace("-", " ")}`;
+    if (d.trigger?.name === "trade")
+      return "Trade";
+    return d.trigger?.name || "Unknown";
+  }
+
+  // Recursive traversal
+  async function traverse(chain, from = null, evoReq = null) {
+    const id = chain.species.url.slice(42).replace("/", "");
+    const sprite = await getSprite(id); // Pass id or name here
+    evoChain.push({
+      name: chain.species.name,
+      id,
+      sprite,
+      evolves_from: from,
+      evolution_requirement: evoReq,
+    });
+    if (chain.evolves_to && chain.evolves_to.length > 0) {
+      for (const evo of chain.evolves_to) {
+        const req = parseEvolutionDetails(evo.evolution_details);
+        await traverse(evo, chain.species.name, req);
+      }
+    }
+  }
+
+  await traverse(speciesChain.chain);
+  return evoChain;
 }
 
 async function testEnd(url) {
@@ -243,22 +272,27 @@ async function getAltPokemon(pokemon) {
 }
 
 async function getPokemonForms(data) {
-  const promises = (data?.varieties ?? []).map(async (form) => {
-    if (data?.name !== form?.pokemon?.name) {
-      const x = await getAltPokemon(
-        form?.pokemon?.url.slice(34).replace("/", "")
-      );
-      return x;
-    }
-    return undefined;
+  // Each form will be an object: { name, isMega, isGmax }
+  return (data?.varieties ?? []).map((form) => {
+    const formName = form?.pokemon?.name.toLowerCase();
+    return {
+      name: form?.pokemon?.name,
+      isMega:
+        formName.includes("mega") ||
+        formName.endsWith("-x") ||
+        formName.endsWith("-y"),
+      isGmax: formName.includes("gmax"),
+    };
   });
-  // Wait for all promises to resolve, then filter out undefined
-  const results = await Promise.all(promises);
-  return results.filter(Boolean);
 }
 
 export async function getPokemonDetailed(pokemon) {
   // Await fetchInfo here!
+  // testEnd(`https://pokeapi.co/api/v2/pokemon-species/67/`);
+// testEnd(`https://pokeapi.co/api/v2/evolution-chain/67/`);
+
+
+
   const [pokemonData, speciesData] = await fetchInfo(pokemon);
 
   const id = await getPokemonId(speciesData);
@@ -276,8 +310,9 @@ export async function getPokemonDetailed(pokemon) {
   const ability = getPokemonAbilities(pokemonData);
   const stats = pokemonStats(pokemonData);
   const totalStat = await getPokemonTotalStat(pokemonData);
-  const evo = await getEvolution(speciesData);
-  const forms = await getPokemonForms(speciesData);
+  const evo = await getEvolutionV2(speciesData);
+  const forms = await getPokemonForms(speciesData, false);
+  // const styleForms = await checkStylisticForm(speciesData);
 
   return {
     id,
@@ -311,8 +346,8 @@ export default async function getPokemon(pokemon) {
   const ability = getPokemonAbilities(pokemonData);
   const stats = pokemonStats(pokemonData);
   const totalStat = await getPokemonTotalStat(pokemonData);
-  const evo = await getEvolution(speciesData);
-  const forms = await getPokemonForms(speciesData);
+  const evo = await getEvolutionV2(speciesData);
+  const forms = await getPokemonForms(speciesData, true);
 
   return {
     id,
@@ -327,8 +362,3 @@ export default async function getPokemon(pokemon) {
   };
 }
 
-testEnd(`https://pokeapi.co/api/v2/pokemon-species/67/`);
-// testEnd(`https://pokeapi.co/api/v2/evolution-chain/67/`);
-
-const [pokemonData, speciesData] = await fetchInfo(25);
-getEvolutionV2(pokemonData, speciesData);
