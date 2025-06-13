@@ -189,7 +189,7 @@ async function getPokemonMoves(pokeData) {
 
 async function getEvolutionV2(speciesData) {
   const evoChain = [];
-  console.log(speciesData?.evolution_chain["url"])
+  console.log(speciesData?.evolution_chain["url"]);
   const speciesResponse = await fetch(speciesData?.evolution_chain["url"]);
   const speciesChain = await speciesResponse.json();
 
@@ -210,8 +210,7 @@ async function getEvolutionV2(speciesData) {
       return `Level ${d.min_level}`;
     if (d.trigger?.name === "use-item" && d.item)
       return `Use ${d.item.name.replace("-", " ")}`;
-    if (d.trigger?.name === "trade")
-      return "Trade";
+    if (d.trigger?.name === "trade") return "Trade";
     return d.trigger?.name || "Unknown";
   }
 
@@ -273,25 +272,26 @@ async function getAltPokemon(pokemon) {
 
 async function getPokemonForms(data) {
   // Each form will be an object: { name, isMega, isGmax }
-  return (data?.varieties ?? []).map((form) => {
-    const formName = form?.pokemon?.name.toLowerCase();
-    return {
-      name: form?.pokemon?.name,
-      isMega:
-        formName.includes("mega") ||
-        formName.endsWith("-x") ||
-        formName.endsWith("-y"),
-      isGmax: formName.includes("gmax"),
-    };
-  });
+  return (data?.varieties ?? [])
+    .map((form) => {
+      const formName = form.pokemon.name.toLowerCase();
+      return {
+        id: Number(form.pokemon.url.slice(34).replace("/", "")),
+        name: form.pokemon.name,
+        isMega:
+          formName.includes("mega") ||
+          formName.endsWith("-x") ||
+          formName.endsWith("-y"),
+        isGmax: formName.includes("gmax"),
+      };
+    })
+    .filter((form) => form.isMega || form.isGmax);
 }
 
 export async function getPokemonDetailed(pokemon) {
   // Await fetchInfo here!
   // testEnd(`https://pokeapi.co/api/v2/pokemon-species/67/`);
-// testEnd(`https://pokeapi.co/api/v2/evolution-chain/67/`);
-
-
+  // testEnd(`https://pokeapi.co/api/v2/evolution-chain/67/`);
 
   const [pokemonData, speciesData] = await fetchInfo(pokemon);
 
@@ -362,3 +362,12 @@ export default async function getPokemon(pokemon) {
   };
 }
 
+export { getAltPokemon };
+
+const x = testEnd("https://pokeapi.co/api/v2/pokemon/10035/");
+console.log("Endpoint using pokemon/10035");
+console.log(x);
+
+const f = await getAltPokemon(10035);
+console.log("CURRENT MEGA POKE");
+console.log(f);

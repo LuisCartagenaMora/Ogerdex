@@ -37,6 +37,7 @@ function PokemonCard({ pokemon, selected, altPokemon }) {
   // Use altPokemon as the data source if present
   const displayData = data;
 
+  
   useEffect(() => {
     console.log(displayData);
     if (displayData && displayData.stats) {

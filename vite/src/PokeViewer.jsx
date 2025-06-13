@@ -60,12 +60,14 @@ function PokeViewer() {
     <>
       <Header />
       <div className="pokeview">
+        {console.log(typeIcons[data?.type[0]]?.color)}
         <div className="poke-char-section">
           <div
             className="poke-name-box"
-            style={{
-              backgroundImage: borderColor(data),
-            }}
+            // style={{
+            //   backgroundImage: borderColor(data),
+            // }}
+            style={{ backgroundColor: typeIcons[data?.type[0]]?.color }}
           >
             <div className="name-id">
               <h4>
@@ -86,15 +88,13 @@ function PokeViewer() {
           </div>
           <div
             className="flavor-text-box"
-            style={{
-              backgroundImage: borderColor(data),
-            }}
+            // style={{
+            //   backgroundImage: borderColor(data),
+            // }}
+             style={{ backgroundColor: typeIcons[data?.type[0]]?.color }}
           >
             <div
               className="flavor-text"
-              style={{
-                backgroundImage: borderColor(data),
-              }}
             >
               "{data?.flavorText}"
             </div>
@@ -138,18 +138,20 @@ function PokeViewer() {
         </div>
       </div>
 
-      <div className="poke-evo-line">
-        <Evolution data={data} />
-      </div>
-      <div className="poke-alt-forms">
-        <AltForm data={data} />
-      </div>
       <div className="poke-stats-box">
         <StatChart
           chartDetails={chartDetails}
           color={typeIcons[data?.type[0]]?.color}
         />
       </div>
+
+      <div className="poke-evo-line">
+        <Evolution data={data} />
+      </div>
+      <div className="poke-alt-forms">
+        <AltForm forms={data.forms} />
+      </div>
+
       <div className="poke-moves-box">
         <div className="move-name-title">Name</div>
         <div className="move-type-title">Type</div>

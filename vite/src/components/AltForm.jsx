@@ -1,35 +1,17 @@
-import Sprite from "./Sprite.jsx";
-function AltForm({ data }) {
-  //Search for the pokemon alternate form ie hisuain, galarian, etc..
-  console.log("ALTFORM DATA");
-  console.log(data?.forms);
-  data?.forms.map((form) => {
-    return (
-      <div className="poke-form-section">
-        {true ? (
-          // Render something if isMega is true
-          <div className="poke-mega-evo">
-            <div classname="mega-sprite">
-              <Sprite data={data} />
-            </div>
-            <div className="mega-name-id">
-              {data?.name} #{data?.id}
-            </div>
-          </div>
-        ) : (
-          // Render something else if isMega is false
-          <div className="poke-gmax">
-            <div classname="gmax-sprite">
-              <Sprite data={data} />
-            </div>
-            <div className="gmax-name-id">
-              {data?.name} #{data?.id}
-            </div>
-          </div>
-        )}
-      </div>
-    );
-  });
+import { getAltPokemon } from "/node/Ogerpon.js";
+import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import MegaEvolution from "./MegaEvolution.jsx";
+import GmaxForm from "./GmaxForm.jsx";
+
+function AltForm({ forms }) {
+  return forms.map((form) => (
+    <div className="poke-form-section" key={form.name}>
+      {console.log(form)}
+      {form.isMega && <MegaEvolution megaEvo={form} />}
+      {form.isGmax && <GmaxForm gMax={form} />}
+    </div>
+  ));
 }
 
 export default AltForm;
