@@ -30,12 +30,12 @@ function PokemonCard({ pokemon, selected, altPokemon }) {
   const shouldUseAlt = !!altPokemon;
   const { data, error } = useQuery({
     queryKey: ["pokemon", pokemon],
-    queryFn: () => getPokemon(pokemon),
+    queryFn: () => getPokemon(pokemon ?? altPokemon),
     enabled: !shouldUseAlt, // Don't fetch if altPokemon is present
   });
 
   // Use altPokemon as the data source if present
-  const displayData = altPokemon || data;
+  const displayData = data;
 
   useEffect(() => {
     console.log(displayData);
@@ -52,6 +52,7 @@ function PokemonCard({ pokemon, selected, altPokemon }) {
 
   return (
     <>
+      {console.log(displayData)}
       <div
         className="pokedex-background"
         style={{
