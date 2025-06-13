@@ -37,7 +37,6 @@ function PokemonCard({ pokemon, selected, altPokemon }) {
   // Use altPokemon as the data source if present
   const displayData = data;
 
-  
   useEffect(() => {
     console.log(displayData);
     if (displayData && displayData.stats) {
@@ -68,7 +67,7 @@ function PokemonCard({ pokemon, selected, altPokemon }) {
             <Ability data={displayData} color={borderColor(displayData)} />
             <a
               className="pokemon-link"
-              href={`/pokemon/view/${displayData?.name}`}
+              href={`/pokemon/view/${displayData?.id}`}
             >
               More about this pokemon
             </a>

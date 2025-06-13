@@ -35,9 +35,9 @@ export default function MegaEvolution({ megaEvo }) {
         {/* <img src={megaEvoData.sprite[0]} alt={`${megaEvoData.name} sprite`} /> */}
         <Sprite data={megaEvoData} />
       </div>
-      <div className="mega-name-id">
-        {megaEvo.name} #{megaEvo.id}
-      </div>
+        <a className="mega-name-id" href={`/pokemon/view/${megaEvo.id}`}>
+          {megaEvo.name} #{megaEvo.id}
+        </a>
       <div className="mega-stats">
         <StatChart chartDetails={chartDetails} />
       </div>

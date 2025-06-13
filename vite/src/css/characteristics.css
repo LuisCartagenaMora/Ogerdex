@@ -16,6 +16,7 @@
   width: 30vw;
   margin: 0 auto;
   border: solid 5px;
+  border-color: #0002;
   background-color: #ffffff;
 }
 
@@ -27,6 +28,7 @@
   border-style: none none solid none;
   border-width: 3px;
   border-color: #0002;
+  text-align: center;
   /* margin: 0 auto;*/
 }
 
@@ -107,19 +109,21 @@
   font-weight: bold;
   width: auto;
   border: solid 4px;
-
+  border-color: #0002;
   background-color: #fcfc55;
 }
 
 .types > * {
   border-style: none solid solid solid;
   border-width: 4px;
+  border-color: #0002;
   background-color: #ffffff;
 }
 
 .abilities > * {
   border-style: none solid none solid;
   border-width: 4px;
+  border-color: #0002;
   background-color: #ffffff;
 }
 
@@ -129,6 +133,7 @@
   grid: auto / auto;
   border-style: none solid solid solid;
   border-width: 4px;
+  border-color: #0002;
   background-color: #ffffff;
 }
 
@@ -143,6 +148,7 @@
   font-weight: bold;
   width: 100%;
   border-style: solid none solid none;
+  border-color: #0002;
   background-color: #fcfc55;
 }
 
@@ -163,6 +169,7 @@
   font-weight: bold;
   width: 100%;
   border-style: solid none solid none;
+  border-color: #0002;
   background-color: #fcfc55;
 }
 
@@ -183,6 +190,7 @@
   font-weight: bold;
   width: 100%;
   border-style: solid none solid none;
+  border-color: #0002;
   background-color: #fcfc55;
 }
 
@@ -203,6 +211,7 @@
   font-weight: bold;
   width: 100%;
   border-style: solid none solid none;
+  border-color: #0002;
   background-color: #fcfc55;
 }
 
@@ -226,6 +235,7 @@
   margin-top: 20px;
   border: solid 2px;
   border-radius: 10px;
+  border-color: #0002;
   background-color: rgb(218, 218, 218);
 }
 
@@ -237,6 +247,7 @@
   border-radius: 50%;
   background-color: rgb(171, 171, 171);
   border: solid 2px;
+  border-color: #0002;
 }
 .pokemon-evo-info {
   height: auto;
@@ -285,20 +296,32 @@
   margin: 0 auto;
   border: solid 2px;
   border-radius: 10px;
+  border-color: #0002;
   gap: 20px;
   background-color: rgb(218, 218, 218);
 }
 
 .poke-mega-evo {
   height: auto;
-  width: auto;
   margin-top: 20px;
 }
 
 .mega-sprite {
   width: 50%;
-
+  border-radius: 50%;
   margin: 0 auto;
+  background-color: red;
+  border-color: #0002;
+}
+
+.mega-name-id {
+  display: flex;
+  justify-content: center;
+  text-transform: capitalize;
+  font-size: larger;
+  font-weight: bold;
+  padding: 10px 0px 10px 0px;
+  color: black;
 }
 
 .poke-gmax {
@@ -317,6 +340,7 @@
   text-transform: capitalize;
   font-size: larger;
   font-weight: bold;
+  text-align: center;
 }
 
 .poke-stats-box {
