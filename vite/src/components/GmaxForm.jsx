@@ -7,11 +7,12 @@ export default function GmaxForm({ gMax }) {
     queryFn: () => getAltPokemon(gMax.id),
   });
 
+  if (error) "A new error was found!";
+
   return (
     <div className="poke-gmax">
-      {console.log("Gmax Form: ")}
-      {console.log(gMax)}
-      <div classname="sprites">
+      <h1>Gigantamax Form</h1>
+      <div classname="gmax-sprite">
         {/* <img src={gMaxData?.sprite[0]} alt={`${gMax.name} sprite`} /> */}
         <Sprite data={gMaxData} />
       </div>

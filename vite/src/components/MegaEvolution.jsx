@@ -29,15 +29,14 @@ export default function MegaEvolution({ megaEvo }) {
 
   return (
     <div className="poke-mega-evo">
-      {console.log("Mega Evolution: ", megaEvoData)}
-      {console.log("ChartDetails: ", chartDetails)}
+      <h1>Mega Evolution</h1>
       <div className="sprites">
         {/* <img src={megaEvoData.sprite[0]} alt={`${megaEvoData.name} sprite`} /> */}
         <Sprite data={megaEvoData} />
       </div>
-        <a className="mega-name-id" href={`/pokemon/view/${megaEvo.id}`}>
-          {megaEvo.name} #{megaEvo.id}
-        </a>
+      <a className="mega-name-id" href={`/pokemon/view/${megaEvo.id}`}>
+        {megaEvo.name} #{megaEvo.id}
+      </a>
       <div className="mega-stats">
         <StatChart chartDetails={chartDetails} />
       </div>

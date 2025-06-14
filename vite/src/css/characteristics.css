@@ -61,7 +61,7 @@
   /* display: grid;
   grid: auto auto auto/ auto auto; */
   width: 50%;
-  background-color: #ffffff;
+
   margin: 0 auto; /* Center the sprites box horizontally */
 }
 
@@ -276,12 +276,12 @@
   width: 75px;
 }
 
-/* .poke-alt-forms {
+.poke-alt-forms {
   display: flex;
   justify-content: center;
-  align-content: center;
-  margin: 0 auto;
-} */
+  align-items: center;
+  margin: 20px 0px 20px 0px;
+}
 
 .poke-form-section {
   display: flex;
@@ -298,6 +298,7 @@
   border-radius: 10px;
   border-color: #0002;
   gap: 20px;
+  text-align: center;
   background-color: rgb(218, 218, 218);
 }
 

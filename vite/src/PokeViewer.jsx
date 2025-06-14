@@ -91,13 +91,9 @@ function PokeViewer() {
             // style={{
             //   backgroundImage: borderColor(data),
             // }}
-             style={{ backgroundColor: typeIcons[data?.type[0]]?.color }}
+            style={{ backgroundColor: typeIcons[data?.type[0]]?.color }}
           >
-            <div
-              className="flavor-text"
-            >
-              "{data?.flavorText}"
-            </div>
+            <div className="flavor-text">"{data?.flavorText}"</div>
           </div>
         </div>
         <div className="poke-types-title">Types</div>

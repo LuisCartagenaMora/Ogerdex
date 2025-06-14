@@ -20,11 +20,7 @@ function PokemonInfo({ pokemon }) {
     console.log("Evolutions: ");
     console.log(PokemonEvolutions);
     return PokemonEvolutions.map((evo, i) => (
-      <PokemonCard
-        key={i}
-        pokemon={evo?.id}
-        selected={evo?.id == pokemon ? "highlight" : ""}
-      />
+      <PokemonCard key={i} pokemon={evo?.id} />
     ));
   }
 
@@ -34,7 +30,7 @@ function PokemonInfo({ pokemon }) {
     console.log("Forms: ");
     console.log(PokemonForms);
     return PokemonForms.map((form, i) => {
-      console.log(form?.id);
+      console.log("FORM IN INFO", form);
       return <PokemonCard key={i} altPokemon={form} />;
     });
   }

@@ -165,6 +165,7 @@ img {
   border-width: 5px;
   border-style: solid none solid none;
   gap: 2vw;
+  text-align: center;
 }
 
 .stat-chart-box {
