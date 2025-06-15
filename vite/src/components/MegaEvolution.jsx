@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Sprite from "./Sprite.jsx";
 import StatChart from "./StatChart.jsx";
+import PokemonCard from "./PokemonCard.jsx";
 import { useQuery } from "@tanstack/react-query";
 import { getAltPokemon } from "/node/Ogerpon.js";
 
@@ -28,18 +29,30 @@ export default function MegaEvolution({ megaEvo }) {
   if (!megaEvoData) return <div>Loading...</div>;
 
   return (
-    <div className="poke-mega-evo">
+    <div className="mega-evo">
       <h1>Mega Evolution</h1>
-      <div className="sprites">
-        {/* <img src={megaEvoData.sprite[0]} alt={`${megaEvoData.name} sprite`} /> */}
-        <Sprite data={megaEvoData} />
-      </div>
-      <a className="mega-name-id" href={`/pokemon/view/${megaEvo.id}`}>
-        {megaEvo.name} #{megaEvo.id}
-      </a>
-      <div className="mega-stats">
-        <StatChart chartDetails={chartDetails} />
-      </div>
+      {console.log(megaEvoData)}
+      <PokemonCard altPokemon={megaEvoData} />
     </div>
+
+    // <>
+    //   <div className="pokedex-background">
+    //     <div className={"details-card"}>
+    //       <Sprite data={megaEvoData} />
+    //       <div className="pokemon-details-box">
+    //         <div className="pokemon-name">{megaEvoData?.name ?? "N/A"}</div>
+    //         <Type data={megaEvoData} />
+    //         <Ability data={megaEvoData} />
+    //         <a
+    //           className="pokemon-link"
+    //           href={`/pokemon/view/${megaEvoData?.id}`}
+    //         >
+    //           More about this pokemon
+    //         </a>
+    //       </div>
+    //       <StatChart chartDetails={chartDetails} />
+    //     </div>
+    //   </div>
+    // </>
   );
 }

@@ -24,21 +24,21 @@ function PokemonInfo({ pokemon }) {
     ));
   }
 
-  //Currently only extracting a pokemon's Battle Form
-  function numberOfForms() {
-    const PokemonForms = Object.values(data?.forms);
-    console.log("Forms: ");
-    console.log(PokemonForms);
-    return PokemonForms.map((form, i) => {
-      console.log("FORM IN INFO", form);
-      return <PokemonCard key={i} altPokemon={form} />;
-    });
-  }
+  // //Currently only extracting a pokemon's Battle Form
+  // function numberOfForms() {
+  //   const PokemonForms = Object.values(data?.forms);
+  //   console.log("Forms: ");
+  //   console.log(PokemonForms);
+  //   return PokemonForms.map((form, i) => {
+  //     console.log("FORM IN INFO", form);
+  //     return <PokemonCard key={i} altPokemon={form} />;
+  //   });
+  // }
 
   return (
     <>
       <div className="pokemon-cards-section">{numberOfEvolutions()}</div>
-      <div className="pokemon-cards-section">{numberOfForms()}</div>
+      {/* <div className="pokemon-cards-section">{numberOfForms()}</div> */}
     </>
   );
 }

@@ -21,10 +21,10 @@ function Evolution({ data }) {
                 <img src={evo.sprite} alt={`${evo.name} sprite`} />
               </div>
               <div className="poke-name-id">
-                <a href={`/pokemon/view/${evo.id}}`} style={{ color: "black" }}>
+                <a href={`/pokemon/view/${evo.id}`} style={{ color: "black" }}>
                   {evo.name}
                 </a>
-                {"\n"}#{evo.id}
+                #{evo.id}
               </div>
             </div>
           </div>

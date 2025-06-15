@@ -60,7 +60,7 @@ function PokeViewer() {
     <>
       <Header />
       <div className="pokeview">
-        {console.log(typeIcons[data?.type[0]]?.color)}
+        {console.log(data)}
         <div className="poke-char-section">
           <div
             className="poke-name-box"
@@ -78,12 +78,24 @@ function PokeViewer() {
               </div>
             </div>
           </div>
-          <a className="cry" onClick={() => handleClick(data?.cry)}>
-            <img src={CryIcon} alt="Cry Icon" />
-          </a>
+          <div className="cry-text-box">
+            <a className="cry" onClick={() => handleClick(data?.cry)}>
+              <img src={CryIcon} alt="Cry Icon" />
+            </a>
+          </div>
+
           <div className="poke-sprite-box">
             <div className="sprites">
               <Sprite data={data} />
+              <span
+                style={{
+                  textTransform: "none",
+                  fontStyle: "italic",
+                  color: "grey",
+                }}
+              >
+                Click pokemon sprite to view the Shiny Version.
+              </span>
             </div>
           </div>
           <div
@@ -96,49 +108,53 @@ function PokeViewer() {
             <div className="flavor-text">"{data?.flavorText}"</div>
           </div>
         </div>
-        <div className="poke-types-title">Types</div>
-        <div className="types">
-          <Type data={data} />
-        </div>
-        <div className="abilities">
-          <Ability data={data} />
-        </div>
-        <div className="pokemon-detailed-info">
-          <div className="poke-mass-section">
-            <span className="poke-mass-title">Mass</span>
-            <div className="poke-mass">
-              <span>
-                Height: {data?.mass[0]}, Weight: {data?.mass[1]}
-              </span>
+
+        <div className="pokemon-basic-info">
+          <div className="pokemon-type-section">
+            <div className="poke-types-title">Types</div>
+            <div className="types">
+              <Type data={data} />
             </div>
           </div>
-          <div className="poke-happiness-section">
-            <span className="poke-happiness-title">Happiness</span>
+          <div className="pokemon-ability-section">
+            <div className="abilities">
+              <Ability data={data} />
+            </div>
           </div>
-          <div className="poke-happiness">
-            <span>{data?.baseHappines}</span>
-          </div>
-          <div className="poke-egg-group-section">
-            <span className="poke-egg-group-title">Egg Group</span>
-          </div>
-          <div className="poke-egg-group">
-            <span>{data?.eggGroup[0]?.name}, </span>
-            <span>{data?.eggGroup[1]?.name}</span>
-          </div>
-          <div className="poke-capture-rate-section">
-            <span className="poke-capture-rate-title">Capture Rate</span>
-          </div>
-          <div className="poke-capture-rate">
-            <span>{data?.captureRate}</span>
+          <div className="pokemon-detailed-info">
+            <div className="poke-mass-section">
+              <span className="poke-mass-title">Mass</span>
+              <div className="poke-mass">
+                <span>
+                  Height: {data?.mass[0]}, Weight: {data?.mass[1]}
+                </span>
+              </div>
+            </div>
+            <div className="poke-happiness-section">
+              <span className="poke-happiness-title">Happiness</span>
+            </div>
+            <div className="poke-happiness">
+              <span>{data?.baseHappines}</span>
+            </div>
+            <div className="poke-egg-group-section">
+              <span className="poke-egg-group-title">Egg Group</span>
+            </div>
+            <div className="poke-egg-group">
+              <span>{data?.eggGroup[0]?.name}, </span>
+              <span>{data?.eggGroup[1]?.name}</span>
+            </div>
+            <div className="poke-capture-rate-section">
+              <span className="poke-capture-rate-title">Capture Rate</span>
+            </div>
+            <div className="poke-capture-rate">
+              <span>{data?.captureRate}</span>
+            </div>
           </div>
         </div>
       </div>
 
       <div className="poke-stats-box">
-        <StatChart
-          chartDetails={chartDetails}
-          color={typeIcons[data?.type[0]]?.color}
-        />
+        <StatChart chartDetails={chartDetails} />
       </div>
 
       <div className="poke-evo-line">

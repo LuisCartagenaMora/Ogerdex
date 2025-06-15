@@ -1,3 +1,12 @@
+h1 {
+  margin: 0;
+}
+
+h4,
+h5 {
+  margin: 15px;
+}
+
 .pokeview {
   display: flex;
   justify-content: center;
@@ -13,7 +22,7 @@
   justify-content: center;
   align-content: center;
   flex-direction: column;
-  width: 30vw;
+  width: auto;
   margin: 0 auto;
   border: solid 5px;
   border-color: #0002;
@@ -24,8 +33,8 @@
   display: flex;
   justify-content: center;
   font-size: x-large;
-  width: 100%;
-  border-style: none none solid none;
+  width: auto;
+  border-style: solid;
   border-width: 3px;
   border-color: #0002;
   text-align: center;
@@ -39,7 +48,7 @@
   justify-content: center;
   align-content: center;
   flex-direction: column;
-  width: 80%;
+  width: 90%;
   margin: 0 auto; /* Center the poke-sprite-box horizontally */
 }
 
@@ -53,8 +62,14 @@
 
 .cry > img {
   height: 5vh;
-  width: 5vw;
+  width: 2.5vw;
   justify-content: flex-start;
+}
+
+.cry-text-box {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
 }
 
 .sprites {
@@ -68,19 +83,21 @@
 .sprite-box {
   display: flex;
   justify-content: center;
-  width: 100%;
+  align-items: center;
+  margin: 0 auto;
+  width: 90%;
 }
 
 .sprite-box > img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
   background-color: #ffffff;
 }
 
-/* .pokemon-sprite {
-  height: 100%;
-  width: 100%;
-} */
-
 .flavor-text-box {
+  width: auto;
   padding: 0.6em;
   border-style: solid solid solid solid;
   border-width: 3px;
@@ -125,6 +142,11 @@
   border-width: 4px;
   border-color: #0002;
   background-color: #ffffff;
+}
+
+.abilities-title {
+  border-radius: 0;
+  width: 100%;
 }
 
 .pokemon-detailed-info {
@@ -280,14 +302,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px 0px 20px 0px;
+  flex-direction: column;
+  margin-top: 20px;
+  gap: 20px;
 }
 
 .poke-form-section {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: row;
+  flex-direction: column;
   height: 100%;
   width: fit-content;
   padding-top: 20px;
@@ -300,11 +324,6 @@
   gap: 20px;
   text-align: center;
   background-color: rgb(218, 218, 218);
-}
-
-.poke-mega-evo {
-  height: auto;
-  margin-top: 20px;
 }
 
 .mega-sprite {
@@ -348,12 +367,6 @@
   margin-top: 20px;
   display: flex;
   justify-content: center;
-  border-style: none solid none solid;
-  border-width: 4px;
-}
-
-.poke-stats-box > * {
-  border: solid 4px;
 }
 
 .poke-moves-box {

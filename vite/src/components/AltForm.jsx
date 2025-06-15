@@ -7,7 +7,6 @@ import GmaxForm from "./GmaxForm.jsx";
 function AltForm({ forms }) {
   return forms.map((form) => (
     <div className="poke-form-section" key={form.name}>
-      {console.log(form)}
       {form.isMega && <MegaEvolution megaEvo={form} />}
       {form.isGmax && <GmaxForm gMax={form} />}
     </div>

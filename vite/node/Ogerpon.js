@@ -43,7 +43,7 @@ function getPokemonGenera(pokeData) {
 }
 
 function getPokemonFlavorText(pokeData) {
-  return pokeData?.flavor_text_entries[91]?.flavor_text || null;
+  return pokeData?.flavor_text_entries[1]?.flavor_text || null;
 }
 
 function getPokemonMass(pokeData) {
