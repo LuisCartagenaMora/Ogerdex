@@ -29,7 +29,6 @@ const linearGradient = (color1, color2) => {
 function handleClick(cry) {
   let pokeCry = new Audio(cry);
   if (pokeCry !== undefined) pokeCry.play();
-  console.log("Queue pokemon cry");
 }
 
 function PokeViewer() {
@@ -60,7 +59,6 @@ function PokeViewer() {
     <>
       <Header />
       <div className="pokeview">
-        {console.log(data)}
         <div className="poke-char-section">
           <div
             className="poke-name-box"
@@ -134,7 +132,7 @@ function PokeViewer() {
               <span className="poke-happiness-title">Happiness</span>
             </div>
             <div className="poke-happiness">
-              <span>{data?.baseHappines}</span>
+              <span>{data?.baseHappines || "N/A"}</span>
             </div>
             <div className="poke-egg-group-section">
               <span className="poke-egg-group-title">Egg Group</span>

@@ -247,18 +247,30 @@ h5 {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: row;
-  height: 100%;
-  width: fit-content;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  gap: 16px;
   padding: 20px;
-  margin: 0 auto;
-  margin-top: 20px;
-  border: solid 2px;
-  border-radius: 10px;
-  border-color: #0002;
+  margin: 20px auto;
+  width: fit-content;
+  border: solid 4px #0002;
   background-color: rgb(218, 218, 218);
+}
+
+.evo-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.poke-lvl-req {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.arrow {
+  margin-bottom: 4px;
 }
 
 .individual-pokemon {
@@ -277,6 +289,7 @@ h5 {
 }
 
 .poke-name-id {
+  flex-direction: column;
   text-transform: capitalize;
   font-size: large;
   font-weight: bold;

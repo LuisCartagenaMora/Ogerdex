@@ -192,6 +192,7 @@ async function getEvolutionV2(speciesData) {
   console.log(speciesData?.evolution_chain["url"]);
   const speciesResponse = await fetch(speciesData?.evolution_chain["url"]);
   const speciesChain = await speciesResponse.json();
+  console.log("SPECIES CHAIN: ", speciesChain);
 
   // Helper to get sprite by id or name
   async function getSprite(idOrName) {

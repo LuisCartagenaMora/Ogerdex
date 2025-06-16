@@ -37,12 +37,7 @@ export default function PokemonCard({ pokemon, altPokemon }) {
   const displayData = data ?? altPokemon;
 
   useEffect(() => {
-    {
-      console.log(
-        displayData == undefined ? "No megaData here" : "In PokemonCard: ",
-        displayData
-      );
-    }
+ 
     if (displayData && displayData.stats) {
       setChartDetails({
         labels: Object.keys(displayData.stats),
@@ -56,7 +51,7 @@ export default function PokemonCard({ pokemon, altPokemon }) {
 
   return (
     <>
-      {console.log(displayData)}
+    
       <div
         className="pokedex-background"
         style={{

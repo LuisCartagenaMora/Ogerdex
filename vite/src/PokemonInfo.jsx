@@ -17,23 +17,12 @@ function PokemonInfo({ pokemon }) {
 
   function numberOfEvolutions() {
     const PokemonEvolutions = Object.values(data?.evo);
-    console.log("Evolutions: ");
-    console.log(PokemonEvolutions);
+ 
     return PokemonEvolutions.map((evo, i) => (
       <PokemonCard key={i} pokemon={evo?.id} />
     ));
   }
 
-  // //Currently only extracting a pokemon's Battle Form
-  // function numberOfForms() {
-  //   const PokemonForms = Object.values(data?.forms);
-  //   console.log("Forms: ");
-  //   console.log(PokemonForms);
-  //   return PokemonForms.map((form, i) => {
-  //     console.log("FORM IN INFO", form);
-  //     return <PokemonCard key={i} altPokemon={form} />;
-  //   });
-  // }
 
   return (
     <>
