@@ -136,16 +136,36 @@ function PokeViewer() {
             </div>
             <div className="poke-egg-group-section">
               <span className="poke-egg-group-title">Egg Group</span>
+              <div className="poke-egg-group">
+                <span>{data?.eggGroup[0]?.name}, </span>
+                <span>{data?.eggGroup[1]?.name}</span>
+              </div>
+              <span className="poke-egg-cycle-title">Egg Cycle</span>
+              <div className="poke-egg-group">
+                <span>{data?.eggCycle}</span>
+              </div>
             </div>
-            <div className="poke-egg-group">
-              <span>{data?.eggGroup[0]?.name}, </span>
-              <span>{data?.eggGroup[1]?.name}</span>
-            </div>
+
             <div className="poke-capture-rate-section">
               <span className="poke-capture-rate-title">Capture Rate</span>
+              <div className="poke-capture-rate">
+                <span>{data?.captureRate}</span>
+              </div>
             </div>
-            <div className="poke-capture-rate">
-              <span>{data?.captureRate}</span>
+
+            <div className="poke-held-items-section">
+              <span className="poke-held-items-title">Held Items</span>
+
+              <ul className="poke-held-items">
+                {data?.heldItems.map((item) => {
+                  return (
+                    <li className="held-item">
+                      <a>{item?.name}</a>
+                      <span>({item.chance} %)</span>
+                    </li>
+                  );
+                })}
+              </ul>
             </div>
           </div>
         </div>

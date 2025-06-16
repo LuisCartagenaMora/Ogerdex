@@ -222,6 +222,22 @@ h5 {
   margin: 5px;
 }
 
+.poke-egg-cycle-title {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  width: 100%;
+  border-style: solid none solid none;
+  border-color: #0002;
+  background-color: #fcfc55;
+}
+
+.poke-egg-cycle {
+  display: flex;
+  justify-content: center;
+  margin: 5px;
+}
+
 .poke-capture-rate-section {
   display: grid;
   grid: auto/auto;
@@ -241,6 +257,30 @@ h5 {
   display: flex;
   justify-content: center;
   margin: 5px;
+}
+
+.poke-held-items-section {
+  display: grid;
+  grid: auto/auto;
+}
+
+.poke-held-items-title {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  width: 100%;
+  border-style: solid none solid none;
+  border-color: #0002;
+  background-color: #fcfc55;
+}
+
+.poke-held-items {
+  display: flex;
+  justify-content: center;
+  margin: 5px;
+}
+
+.held-item {
 }
 
 .poke-evo-section {

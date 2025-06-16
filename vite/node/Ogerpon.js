@@ -60,8 +60,26 @@ function getPokemonEggGroup(pokeData) {
   return pokeData?.egg_groups;
 }
 
+function getPokemonEggCycle(speciesData) {
+  return speciesData?.hatch_counter;
+}
+
 function getPokemonCaptureRate(pokeData) {
   return pokeData?.capture_rate || null;
+}
+
+function getPokemonHeldItem(pokeData) {
+  return (
+    pokeData?.held_items.map((held_item) => {
+      return {
+        name: held_item.item.name,
+        url: held_item.item.url,
+        chance:
+          held_item.version_details[held_item.version_details.length - 1]
+            ?.rarity, // Only gets the latest gen info
+      };
+    }) ?? []
+  );
 }
 
 function getPokemonId(speciesData) {
@@ -313,7 +331,9 @@ export async function getPokemonDetailed(pokemon) {
   const flavorText = await getPokemonFlavorText(speciesData);
   const baseHappines = await getPokemonBaseHappines(speciesData);
   const eggGroup = await getPokemonEggGroup(speciesData);
+  const eggCycle = await getPokemonEggCycle(speciesData);
   const captureRate = await getPokemonCaptureRate(speciesData);
+  const heldItems = await getPokemonHeldItem(pokemonData);
   const moves = await getPokemonMoves(pokemonData);
   const sprite = getPokemonSprite(pokemonData);
   const types = await getPokemonType(pokemonData);
@@ -333,7 +353,9 @@ export async function getPokemonDetailed(pokemon) {
     flavorText,
     baseHappines,
     eggGroup,
+    eggCycle,
     captureRate,
+    heldItems,
     moves,
     type: types,
     sprite,
@@ -373,7 +395,3 @@ export default async function getPokemon(pokemon) {
 }
 
 export { getAltPokemon };
-
-// const x = testEnd("https://pokeapi.co/api/v2/pokemon/10035/");
-// console.log("Endpoint using pokemon/10035");
-// console.log(x);
