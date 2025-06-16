@@ -6,6 +6,9 @@ async function fetchInfo(id) {
 
   try {
     const [pokemonRes, speciesRes] = await Promise.all([pokemon, speciesInfo]);
+    if (!pokemonRes.ok || !speciesRes.ok) {
+      throw new Error("Pokémon not found");
+    }
     const pokemonData = await pokemonRes.json();
     const speciesData = await speciesRes.json();
     return [pokemonData, speciesData];
@@ -15,14 +18,11 @@ async function fetchInfo(id) {
 }
 
 async function fetchAltInfo(id) {
-  const pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`);
-
-  try {
-    const pokemonData = await pokemon.json();
-    return pokemonData;
-  } catch (e) {
-    console.error(e);
+  const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`);
+  if (!response.ok) {
+    throw new Error("Pokémon not found");
   }
+  return await response.json();
 }
 
 function calcBaseStat(...args) {
@@ -189,10 +189,8 @@ async function getPokemonMoves(pokeData) {
 
 async function getEvolutionV2(speciesData) {
   const evoChain = [];
-  console.log(speciesData?.evolution_chain["url"]);
   const speciesResponse = await fetch(speciesData?.evolution_chain["url"]);
   const speciesChain = await speciesResponse.json();
-  console.log("SPECIES CHAIN: ", speciesChain);
 
   // Helper to get sprite by id or name
   async function getSprite(idOrName) {
@@ -242,10 +240,6 @@ async function testEnd(url) {
   try {
     const response = await fetch(url);
     const data = await response.json();
-    console.log("--------------------------");
-    console.log("ENDPOINT DATA");
-    console.log(data);
-    console.log("--------------------------");
   } catch (e) {
     console.error(e);
   }
@@ -273,9 +267,11 @@ async function getAltPokemon(pokemon) {
 
 async function getPokemonForms(data) {
   // Each form will be an object: { name, isMega, isGmax }
+  console.log("Inside Pokemon Forms:", data.varieties);
   return (data?.varieties ?? [])
     .map((form) => {
       const formName = form.pokemon.name.toLowerCase();
+
       return {
         id: Number(form.pokemon.url.slice(34).replace("/", "")),
         name: form.pokemon.name,
@@ -284,9 +280,22 @@ async function getPokemonForms(data) {
           formName.endsWith("-x") ||
           formName.endsWith("-y"),
         isGmax: formName.includes("gmax"),
+        isPaldea: formName.includes("paldea"),
+        isAlola: formName.includes("alola"),
+        isGalar: formName.includes("galar"),
+        isHisui: formName.includes("hisui"),
+        url: form.pokemon.url || null,
       };
     })
-    .filter((form) => form.isMega || form.isGmax);
+    .filter(
+      (form) =>
+        form.isMega ||
+        form.isGmax ||
+        form.isPaldea ||
+        form.isAlola ||
+        form.isGalar ||
+        form.isHisui
+    );
 }
 
 export async function getPokemonDetailed(pokemon) {
@@ -365,10 +374,6 @@ export default async function getPokemon(pokemon) {
 
 export { getAltPokemon };
 
-const x = testEnd("https://pokeapi.co/api/v2/pokemon/10035/");
-console.log("Endpoint using pokemon/10035");
-console.log(x);
-
-const f = await getAltPokemon(10035);
-console.log("CURRENT MEGA POKE");
-console.log(f);
+// const x = testEnd("https://pokeapi.co/api/v2/pokemon/10035/");
+// console.log("Endpoint using pokemon/10035");
+// console.log(x);

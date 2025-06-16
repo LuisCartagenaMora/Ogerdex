@@ -159,6 +159,7 @@ function PokeViewer() {
         <Evolution data={data} />
       </div>
       <div className="poke-alt-forms">
+        {console.log(data)}
         <AltForm forms={data.forms} />
       </div>
 
