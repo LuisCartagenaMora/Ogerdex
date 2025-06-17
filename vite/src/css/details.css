@@ -78,6 +78,17 @@ img {
   font-weight: bold;
 }
 
+.poke-types-title {
+  display: inherit;
+  width: inherit;
+  margin-top: 20px;
+  font-weight: bold;
+  border: solid 4px;
+  border-color: #0002;
+  background-color: #fcfc55;
+  text-align: center;
+}
+
 .pokemon-types-box {
   display: flex;
   margin-top: 10px;
@@ -101,13 +112,16 @@ img {
 }
 
 .pokemon-abilities-box {
-  justify-items: center;
-  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 20px auto 20px auto;
   font-size: large;
 }
 
 .abilities-title {
-  display: flex;
+  display: inherit;
   justify-content: center;
   border-color: #0002;
   border-style: solid;
@@ -115,13 +129,12 @@ img {
   border-radius: 10px;
   justify-self: center;
   font-weight: bold;
-  width: 100%;
+  width: inherit;
   background-color: #fcfc55;
 }
 
 .pokemon-abilities {
   padding: 0;
-  flex-direction: column;
 }
 
 .hidden-ability-icon {

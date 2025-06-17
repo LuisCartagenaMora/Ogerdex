@@ -35,24 +35,5 @@ export default function MegaEvolution({ megaEvo }) {
       <PokemonCard altPokemon={megaEvoData} />
     </div>
 
-    // <>
-    //   <div className="pokedex-background">
-    //     <div className={"details-card"}>
-    //       <Sprite data={megaEvoData} />
-    //       <div className="pokemon-details-box">
-    //         <div className="pokemon-name">{megaEvoData?.name ?? "N/A"}</div>
-    //         <Type data={megaEvoData} />
-    //         <Ability data={megaEvoData} />
-    //         <a
-    //           className="pokemon-link"
-    //           href={`/pokemon/view/${megaEvoData?.id}`}
-    //         >
-    //           More about this pokemon
-    //         </a>
-    //       </div>
-    //       <StatChart chartDetails={chartDetails} />
-    //     </div>
-    //   </div>
-    // </>
   );
 }

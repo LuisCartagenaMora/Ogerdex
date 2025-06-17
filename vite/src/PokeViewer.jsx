@@ -8,6 +8,7 @@ import Ability from "./components/Ability.jsx";
 import Evolution from "./components/Evolution.jsx";
 import AltForm from "./components/AltForm.jsx";
 import StatChart from "./components/StatChart.jsx";
+import MoveList from "./components/MoveList.jsx";
 import LoadingIcon from "./components/LoadingIcon.jsx";
 import typeIcons from "./assets/typeIcons.jsx";
 import Header from "./components/Header.jsx";
@@ -28,6 +29,7 @@ const linearGradient = (color1, color2) => {
 
 function handleClick(cry) {
   let pokeCry = new Audio(cry);
+  pokeCry.volume = 0.4; //Seems right to me
   if (pokeCry !== undefined) pokeCry.play();
 }
 
@@ -92,7 +94,7 @@ function PokeViewer() {
                   color: "grey",
                 }}
               >
-                Click pokemon sprite to view the Shiny Version.
+                Click sprite for Shiny Version.
               </span>
             </div>
           </div>
@@ -109,7 +111,6 @@ function PokeViewer() {
 
         <div className="pokemon-basic-info">
           <div className="pokemon-type-section">
-            <div className="poke-types-title">Types</div>
             <div className="types">
               <Type data={data} />
             </div>
@@ -119,58 +120,62 @@ function PokeViewer() {
               <Ability data={data} />
             </div>
           </div>
-          <div className="pokemon-detailed-info">
-            <div className="poke-mass-section">
-              <span className="poke-mass-title">Mass</span>
-              <div className="poke-mass">
-                <span>
-                  Height: {data?.mass[0]}, Weight: {data?.mass[1]}
-                </span>
-              </div>
-            </div>
-            <div className="poke-happiness-section">
-              <span className="poke-happiness-title">Happiness</span>
-            </div>
-            <div className="poke-happiness">
-              <span>{data?.baseHappines || "N/A"}</span>
-            </div>
-            <div className="poke-egg-group-section">
-              <span className="poke-egg-group-title">Egg Group</span>
-              <div className="poke-egg-group">
-                <span>{data?.eggGroup[0]?.name}, </span>
-                <span>{data?.eggGroup[1]?.name}</span>
-              </div>
-              <span className="poke-egg-cycle-title">Egg Cycle</span>
-              <div className="poke-egg-group">
-                <span>{data?.eggCycle}</span>
-              </div>
-            </div>
+        </div>
+      </div>
 
-            <div className="poke-capture-rate-section">
-              <span className="poke-capture-rate-title">Capture Rate</span>
-              <div className="poke-capture-rate">
-                <span>{data?.captureRate}</span>
-              </div>
-            </div>
+      <div className="pokemon-detailed-info">
+        <div className="poke-mass-section">
+          <span className="poke-mass-title">Mass</span>
+          <div className="poke-mass">
+            <span>Height: {data?.mass[0]}</span>
+            <span>Weight: {data?.mass[1]}</span>
+          </div>
+        </div>
 
-            <div className="poke-held-items-section">
-              <span className="poke-held-items-title">Held Items</span>
+        <div className="poke-happiness-section">
+          <span className="poke-happiness-title">Happiness</span>
+          <div className="poke-happiness">
+            <span>{data?.baseHappines || "N/A"}</span>
+          </div>
+        </div>
 
-              <ul className="poke-held-items">
-                {data?.heldItems && data.heldItems.length > 0 ? (
-                  data.heldItems.map((item) => (
-                    <li className="held-item" key={item.name}>
-                      <a href={`/item/${item.url.slice(30).replace("/", "")}`}>
-                        {item?.name}
-                      </a>
-                      <span> ({item.chance}%)</span>
-                    </li>
-                  ))
-                ) : (
-                  <li>N/A</li>
-                )}
-              </ul>
-            </div>
+        <div className="poke-egg-group-section">
+          <span className="poke-egg-group-title">Egg Group</span>
+          <div className="poke-egg-group">
+            <span>{data?.eggGroup[0]?.name}</span>
+            {data?.eggGroup[1] ? <span>{data?.eggGroup[1]?.name}</span> : ""}
+          </div>
+        </div>
+
+        <div className="poke-egg-cycle-section">
+          <span className="poke-egg-cycle-title">Egg Cycle</span>
+          <div className="poke-egg-cycle">
+            <span>{data?.eggCycle}</span>
+          </div>
+        </div>
+
+        <div className="poke-capture-rate-section">
+          <span className="poke-capture-rate-title">Capture Rate</span>
+          <div className="poke-capture-rate">
+            <span>{data?.captureRate}</span>
+          </div>
+        </div>
+
+        <div className="poke-held-items-section">
+          <span className="poke-held-items-title">Held Items</span>
+          <div className="poke-held-items">
+            {data?.heldItems && data.heldItems.length > 0 ? (
+              data.heldItems.map((item) => (
+                <div className="held-item" key={item.name}>
+                  <a href={`/item/${item.url.slice(30).replace("/", "")}`}>
+                    {item?.name.replace("-", " ")}
+                  </a>
+                  <span> ({item.chance}%)</span>
+                </div>
+              ))
+            ) : (
+              <span>N/A</span>
+            )}
           </div>
         </div>
       </div>
@@ -187,52 +192,7 @@ function PokeViewer() {
         <AltForm forms={data.forms} />
       </div>
 
-      <div className="poke-moves-box">
-        <div className="move-name-title">Name</div>
-        <div className="move-type-title">Type</div>
-        <div className="move-damage-class-title">Damage Class</div>
-        <div className="move-power-title">Power</div>
-        <div className="move-accuracy-title">Accuracy</div>
-        <div className="move-pp-title">PP</div>
-        <div className="move-priority-title">Priority</div>
-        <div className="move-effect-title">Effect</div>
-
-        {data?.moves.map((move, i) => (
-          <>
-            <div className="move-name" style={{ gridRowStart: i + 2 }}>
-              {move?.name}
-            </div>
-            <div
-              className="move-type"
-              style={{
-                gridRowStart: i + 2,
-                backgroundColor: typeIcons[move?.type]?.color || "#eee", // fallback color
-              }}
-            >
-              {typeIcons[move?.type].icon}
-              {move?.type}
-            </div>
-            <div className="move-damage-class" style={{ gridRowStart: i + 2 }}>
-              {move?.damage_class}
-            </div>
-            <div className="move-power" style={{ gridRowStart: i + 2 }}>
-              {move?.power ?? "-"}
-            </div>
-            <div className="move-accuracy" style={{ gridRowStart: i + 2 }}>
-              {move?.accuracy ?? "-"}
-            </div>
-            <div className="move-pp" style={{ gridRowStart: i + 2 }}>
-              {move?.pp}
-            </div>
-            <div className="move-priority" style={{ gridRowStart: i + 2 }}>
-              {move?.priority ?? 0}
-            </div>
-            <div className="move-effect" style={{ gridRowStart: i + 2 }}>
-              {move?.effect}
-            </div>
-          </>
-        ))}
-      </div>
+      <MoveList moves={data?.moves} />
 
       <Footer />
     </>

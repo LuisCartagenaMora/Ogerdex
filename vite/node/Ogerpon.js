@@ -43,7 +43,11 @@ function getPokemonGenera(pokeData) {
 }
 
 function getPokemonFlavorText(pokeData) {
-  return pokeData?.flavor_text_entries[1]?.flavor_text || null;
+  const englishEntries = pokeData?.flavor_text_entries.filter((text_entry) => {
+    return text_entry.language.name === "en";
+  });
+  console.log(englishEntries);
+  return englishEntries[englishEntries.length - 1].flavor_text;
 }
 
 function getPokemonMass(pokeData) {
