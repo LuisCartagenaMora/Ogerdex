@@ -31,7 +31,7 @@ export default function MegaEvolution({ megaEvo }) {
   return (
     <div className="mega-evo">
       <h1>Mega Evolution</h1>
-     
+
       <PokemonCard altPokemon={megaEvoData} />
     </div>
 

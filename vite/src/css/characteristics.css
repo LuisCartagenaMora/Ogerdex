@@ -277,12 +277,11 @@ h5 {
 .poke-held-items {
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
   margin: 5px;
+  text-align: center;
 }
-
-.held-item {
-}
-
 .poke-evo-section {
   display: flex;
   justify-content: center;

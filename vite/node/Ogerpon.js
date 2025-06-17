@@ -394,4 +394,13 @@ export default async function getPokemon(pokemon) {
   };
 }
 
-export { getAltPokemon };
+async function getItem(id) {
+  console.log(id);
+  const response = await fetch(`https://pokeapi.co/api/v2/item/${id}/`);
+  console.log("Response: ", response);
+  const itemData = await response.json();
+  console.log("ItemData: ", itemData);
+  return itemData;
+}
+
+export { getAltPokemon, getItem };

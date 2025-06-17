@@ -157,14 +157,18 @@ function PokeViewer() {
               <span className="poke-held-items-title">Held Items</span>
 
               <ul className="poke-held-items">
-                {data?.heldItems.map((item) => {
-                  return (
-                    <li className="held-item">
-                      <a>{item?.name}</a>
-                      <span>({item.chance} %)</span>
+                {data?.heldItems && data.heldItems.length > 0 ? (
+                  data.heldItems.map((item) => (
+                    <li className="held-item" key={item.name}>
+                      <a href={`/item/${item.url.slice(30).replace("/", "")}`}>
+                        {item?.name}
+                      </a>
+                      <span> ({item.chance}%)</span>
                     </li>
-                  );
-                })}
+                  ))
+                ) : (
+                  <li>N/A</li>
+                )}
               </ul>
             </div>
           </div>
