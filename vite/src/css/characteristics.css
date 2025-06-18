@@ -73,6 +73,7 @@ li {
 .sprites {
   width: 50%;
   margin: 0 auto;
+  text-align: center;
 }
 
 .sprite-box {
@@ -108,9 +109,24 @@ li {
 .pokemon-basic-info {
   display: grid;
   grid: auto/ 1fr 1fr;
+  align-items: stretch;
   width: 50%;
   grid-gap: 5px;
   margin: 0 auto;
+}
+
+.pokemon-basic-info .abilities-title {
+  border: solid 4px #0002;
+  border-radius: 0;
+  width: 100%;
+  font-size: medium;
+}
+
+.poke-form-section .abilities-title {
+  border: solid 2px #0002;
+  background-color: #fcfc55;
+  border-radius: 10px;
+  width: 98%;
 }
 
 .pokemon-type-section {
@@ -130,7 +146,7 @@ li {
   font-weight: bold;
   border: solid 4px;
   border-color: #0002;
-  background-color: #fcfc55;
+
   text-align: center;
 }
 
@@ -156,30 +172,27 @@ li {
 }
 
 .abilities > * {
-  border-style: none solid none solid;
+  border-style: none solid solid solid;
   border-width: 4px;
   border-color: #0002;
   background-color: #ffffff;
 }
 
-.abilities > * :last-child {
-  border-bottom: 0px;
-}
-
 .abilities-title {
-  border-radius: 0;
-  width: 100%;
+  border: solid 1px;
+  border-radius: 10px;
+  border-color: #0002;
+  width: 95%;
 }
 
 .pokemon-detailed-info {
   margin: 20px auto;
   width: 50%;
   display: grid;
-  grid: auto auto auto auto auto auto auto auto / 0.8fr 0.8fr;
-  grid-gap: 5px;
-  border-style: none solid solid solid;
-  border-width: 4px;
-  border-color: #0002;
+  grid: auto auto auto / 0.8fr 0.8fr;
+
+  border: solid 4px #0002;
+
   background-color: #b5b5b5;
   text-align: center;
 }
@@ -193,6 +206,7 @@ li {
   display: flex;
   flex-direction: column;
   align-items: center;
+  border: solid 3px #0002;
   background-color: #ffffff;
 }
 
@@ -208,7 +222,6 @@ li {
   width: 100%;
   border-style: solid none solid none;
   border-color: #0002;
-  background-color: #fcfc55;
 }
 
 .poke-mass,
@@ -238,7 +251,6 @@ li {
   width: 100%;
   border-style: solid none solid none;
   border-color: #0002;
-  background-color: #fcfc55;
 }
 
 .poke-egg-group-section {
@@ -253,7 +265,6 @@ li {
   width: 100%;
   border-style: solid none solid none;
   border-color: #0002;
-  background-color: #fcfc55;
 }
 
 .poke-egg-cycle-section {
@@ -268,7 +279,6 @@ li {
   width: 100%;
   border-style: solid none solid none;
   border-color: #0002;
-  background-color: #fcfc55;
 }
 .poke-capture-rate-section {
   grid-column: 1;
@@ -282,7 +292,6 @@ li {
   width: 100%;
   border-style: solid none solid none;
   border-color: #0002;
-  background-color: #fcfc55;
 }
 
 .poke-held-items-section {
@@ -297,7 +306,6 @@ li {
   width: 100%;
   border-style: solid none solid none;
   border-color: #0002;
-  background-color: #fcfc55;
 }
 
 .poke-evo-section {
@@ -335,6 +343,7 @@ li {
 }
 
 .poke-sprite {
+  width: fit-content;
   border-radius: 50%;
   background-color: rgb(171, 171, 171);
   border: solid 2px;
@@ -342,10 +351,11 @@ li {
 }
 .pokemon-evo-info {
   height: auto;
-  width: 100px;
+  width: auto;
 }
 
 .poke-name-id {
+  width: 100%;
   flex-direction: column;
   text-transform: capitalize;
   font-size: large;
@@ -447,6 +457,7 @@ li {
   width: 80%;
   max-width: 1200px;
   margin: 20px auto;
+  margin-bottom: 80px;
   font-size: medium;
   text-transform: capitalize;
   border: solid 4px #222;
@@ -502,8 +513,4 @@ li {
   text-align: left;
   justify-content: flex-start;
   padding: 0.5em 1em;
-}
-
-.poke-moves-box :last-child {
-  margin-bottom: none;
 }

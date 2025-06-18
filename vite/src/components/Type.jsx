@@ -3,7 +3,6 @@ import typeIcons from "../assets/typeIcons.jsx";
 function Type({ data }) {
   return (
     <>
-      <span className="poke-types-title">Types</span>
       <div className="pokemon-types-box">
         <div
           className="pokemon-primary-type"

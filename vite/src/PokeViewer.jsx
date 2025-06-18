@@ -111,13 +111,20 @@ function PokeViewer() {
 
         <div className="pokemon-basic-info">
           <div className="pokemon-type-section">
+            {console.log(data)}
+            <div
+              className="poke-types-title"
+              style={{ backgroundColor: typeIcons[data?.type[0]]?.color }}
+            >
+              Type
+            </div>
             <div className="types">
               <Type data={data} />
             </div>
           </div>
           <div className="pokemon-ability-section">
             <div className="abilities">
-              <Ability data={data} />
+              <Ability data={data} color={typeIcons[data?.type[0]]?.color} />
             </div>
           </div>
         </div>
@@ -125,7 +132,12 @@ function PokeViewer() {
 
       <div className="pokemon-detailed-info">
         <div className="poke-mass-section">
-          <span className="poke-mass-title">Mass</span>
+          <span
+            className="poke-mass-title"
+            style={{ backgroundColor: typeIcons[data?.type[0]]?.color }}
+          >
+            Mass
+          </span>
           <div className="poke-mass">
             <span>Height: {data?.mass[0]}</span>
             <span>Weight: {data?.mass[1]}</span>
@@ -133,14 +145,24 @@ function PokeViewer() {
         </div>
 
         <div className="poke-happiness-section">
-          <span className="poke-happiness-title">Happiness</span>
+          <span
+            className="poke-happiness-title"
+            style={{ backgroundColor: typeIcons[data?.type[0]]?.color }}
+          >
+            Happiness
+          </span>
           <div className="poke-happiness">
             <span>{data?.baseHappines || "N/A"}</span>
           </div>
         </div>
 
         <div className="poke-egg-group-section">
-          <span className="poke-egg-group-title">Egg Group</span>
+          <span
+            className="poke-egg-group-title"
+            style={{ backgroundColor: typeIcons[data?.type[0]]?.color }}
+          >
+            Egg Group
+          </span>
           <div className="poke-egg-group">
             <span>{data?.eggGroup[0]?.name}</span>
             {data?.eggGroup[1] ? <span>{data?.eggGroup[1]?.name}</span> : ""}
@@ -148,21 +170,36 @@ function PokeViewer() {
         </div>
 
         <div className="poke-egg-cycle-section">
-          <span className="poke-egg-cycle-title">Egg Cycle</span>
+          <span
+            className="poke-egg-cycle-title"
+            style={{ backgroundColor: typeIcons[data?.type[0]]?.color }}
+          >
+            Egg Cycle
+          </span>
           <div className="poke-egg-cycle">
             <span>{data?.eggCycle}</span>
           </div>
         </div>
 
         <div className="poke-capture-rate-section">
-          <span className="poke-capture-rate-title">Capture Rate</span>
+          <span
+            className="poke-capture-rate-title"
+            style={{ backgroundColor: typeIcons[data?.type[0]]?.color }}
+          >
+            Capture Rate
+          </span>
           <div className="poke-capture-rate">
             <span>{data?.captureRate}</span>
           </div>
         </div>
 
         <div className="poke-held-items-section">
-          <span className="poke-held-items-title">Held Items</span>
+          <span
+            className="poke-held-items-title"
+            style={{ backgroundColor: typeIcons[data?.type[0]]?.color }}
+          >
+            Held Items
+          </span>
           <div className="poke-held-items">
             {data?.heldItems && data.heldItems.length > 0 ? (
               data.heldItems.map((item) => (

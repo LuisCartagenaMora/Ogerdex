@@ -91,11 +91,13 @@ img {
 
 .pokemon-types-box {
   display: flex;
-  margin-top: 10px;
+
   padding: 0%;
   justify-content: center;
+  width: 100%;
   gap: 10px;
 }
+
 .pokemon-primary-type {
   height: fit-content;
   padding-left: 10px;
@@ -116,7 +118,7 @@ img {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: 20px auto 20px auto;
+  margin: 20px auto auto auto;
   font-size: large;
 }
 
@@ -179,6 +181,7 @@ img {
   height: 250px;
   border: solid 2px #222224;
   background-color: #f0f0f0;
+  text-transform: capitalize;
 }
 
 .stat-chart-inner-box-title {
