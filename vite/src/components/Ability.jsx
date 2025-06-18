@@ -8,17 +8,56 @@ function Ability({ data, color }) {
           Abilities
         </div>
         <ul className="pokemon-abilities">
-          {data?.ability?.ability[1] == "none" ? (
-            <li>{data?.ability?.ability[0]}</li>
+          {data?.ability?.ability[1] === "none" ? (
+            <li>
+              {data?.ability?.ability[0]?.name}
+              <span
+                className="ability-description"
+                style={{ borderColor: color }}
+              >
+                {data?.ability?.ability[0]?.description ??
+                  "Ability description couldn't be fetched"}
+              </span>
+            </li>
           ) : (
             <>
-              <li>{data?.ability?.ability[0] ?? ""}</li>
-              <li>{data?.ability?.ability[1] ?? ""}</li>
-
-              <li>
-                <img className="hidden-ability-icon" src={goldStar} />
-                {data?.ability?.hidden_ability ?? ""}
+              <li className="ability">
+                {data?.ability?.ability[0]?.name ?? ""}
+                <span
+                  className="ability-description"
+                  style={{ borderColor: color }}
+                >
+                  {data?.ability?.ability[0]?.description ??
+                    "Ability description couldn't be fetched"}
+                </span>
               </li>
+              <li className="ability">
+                {data?.ability?.ability[1]?.name ?? ""}
+                <span
+                  className="ability-description"
+                  style={{ borderColor: color }}
+                >
+                  {data?.ability?.ability[1]?.description ??
+                    "Ability description couldn't be fetched"}
+                </span>
+              </li>
+              {data?.ability?.hidden_ability && (
+                <li className="ability">
+                  <img
+                    className="hidden-ability-icon"
+                    src={goldStar}
+                    alt="Hidden Ability"
+                  />
+                  {data?.ability?.hidden_ability?.name ?? ""}
+                  <span
+                    className="ability-description"
+                    style={{ borderColor: color }}
+                  >
+                    {data?.ability?.hidden_ability?.description ??
+                      "Ability description couldn't be fetched"}
+                  </span>
+                </li>
+              )}
             </>
           )}
         </ul>

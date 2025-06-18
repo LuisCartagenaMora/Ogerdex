@@ -32,12 +32,17 @@ function Evolution({ data }) {
                         alt="evolution arrow"
                       />
                       {evo.evolution_requirement && (
-                      <div className="poke-lvl-req">
-                        {evo.evolution_requirement}
-                      </div>
-                    )}
+                        <div className="poke-lvl-req">
+                          {evo.evolution_requirement
+                            .replace("-", " ")
+                            .charAt(0)
+                            .toUpperCase() +
+                            evo.evolution_requirement
+                              .replace("-", " ")
+                              .slice(1)}
+                        </div>
+                      )}
                     </div>
-                    
                   </>
                 )}
                 <div className="pokemon-evo-info">

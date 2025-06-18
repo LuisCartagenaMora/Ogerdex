@@ -25,11 +25,13 @@ img {
   display: flex;
   justify-content: space-evenly;
   align-content: center;
-  row-gap: 2vh;
+  row-gap: 20px;
   flex-flow: row wrap;
-  margin-left: 14vw;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  /* margin-left: 14vw;
   margin-right: 14vw;
-  padding-bottom: 8vh;
+  padding-bottom: 8vh; */
 }
 
 .details-card {
@@ -40,7 +42,7 @@ img {
   text-transform: capitalize;
   height: 550px;
   width: 500px;
-  border: solid 5px;
+  border: solid 2px #0002;
   border-radius: 25px;
   margin-left: 2vw;
   margin-right: 2vw;
@@ -125,7 +127,7 @@ img {
 .abilities-title {
   display: inherit;
   justify-content: center;
-  border-color: #0002;
+  border-color: rgb(50, 50, 50);
   border-style: solid;
   border-width: 2px;
   border-radius: 10px;
@@ -136,8 +138,49 @@ img {
 }
 
 .pokemon-abilities {
-  padding: 0;
+  display: flex;
+  flex-direction: column;
+
+  /* optional: adds space between abilities */
 }
+
+/* ========================== */
+
+.ability {
+  position: relative;
+  display: inline-block; /* or inline-flex */
+}
+
+.ability-description {
+  opacity: 0;
+  transition: opacity 0.4s;
+  position: absolute;
+  left: 110%; /* Position to the right of the name */
+  top: 50%;
+  transform: translateY(-50%);
+  background: #fff;
+  color: #222;
+  border: 2px solid;
+  padding: 8px 12px;
+  border-radius: 6px;
+  min-width: 180px;
+  z-index: 10;
+  pointer-events: none;
+  box-shadow: 0 2px 8px #0002;
+  white-space: pre-line;
+}
+
+.ability:hover .ability-description {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.ability:hover .ability-description {
+  visibility: visible;
+}
+
+/* ============================ */
 
 .hidden-ability-icon {
   height: 20px;

@@ -1,18 +1,13 @@
 .header-component {
   display: flex;
   justify-content: center;
-  align-items: baseline;
-  margin-bottom: 2vh;
-  height: 8vh;
-  width: 100%;
-  align-content: center;
+  align-items: center;
   background-color: #ee1515;
 }
 
 .header-component > * {
-  height: 4vh;
   font-size: large;
-  margin-left: 20px;
+  margin: 10px 5px 10px 0px;
   border: solid 2px;
   border-radius: 50px;
   background-color: #f0f0f0;

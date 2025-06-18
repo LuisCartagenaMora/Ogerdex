@@ -108,9 +108,9 @@ li {
 
 .pokemon-basic-info {
   display: grid;
-  grid: auto/ 1fr 1fr;
+  grid: auto/ 1.1fr 0.9fr;
   align-items: stretch;
-  width: 50%;
+  width: 60%;
   grid-gap: 5px;
   margin: 0 auto;
 }
@@ -137,6 +137,7 @@ li {
 .pokemon-types-box {
   padding: 2%;
   margin: 0;
+  max-height: stretch;
 }
 
 .poke-types-title {
@@ -164,6 +165,7 @@ li {
   border-width: 4px;
   border-color: #0002;
   background-color: #ffffff;
+  max-height: 100%;
 }
 
 .pokemon-ability-section {
@@ -234,7 +236,7 @@ li {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: 20px;
+  margin: 0 auto;
   text-transform: capitalize;
   background-color: #ffffff;
 }
@@ -340,6 +342,7 @@ li {
 
 .individual-pokemon {
   display: inherit;
+  justify-content: baseline;
 }
 
 .poke-sprite {
