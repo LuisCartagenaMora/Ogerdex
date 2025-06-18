@@ -168,6 +168,44 @@ li {
   max-height: 100%;
 }
 
+/* ========================== */
+
+.pokemon-types-box {
+  position: relative;
+  display: inline-block; /* or inline-flex */
+}
+
+.type-description {
+  opacity: 0;
+  transition: opacity 0.4s;
+  position: absolute;
+  left: 110%; /* Position to the right of the name */
+  top: 50%;
+  transform: translateY(-50%);
+  background: #fff;
+  color: #222;
+  border: 2px solid;
+  padding: 8px 12px;
+  border-radius: 6px;
+  min-width: 180px;
+  z-index: 10;
+  pointer-events: none;
+  box-shadow: 0 2px 8px #0002;
+  white-space: pre-line;
+}
+
+.pokemon-types-box:hover .type-description {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.pokemon-types-box:hover .type-description {
+  visibility: visible;
+}
+
+/* ============================ */
+
 .pokemon-ability-section {
   grid-column: 2;
   grid-row: 1;

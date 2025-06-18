@@ -22,6 +22,10 @@ function Type({ data }) {
           {typeIcons[data?.type?.[1]]?.icon}
           {data?.type?.[1] ?? ""}
         </div>
+        <span className="type-description">
+          {"Add data here" ?? "Type description couldn't be obtained."}
+          {/* Display here the typeChart for the pokemon's type or combination of types. use data?.typeChart */}
+        </span>
       </div>
     </>
   );

@@ -25,6 +25,37 @@ async function fetchAltInfo(id) {
   return await response.json();
 }
 
+async function fetchTypeInfo(types) {
+  if (types.length < 2) {
+    const type1 = await fetch(`https://pokeapi.co/api/v2/type/${types[0]}/`);
+
+    try {
+      if (!firstTypeRes.ok) {
+        throw new Error("Pokemon's type information could not be found");
+      }
+      const firstTypeData = await firstTypeRes.json();
+      return [firstTypeData];
+    } catch (e) {
+      console.error(e);
+    }
+  } else {
+    const type1 = await fetch(`https://pokeapi.co/api/v2/type/${types[0]}/`);
+    const type2 = await fetch(`https://pokeapi.co/api/v2/type/${types[1]}/`);
+
+    try {
+      const [firstTypeRes, secondTypeRes] = await Promise.all([type1, type2]);
+      if (!firstTypeRes.ok || !secondTypeRes.ok) {
+        throw new Error("Pokemon's type information could not be found");
+      }
+      const firstTypeData = await firstTypeRes.json();
+      const secondTypeData = await secondTypeRes.json();
+      return [firstTypeData, secondTypeData];
+    } catch (e) {
+      console.error(e);
+    }
+  }
+}
+
 function calcBaseStat(...args) {
   return args.reduce((total, stat) => total + stat, 0);
 }
@@ -96,6 +127,12 @@ function getPokemonSprite(pokeData) {
 
 function getPokemonType(pokeData) {
   return pokeData?.types.map((p) => p?.type?.name);
+}
+
+async function getTypeEffectiveness(types) {
+  const typeData = await fetchTypeInfo(types);
+  console.log(typeData);
+  return typeData;
 }
 
 function pokemonStats(pokeData) {
@@ -285,6 +322,7 @@ async function getAltPokemon(pokemon) {
   const name = await getPokemonName(pokemonData);
   const sprite = getPokemonSprite(pokemonData);
   const types = await getPokemonType(pokemonData);
+  const typeChart = await getTypeEffectiveness(types);
   const ability = await getPokemonAbilities(pokemonData);
   const stats = pokemonStats(pokemonData);
   const totalStat = await getPokemonTotalStat(pokemonData);
@@ -292,6 +330,7 @@ async function getAltPokemon(pokemon) {
   return {
     name,
     type: types,
+    typeChart,
     sprite,
     ability,
     stats,
@@ -353,6 +392,7 @@ export async function getPokemonDetailed(pokemon) {
   const moves = await getPokemonMoves(pokemonData);
   const sprite = getPokemonSprite(pokemonData);
   const types = await getPokemonType(pokemonData);
+  const typeChart = await getTypeEffectiveness(types);
   const ability = await getPokemonAbilities(pokemonData);
   const stats = pokemonStats(pokemonData);
   const totalStat = await getPokemonTotalStat(pokemonData);
@@ -374,6 +414,7 @@ export async function getPokemonDetailed(pokemon) {
     heldItems,
     moves,
     type: types,
+    typeChart,
     sprite,
     ability,
     stats,
@@ -391,6 +432,7 @@ export default async function getPokemon(pokemon) {
   const name = await getPokemonName(pokemonData);
   const sprite = await getPokemonSprite(pokemonData);
   const types = await getPokemonType(pokemonData);
+  const typeChart = await getTypeEffectiveness(types);
   const ability = await getPokemonAbilities(pokemonData);
   const stats = pokemonStats(pokemonData);
   const totalStat = await getPokemonTotalStat(pokemonData);
@@ -402,6 +444,7 @@ export default async function getPokemon(pokemon) {
     id,
     name,
     type: types,
+    typeChart,
     sprite,
     ability,
     stats,
