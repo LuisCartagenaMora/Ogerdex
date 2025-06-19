@@ -189,66 +189,173 @@ function Type({ data }) {
           {data?.type?.[1] ?? ""}
         </div>
         <span className="type-description">
-          <strong>Weak To:</strong>
-          {typeInfo.weakFrom && Object.entries(typeInfo.weakFrom).length > 0 ? (
-            <ul>
-              {Object.entries(typeInfo.weakFrom).map(([type, multiplier]) => (
-                <li
-                  key={type}
-                  className="individual-type"
-                  style={{
-                    backgroundColor: typeIcons[type]?.color,
-                  }}
-                >
-                  {multiplier} {type}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <span>None</span>
-          )}
+          <div className="type-section">
+            <strong className="type-section-title">Super Effective:</strong>
+            <div className="type-row">
+              {typeInfo.superEffectiveTo &&
+                typeInfo.superEffectiveTo.map((typeArray, index) =>
+                  typeArray.length > 0 ? (
+                    <div key={index} className="type-section">
+                      <b>
+                        {data.type && data.type[index]
+                          ? data.type[index].charAt(0).toUpperCase() +
+                            data.type[index].slice(1)
+                          : `Type ${index + 1}`}
+                        :
+                      </b>
+                      <div className="type-row">
+                        {typeArray.map((type) => (
+                          <span
+                            key={type}
+                            className="type-tag"
+                            style={{ backgroundColor: typeIcons[type]?.color }}
+                          >
+                            {typeIcons[type]?.icon} {type}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  ) : null
+                )}
+              {typeInfo.superEffectiveTo &&
+                typeInfo.superEffectiveTo.every((arr) => arr.length === 0) && (
+                  <span className="type-tag">None</span>
+                )}
+            </div>
+          </div>
 
-          <strong>Resistant To:</strong>
-          {typeInfo.resistantFrom &&
-          Object.entries(typeInfo.resistantFrom).length > 0 ? (
-            <ul>
-              {Object.entries(typeInfo.resistantFrom).map(
-                ([type, multiplier]) => (
-                  <li
+          <div className="type-section">
+            <strong className="type-section-title">
+              Not Very Effective To:
+            </strong>
+            {typeInfo.weakDamageTo &&
+              typeInfo.weakDamageTo.map((typeArray, index) =>
+                typeArray.length > 0 ? (
+                  <div key={index} className="type-section">
+                    <b>
+                      {data.type && data.type[index]
+                        ? data.type[index].charAt(0).toUpperCase() +
+                          data.type[index].slice(1)
+                        : `Type ${index + 1}`}
+                      :
+                    </b>
+                    <div className="type-row">
+                      {typeArray.map((type) => (
+                        <span
+                          key={type}
+                          className="type-tag"
+                          style={{ backgroundColor: typeIcons[type]?.color }}
+                        >
+                          {typeIcons[type]?.icon} {type}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ) : null
+              )}
+            {typeInfo.weakDamageTo &&
+              typeInfo.weakDamageTo.every((arr) => arr.length === 0) && (
+                <span className="type-tag">None</span>
+              )}
+          </div>
+
+          <div className="type-section">
+            <strong className="type-section-title">No Damage To:</strong>
+            {typeInfo.noDamageTo &&
+              typeInfo.noDamageTo.map((typeArray, index) =>
+                typeArray.length > 0 ? (
+                  <div key={index} className="type-section">
+                    <b>
+                      {data.type && data.type[index]
+                        ? data.type[index].charAt(0).toUpperCase() +
+                          data.type[index].slice(1)
+                        : `Type ${index + 1}`}
+                      :
+                    </b>
+                    <div className="type-row">
+                      {typeArray.map((type) => (
+                        <span
+                          key={type}
+                          className="type-tag"
+                          style={{ backgroundColor: typeIcons[type]?.color }}
+                        >
+                          {typeIcons[type]?.icon} {type}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ) : null
+              )}
+            {typeInfo.noDamageTo &&
+              typeInfo.noDamageTo.every((arr) => arr.length === 0) && (
+                <span className="type-tag">None</span>
+              )}
+          </div>
+
+          {/* Defensive sections can be spaced out the same way */}
+          <div className="type-section">
+            <strong className="type-section-title">Weak To:</strong>
+            <div className="type-row">
+              {typeInfo.weakFrom &&
+              Object.entries(typeInfo.weakFrom).length > 0 ? (
+                Object.entries(typeInfo.weakFrom).map(([type, multiplier]) => (
+                  <span
                     key={type}
-                    className="individual-type"
-                    style={{
-                      backgroundColor: typeIcons[type]?.color,
-                    }}
+                    className="type-tag"
+                    style={{ backgroundColor: typeIcons[type]?.color }}
                   >
                     {multiplier} {type}
-                  </li>
-                )
+                  </span>
+                ))
+              ) : (
+                <span className="type-tag">None</span>
               )}
-            </ul>
-          ) : (
-            <span>None</span>
-          )}
+            </div>
+          </div>
 
-          <strong>Immune To:</strong>
-          {typeInfo.immuneFrom &&
-          Object.entries(typeInfo.immuneFrom).length > 0 ? (
-            <ul>
-              {Object.entries(typeInfo.immuneFrom).map(([type, multiplier]) => (
-                <li
-                  key={type}
-                  className="individual-type"
-                  style={{
-                    backgroundColor: typeIcons[type]?.color,
-                  }}
-                >
-                  {multiplier} {type}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <span>None</span>
-          )}
+          <div className="type-section">
+            <strong className="type-section-title">Resistant To:</strong>
+            <div className="type-row">
+              {typeInfo.resistantFrom &&
+              Object.entries(typeInfo.resistantFrom).length > 0 ? (
+                Object.entries(typeInfo.resistantFrom).map(
+                  ([type, multiplier]) => (
+                    <span
+                      key={type}
+                      className="type-tag"
+                      style={{ backgroundColor: typeIcons[type]?.color }}
+                    >
+                      {multiplier} {type}
+                    </span>
+                  )
+                )
+              ) : (
+                <span className="type-tag">None</span>
+              )}
+            </div>
+          </div>
+
+          <div className="type-section">
+            <strong className="type-section-title">Immune To:</strong>
+            <div className="type-row">
+              {typeInfo.immuneFrom &&
+              Object.entries(typeInfo.immuneFrom).length > 0 ? (
+                Object.entries(typeInfo.immuneFrom).map(
+                  ([type, multiplier]) => (
+                    <span
+                      key={type}
+                      className="type-tag"
+                      style={{ backgroundColor: typeIcons[type]?.color }}
+                    >
+                      {multiplier} {type}
+                    </span>
+                  )
+                )
+              ) : (
+                <span className="type-tag">None</span>
+              )}
+            </div>
+          </div>
         </span>
       </div>
     </>

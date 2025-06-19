@@ -23,11 +23,11 @@ img {
 
 .pokemon-cards-section {
   display: flex;
-  justify-content: space-evenly;
   align-content: center;
   row-gap: 20px;
   flex-flow: row wrap;
   margin-top: 25px;
+  margin-left: 25px;
   margin-bottom: 25px;
   /* margin-left: 14vw;
   margin-right: 14vw;

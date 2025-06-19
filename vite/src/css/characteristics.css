@@ -181,7 +181,7 @@ li {
   left: 70%; /* Position to the right of the name */
   top: 20%;
   transform: translateY(-10%);
-  background: #fff;
+  background-color: #d6d6d6;
   color: #222;
   border: 2px solid;
   padding: 8px 12px;
@@ -191,6 +191,9 @@ li {
   pointer-events: none;
   box-shadow: 0 2px 8px #0002;
   white-space: pre-line;
+  max-width: fit-content;
+  max-height: 200px;
+  overflow-y: auto;
 }
 
 .pokemon-types-box:hover .type-description {
@@ -559,4 +562,39 @@ li {
   text-align: left;
   justify-content: flex-start;
   padding: 0.5em 1em;
+}
+
+.type-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 6px;
+  justify-content: flex-start; /* prevents stretching */
+}
+
+.type-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 2px;
+}
+
+.type-section-title {
+  font-size: large;
+}
+
+.type-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  margin: 0 2px;
+  border-radius: 8px;
+  font-size: 0.9em;
+  background: #eee;
+  color: #222;
+  width: fit-content;
+  white-space: nowrap;
+}
+
+.type-section {
+  margin-bottom: 10px;
 }
