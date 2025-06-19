@@ -27,13 +27,15 @@ async function fetchAltInfo(id) {
 
 async function fetchTypeInfo(types) {
   if (types.length < 2) {
-    const type1 = await fetch(`https://pokeapi.co/api/v2/type/${types[0]}/`);
-
+    const firstTypeRes = await fetch(
+      `https://pokeapi.co/api/v2/type/${types[0]}/`
+    );
     try {
       if (!firstTypeRes.ok) {
         throw new Error("Pokemon's type information could not be found");
       }
       const firstTypeData = await firstTypeRes.json();
+      console.log([firstTypeData]);
       return [firstTypeData];
     } catch (e) {
       console.error(e);
@@ -131,7 +133,6 @@ function getPokemonType(pokeData) {
 
 async function getTypeEffectiveness(types) {
   const typeData = await fetchTypeInfo(types);
-  console.log(typeData);
   return typeData;
 }
 

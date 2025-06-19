@@ -179,8 +179,8 @@ li {
   transition: opacity 0.4s;
   position: absolute;
   left: 70%; /* Position to the right of the name */
-  top: 50%;
-  transform: translateY(-50%);
+  top: 20%;
+  transform: translateY(-10%);
   background: #fff;
   color: #222;
   border: 2px solid;
@@ -204,6 +204,12 @@ li {
 }
 
 /* ============================ */
+
+.individual-type {
+  border-radius: 25px;
+  width: fit-content;
+  padding: 5px;
+}
 
 .pokemon-ability-section {
   grid-column: 2;
