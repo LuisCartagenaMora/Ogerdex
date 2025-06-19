@@ -98,6 +98,7 @@ li {
   border-style: solid solid solid solid;
   border-width: 3px;
   border-color: #0002;
+  text-align: center;
 }
 
 .flavor-text {
@@ -137,7 +138,6 @@ li {
 .pokemon-types-box {
   padding: 2%;
   margin: 0;
-  max-height: stretch;
 }
 
 .poke-types-title {
@@ -172,14 +172,13 @@ li {
 
 .pokemon-types-box {
   position: relative;
-  display: inline-block; /* or inline-flex */
 }
 
 .type-description {
   opacity: 0;
   transition: opacity 0.4s;
   position: absolute;
-  left: 110%; /* Position to the right of the name */
+  left: 70%; /* Position to the right of the name */
   top: 50%;
   transform: translateY(-50%);
   background: #fff;

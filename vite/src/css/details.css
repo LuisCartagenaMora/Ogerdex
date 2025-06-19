@@ -140,6 +140,8 @@ img {
 .pokemon-abilities {
   display: flex;
   flex-direction: column;
+  padding: 0;
+  text-align: center;
 
   /* optional: adds space between abilities */
 }
