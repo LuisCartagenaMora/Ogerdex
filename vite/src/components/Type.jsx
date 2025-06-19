@@ -190,7 +190,10 @@ function Type({ data }) {
         </div>
         <span className="type-description">
           <div className="type-section">
-            <strong className="type-section-title">Super Effective:</strong>
+            <div className="type-section-title">
+              <strong>Super Effective:</strong>
+            </div>
+
             <div className="type-row">
               {typeInfo.superEffectiveTo &&
                 typeInfo.superEffectiveTo.map((typeArray, index) =>

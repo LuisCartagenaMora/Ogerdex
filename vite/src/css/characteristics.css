@@ -581,6 +581,16 @@ li {
 
 .type-section-title {
   font-size: large;
+  width: 100%; /* Make the bar take up the whole row */
+  display: block; /* Ensure it behaves as a block element */
+  background-color: #fcfc55;
+  border-style: solid none solid none;
+  border-color: #0002;
+  border-width: 1px;
+  border-radius: 5px;
+  padding: 4px 0 4px 8px; /* Add some vertical and left padding */
+  margin-bottom: 6px; /* Space below the bar */
+  box-sizing: border-box; /* Ensure padding doesn't overflow */
 }
 
 .type-tag {
@@ -589,6 +599,7 @@ li {
   margin: 0 2px;
   border-radius: 8px;
   font-size: 0.9em;
+  font-weight: bold;
   background: #eee;
   color: #222;
   width: fit-content;
@@ -597,4 +608,15 @@ li {
 
 .type-section {
   margin-bottom: 10px;
+}
+
+.type-label {
+  font-size: 1.1em;
+  font-weight: bold;
+  padding: 2px 10px;
+  border-radius: 8px;
+  margin-right: 8px;
+  color: #fff;
+  display: inline-block;
+  margin-bottom: 4px;
 }

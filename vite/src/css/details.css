@@ -160,7 +160,7 @@ img {
   left: 110%; /* Position to the right of the name */
   top: 50%;
   transform: translateY(-50%);
-  background: #fff;
+  background-color: #d6d6d6;
   color: #222;
   border: 2px solid;
   padding: 8px 12px;
