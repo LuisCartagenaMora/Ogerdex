@@ -186,7 +186,7 @@ li {
   border: 2px solid;
   padding: 8px 12px;
   border-radius: 6px;
-  min-width: 180px;
+  min-width: 250px;
   z-index: 10;
   pointer-events: none;
   box-shadow: 0 2px 8px #0002;
@@ -283,6 +283,7 @@ li {
   align-items: center;
   flex-direction: column;
   margin: 0 auto;
+  padding: 6px 0 6px 0;
   text-transform: capitalize;
   background-color: #ffffff;
 }
@@ -581,16 +582,7 @@ li {
 
 .type-section-title {
   font-size: large;
-  width: 100%; /* Make the bar take up the whole row */
-  display: block; /* Ensure it behaves as a block element */
-  background-color: #fcfc55;
-  border-style: solid none solid none;
-  border-color: #0002;
-  border-width: 1px;
-  border-radius: 5px;
-  padding: 4px 0 4px 8px; /* Add some vertical and left padding */
-  margin-bottom: 6px; /* Space below the bar */
-  box-sizing: border-box; /* Ensure padding doesn't overflow */
+  padding: 4px 0 4px 0;
 }
 
 .type-tag {

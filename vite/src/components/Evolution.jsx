@@ -16,13 +16,12 @@ function Evolution({ data }) {
   const groupedEvo = groupByEvolvesFrom(data.evo);
 
   return (
-    groupedEvo.length > 0 && (
+    groupedEvo.flat().length > 1 && (
       <div className="poke-evo-section">
         {groupedEvo.map((group, groupIdx) => (
           <div className="evo-group" key={groupIdx}>
-            {group.map((evo, evoIdx) => (
+            {group.map((evo) => (
               <div className="individual-pokemon" key={evo.id}>
-                {/* Only show arrow and requirement if not the first group */}
                 {groupIdx > 0 && (
                   <>
                     <div className="poke-lvl-req">

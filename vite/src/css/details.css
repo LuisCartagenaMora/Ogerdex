@@ -23,21 +23,21 @@ img {
 
 .pokemon-cards-section {
   display: flex;
+  justify-content: center;
   align-content: center;
   row-gap: 20px;
-  flex-flow: row wrap;
+  flex-flow: column wrap;
   margin-top: 25px;
   margin-left: 25px;
   margin-bottom: 25px;
-  /* margin-left: 14vw;
+  margin-left: 14vw;
   margin-right: 14vw;
-  padding-bottom: 8vh; */
+  padding-bottom: 8vh;
 }
 
 .details-card {
   display: grid;
-  grid-template-columns: 50% 50%;
-  grid-template-rows: auto;
+  grid: 50% / 50% 50%;
   background-color: #f0f0f0;
   text-transform: capitalize;
   height: 550px;
@@ -170,6 +170,7 @@ img {
   pointer-events: none;
   box-shadow: 0 2px 8px #0002;
   white-space: pre-line;
+  text-transform: uppercase;
 }
 
 .ability:hover .ability-description {
@@ -193,7 +194,7 @@ img {
   display: flex;
   justify-content: center;
   font-size: large;
-  margin-top: 15%;
+
   color: black;
 }
 

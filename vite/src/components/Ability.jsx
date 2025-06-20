@@ -15,6 +15,9 @@ function Ability({ data, color }) {
                 className="ability-description"
                 style={{ borderColor: color }}
               >
+                <strong style={{ display: "flex", justifyContent: "center" }}>
+                  Description:
+                </strong>
                 {data?.ability?.ability[0]?.description ??
                   "Ability description couldn't be fetched"}
               </span>
@@ -27,6 +30,9 @@ function Ability({ data, color }) {
                   className="ability-description"
                   style={{ borderColor: color }}
                 >
+                  <strong style={{ display: "flex", justifyContent: "center" }}>
+                    Description:
+                  </strong>
                   {data?.ability?.ability[0]?.description ??
                     "Ability description couldn't be fetched"}
                 </span>
@@ -37,6 +43,9 @@ function Ability({ data, color }) {
                   className="ability-description"
                   style={{ borderColor: color }}
                 >
+                  <strong style={{ display: "flex", justifyContent: "center" }}>
+                    Description:
+                  </strong>
                   {data?.ability?.ability[1]?.description ??
                     "Ability description couldn't be fetched"}
                 </span>
@@ -53,6 +62,11 @@ function Ability({ data, color }) {
                     className="ability-description"
                     style={{ borderColor: color }}
                   >
+                    <strong
+                      style={{ display: "flex", justifyContent: "center" }}
+                    >
+                      Description
+                    </strong>
                     {data?.ability?.hidden_ability?.description ??
                       "Ability description couldn't be fetched"}
                   </span>

@@ -111,7 +111,6 @@ function PokeViewer() {
 
         <div className="pokemon-basic-info">
           <div className="pokemon-type-section">
-         
             <div
               className="poke-types-title"
               style={{ backgroundColor: typeIcons[data?.type[0]]?.color }}
@@ -225,7 +224,6 @@ function PokeViewer() {
         <Evolution data={data} />
       </div>
       <div className="poke-alt-forms">
-     
         <AltForm forms={data.forms} />
       </div>
 
