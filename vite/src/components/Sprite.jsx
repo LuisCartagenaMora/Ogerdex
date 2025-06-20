@@ -3,19 +3,15 @@ import { useState } from "react";
 function toggleImages(state, data) {
   if (state === true) {
     return (
-      <img
-        className="pokemon-sprite"
-        src={data?.sprite[0]}
-        alt={`${data?.name} sprite`}
-      />
+      <div className="pokemon-sprite">
+        <img src={data?.sprite[0]} alt={`${data?.name} sprite`} />
+      </div>
     );
   } else {
     return (
-      <img
-        className="pokemon-sprite"
-        src={data?.sprite[1]}
-        alt={`${data?.name} sprite`}
-      />
+      <div className="pokemon-sprite">
+        <img src={data?.sprite[1]} alt={`${data?.name} sprite`} />
+      </div>
     );
   }
 }
