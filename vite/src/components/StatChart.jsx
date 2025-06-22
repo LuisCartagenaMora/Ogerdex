@@ -44,7 +44,7 @@ function StatChart({ chartDetails, color }) {
                       gridColumnStart: 1,
                     }}
                   >
-                    <span className="individual-stat-label">{label}</span>
+                    <span className="individual-stat-label">{label}:</span>
                     <span>{value}</span>
                   </div>
 

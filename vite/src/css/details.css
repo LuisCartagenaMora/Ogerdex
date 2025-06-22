@@ -213,6 +213,12 @@ img {
   padding-bottom: 4vh;
 }
 
+.outer-stat-chart-section {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+}
+
 /* .stat-chart-section {
   height: 250px;
   width: 500px;
@@ -220,10 +226,14 @@ img {
   text-align: center;
 } */
 .stat-chart-section {
-  overflow-x: auto; /* just in case */
+  width: 100%;
+  max-width: 1000px; /* Optional: cap the max width */
+  margin: 0 auto;
 }
 
 .stat-chart-box {
+  width: 100%;
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -239,16 +249,13 @@ img {
 
 .stat-chart-inner-box {
   display: grid;
-  grid-template-columns: 100px 1fr; /* labels + bars */
+  grid-template-columns: 100px 1fr; /* label + bar */
+  width: 100%; /* ✅ stretch to fill */
   height: auto;
-  width: auto;
   box-sizing: border-box;
 }
 
 .stat-chart-inner-box-title {
-  grid-column-start: 1;
-  grid-column-end: 2;
-  grid-row: 1;
   align-content: center;
   text-align: center;
   border-style: none solid solid none;
@@ -260,8 +267,6 @@ img {
 }
 
 .total-base-stat {
-  grid-column: 2;
-  grid-row: 1;
   border-color: #222224;
   border-width: 2px;
   border-style: none none solid none;
@@ -270,7 +275,6 @@ img {
 }
 
 .stat-chart-inner-box-stats {
-  grid-row-start: 2;
   display: flex;
   flex-flow: column;
   height: 231px;
@@ -289,15 +293,14 @@ img {
   flex-flow: row;
   justify-content: space-between;
   border-width: 2px;
-  border-style: none solid solid none;
-  height: 200px;
-  padding-top: 5px;
+  border-style: none solid none none;
+  height: auto; /* ✅ fit content */
+  padding: 6px 8px; /* slightly smaller padding */
+  text-transform: capitalize;
 }
 
 .stat-chart-inner-box-bars {
-  grid-column-start: 2;
-  grid-row-start: 2;
-  height: 281px;
+  height: auto; /* ✅ remove hardcoded height */
   width: 100%;
 }
 
@@ -310,8 +313,8 @@ img {
   border-style: none none solid none;
 } */
 .individual-stat-bar {
-  width: 100%; /* ensure it fills the grid column */
-  border: none none solid none 2px red;
+  width: 100%;
+  height: 36px; /* or whatever height you're using */
 }
 
 .stat-chart-inner-box-stats-total {
@@ -392,5 +395,10 @@ img {
 
   .individual-stat-label {
     font-size: 0.85rem;
+  }
+
+  .ability-description {
+    top: 340%;
+    left: -40%;
   }
 }
