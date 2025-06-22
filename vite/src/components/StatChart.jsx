@@ -23,7 +23,7 @@ function calcTotal(values) {
 
 function StatChart({ chartDetails, color }) {
   return (
-    <>
+    <div className="outer-stat-chart-section">
       <div className="stat-chart-section">
         <div className="stat-chart-box" style={{ backgroundColor: color }}>
           <div className="stat-chart-inner-box">
@@ -31,44 +31,44 @@ function StatChart({ chartDetails, color }) {
             <div className="total-base-stat">
               Total Base Stat: {calcTotal(chartDetails?.values)}
             </div>
-            <div className="stat-chart-inner-box-stats">
-              {chartDetails?.labels.map((label, i) => (
-                <div
-                  className="individual-stat-box"
-                  style={{ backgroundColor: statColors[i] }}
-                >
-                  <div className="individual-stat-label">{label}:</div>
-                  <div className="individual-stat-label">
-                    {chartDetails?.values[i]}
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="stat-chart-inner-box-bars">
-              {chartDetails?.values.map((value, i) => {
-                const percentage = (value / 255) * 100;
-                return (
+
+            {chartDetails?.labels.map((label, i) => {
+              const value = chartDetails?.values[i] ?? 0;
+              const percent = (Math.min(value, 255) / 255) * 100; // cap at 255
+              return (
+                <>
                   <div
-                    className="individual-stat-bar"
+                    className="individual-stat-box"
                     style={{
-                      backgroundColor: barColors[i],
-                      width: { percentage },
+                      backgroundColor: statColors[i],
+                      gridColumnStart: 1,
                     }}
                   >
+                    <span className="individual-stat-label">{label}</span>
+                    <span>{value}</span>
+                  </div>
+
+                  {/* right-hand cell ─ bar */}
+                  <div
+                    className="individual-stat-bar"
+                    style={{ backgroundColor: barColors[i] }}
+                  >
                     <div
+                      className="bar-fill"
                       style={{
                         backgroundColor: statColors[i],
-                        width: Math.min(chartDetails?.values[i], 255),
+                        width: `${percent}%`,
+                        gridColumnStart: 2,
                       }}
-                    ></div>
+                    />
                   </div>
-                );
-              })}
-            </div>
+                </>
+              );
+            })}
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
