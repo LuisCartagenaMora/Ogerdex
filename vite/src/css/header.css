@@ -1,3 +1,6 @@
+@media (width <= 359px) {
+}
+
 .header-component {
   display: flex;
   justify-content: center;

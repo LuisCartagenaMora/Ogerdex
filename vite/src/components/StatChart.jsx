@@ -44,18 +44,15 @@ function StatChart({ chartDetails, color }) {
                 </div>
               ))}
             </div>
-            {/* <div className="stat-chart-inner-box-bars">{chartDetails?.values.map((_, i) => {
-              return <div className="individual-stat-bar" style={{ backgroundColor: statColors[i], width: Math.min(chartDetails?.values[i], 255) }}></div >
-            })}
-            </div> */}
             <div className="stat-chart-inner-box-bars">
-              {chartDetails?.values.map((_, i) => {
+              {chartDetails?.values.map((value, i) => {
+                const percentage = (value / 255) * 100;
                 return (
                   <div
                     className="individual-stat-bar"
                     style={{
                       backgroundColor: barColors[i],
-                      width: 255,
+                      width: { percentage },
                     }}
                   >
                     <div
