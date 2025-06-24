@@ -1,0 +1,12 @@
+.error-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: baseline;
+  padding: 2px;
+  border: solid 1px #0002;
+  opacity: 1;
+}
+
+.hidden {
+  opacity: 0;
+}

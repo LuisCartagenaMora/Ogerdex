@@ -71,7 +71,6 @@ li {
 }
 
 .sprites {
-  width: 50%;
   margin: 0 auto;
   text-align: center;
 }
@@ -81,7 +80,6 @@ li {
   justify-content: center;
   align-items: center;
   margin: 0 auto;
-  width: 90%;
 }
 
 .sprite-box > img {

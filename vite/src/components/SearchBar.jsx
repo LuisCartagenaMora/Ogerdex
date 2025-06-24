@@ -1,9 +1,3 @@
-// Search for ElasticSearch and implement it for searching capabilities.
-// import { useQuery } from "@tanstack/react-query";
-// import getPokemonById from "../node/Ogerpon.js";
-// import LoadingIcon from "./components/LoadingIcon.jsx";
-// import "./css/details.css";
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Fuse from "fuse.js";

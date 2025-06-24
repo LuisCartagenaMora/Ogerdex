@@ -58,26 +58,6 @@ img {
   align-items: center;
 }
 
-.pokemon-sprite {
-  width: 220px; /* slightly larger than the image for padding */
-  height: 220px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: white;
-  border-radius: 10px;
-  image-rendering: optimizeQuality;
-}
-
-.pokemon-sprite > img {
-  width: 160px; /* 20% smaller than 200px */
-  height: auto;
-  max-width: 100%;
-  max-height: 100%;
-  display: block;
-  margin: 0 auto; /* ensures horizontal centering if needed */
-}
-
 .pokemon-name {
   margin-top: 15px;
   display: flex;

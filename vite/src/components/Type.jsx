@@ -156,6 +156,7 @@ function Type({ data }) {
 
   useEffect(() => {
     // Process defensive types
+    console.log("WEAK", data);
     const processed = processDefensiveTypes(data);
 
     setTypeInfo({
@@ -167,10 +168,6 @@ function Type({ data }) {
       immuneFrom: processed.immuneFrom,
     });
   }, [data]);
-
-  if (!data) {
-    return <LoadingIcon />; // or just return null
-  }
 
   return (
     <>

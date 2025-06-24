@@ -7,13 +7,12 @@ import Type from "./Type.jsx";
 import Ability from "./Ability.jsx";
 import StatChart from "./StatChart.jsx";
 import "../css/details.css";
-
 import typeIcons from "../assets/typeIcons.jsx";
 
 function borderColor(pokemonDetails) {
-  const type1Color = typeIcons[pokemonDetails?.type[0]]?.color;
-  return pokemonDetails?.type.length === 2
-    ? linearGradient(type1Color, typeIcons[pokemonDetails?.type[1]]?.color)
+  const type1Color = typeIcons[pokemonDetails?.type?.[0]]?.color;
+  return pokemonDetails?.type?.length === 2
+    ? linearGradient(type1Color, typeIcons[pokemonDetails?.type?.[1]]?.color)
     : `linear-gradient(${type1Color}, ${type1Color})`;
 }
 
@@ -21,50 +20,53 @@ const linearGradient = (color1, color2) => {
   return `linear-gradient(${color1}, ${color2})`;
 };
 
-export default function PokemonCard({ pokemonId }) {
+export default function PokemonCard({ pokemon, altPokemon }) {
   const [chartDetails, setChartDetails] = useState({
     labels: [],
     values: [],
   });
 
-  const { data: pokemon, error } = useQuery({
-    queryKey: ["pokemonId", pokemonId],
-    queryFn: () => getPokemon(pokemonId),
+  // If altPokemon is provided, use it directly. Otherwise, fetch with useQuery.
+  const shouldUseAlt = !!altPokemon;
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["pokemon", pokemon],
+    queryFn: () => getPokemon(pokemon),
+    enabled: !shouldUseAlt && !!pokemon, // Only fetch if altPokemon is not present and pokemon is provided
   });
 
+  const displayData = shouldUseAlt ? altPokemon : data;
+
   useEffect(() => {
-    if (pokemon && pokemon.stats) {
+    if (displayData && displayData.stats) {
       setChartDetails({
-        labels: Object.keys(pokemon.stats),
-        values: Object.values(pokemon.stats),
+        labels: Object.keys(displayData.stats),
+        values: Object.values(displayData.stats),
       });
     }
-  }, [pokemon]);
+  }, [displayData]);
 
-  if (!pokemon) return <LoadingIcon />;
+  if (!displayData) return <LoadingIcon />;
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <>
-      <div
-        className="pokedex-background"
-        style={{
-          backgroundImage: borderColor(pokemon),
-        }}
-      >
-        <div className="details-card">
-          <Sprite data={pokemon} />
-          <div className="pokemon-details-box">
-            <div className="pokemon-name">{pokemon?.name ?? "N/A"}</div>
-            <Type data={pokemon} />
-            <Ability data={pokemon} color={borderColor(pokemon)} />
-            <a className="pokemon-link" href={`/pokemon/view/${pokemon?.id}`}>
-              More about this pokemon
-            </a>
-          </div>
-          <StatChart chartDetails={chartDetails} />
+    <div
+      className="pokedex-background"
+      style={{
+        backgroundImage: borderColor(displayData),
+      }}
+    >
+      <div className="details-card">
+        <Sprite data={displayData} />
+        <div className="pokemon-details-box">
+          <div className="pokemon-name">{displayData?.name ?? "N/A"}</div>
+          <Type data={displayData} />
+          <Ability data={displayData} color={borderColor(displayData)} />
+          <a className="pokemon-link" href={`/pokemon/view/${displayData?.id}`}>
+            More about this pokemon
+          </a>
         </div>
+        <StatChart chartDetails={chartDetails} />
       </div>
-    </>
+    </div>
   );
 }

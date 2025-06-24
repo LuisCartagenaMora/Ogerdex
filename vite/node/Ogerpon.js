@@ -132,6 +132,10 @@ function getPokemonSprite(pokeData) {
   ];
 }
 
+function getPokemonBabyStatus(speciesData) {
+  return speciesData.is_baby || null;
+}
+
 function getPokemonType(pokeData) {
   return pokeData?.types.map((p) => p?.type?.name);
 }
@@ -327,6 +331,7 @@ async function getAltPokemon(pokemon) {
 
   const name = await getPokemonName(pokemonData);
   const sprite = getPokemonSprite(pokemonData);
+
   const types = await getPokemonType(pokemonData);
   const typeChart = await getTypeEffectiveness(types);
   const ability = await getPokemonAbilities(pokemonData);
@@ -397,6 +402,7 @@ export async function getPokemonDetailed(pokemon) {
   const heldItems = await getPokemonHeldItem(pokemonData);
   const moves = await getPokemonMoves(pokemonData);
   const sprite = getPokemonSprite(pokemonData);
+  const isBaby = getPokemonBabyStatus(speciesData);
   const types = await getPokemonType(pokemonData);
   const typeChart = await getTypeEffectiveness(types);
   const ability = await getPokemonAbilities(pokemonData);
@@ -422,6 +428,7 @@ export async function getPokemonDetailed(pokemon) {
     type: types,
     typeChart,
     sprite,
+    isBaby,
     ability,
     stats,
     totalStat,
@@ -437,6 +444,7 @@ export default async function getPokemon(pokemon) {
   const id = await getPokemonId(speciesData);
   const name = await getPokemonName(pokemonData);
   const sprite = await getPokemonSprite(pokemonData);
+  const isBaby = getPokemonBabyStatus(speciesData);
   const types = await getPokemonType(pokemonData);
   const typeChart = await getTypeEffectiveness(types);
   const ability = await getPokemonAbilities(pokemonData);
@@ -451,6 +459,7 @@ export default async function getPokemon(pokemon) {
     type: types,
     typeChart,
     sprite,
+    isBaby,
     ability,
     stats,
     totalStat,

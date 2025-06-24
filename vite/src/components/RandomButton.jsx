@@ -8,6 +8,7 @@ function RandomButton() {
     const randNum = Math.floor(Math.random() * MAX_POKEMON);
 
     navigate("/pokemon/random/" + String(randNum));
+    
   }
   return (
     <>

@@ -6,6 +6,7 @@ import GmaxForm from "./GmaxForm.jsx";
 import RegionForm from "./RegionForm.jsx";
 
 function AltForm({ forms }) {
+  console.log("FORMS: ", forms);
   return forms.map((form) => (
     <div className="poke-form-section" key={form.name}>
       {(form.isPaldea || form.isAlola || form.isGalar || form.isHisui) && (

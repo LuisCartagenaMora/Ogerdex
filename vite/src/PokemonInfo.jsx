@@ -18,7 +18,7 @@ function PokemonInfo({ pokemon }) {
   function numberOfEvolutions() {
     const PokemonEvolutions = Object.values(data?.evo || {});
     return PokemonEvolutions.map((pokemon, i) => (
-      <PokemonCard key={i} pokemonId={pokemon.id} />
+      <PokemonCard key={i} pokemon={pokemon.id} />
     ));
   }
 

@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-import Sprite from "./Sprite.jsx";
-import StatChart from "./StatChart.jsx";
 import PokemonCard from "./PokemonCard.jsx";
 import { useQuery } from "@tanstack/react-query";
 import { getAltPokemon } from "/node/Ogerpon.js";
@@ -25,15 +23,13 @@ export default function MegaEvolution({ megaEvo }) {
     }
   }, [megaEvoData]);
 
-  if (error) return <div>Error loading Mega Evolution data.</div>;
-  if (!megaEvoData) return <div>Loading...</div>;
+  if (error) return <Error error={"Couldn't get Mega Evolution/s"} />;
 
   return (
     <div className="mega-evo">
       <h1>Mega Evolution</h1>
 
-      <PokemonCard altPokemon={megaEvoData} />
+      <PokemonCard altPokemon={megaEvo.id} />
     </div>
-
   );
 }
