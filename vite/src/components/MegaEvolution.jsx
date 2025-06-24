@@ -29,7 +29,7 @@ export default function MegaEvolution({ megaEvo }) {
     <div className="mega-evo">
       <h1>Mega Evolution</h1>
 
-      <PokemonCard altPokemon={megaEvo.id} />
+      <PokemonCard altPokemon={megaEvoData} />
     </div>
   );
 }

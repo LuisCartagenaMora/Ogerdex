@@ -1,8 +1,3 @@
-li {
-  border-style: none none solid none;
-  border: solid 1px #0002;
-}
-
 li:hover {
   background-color: rgb(218, 218, 218);
 }

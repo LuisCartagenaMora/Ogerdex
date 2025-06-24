@@ -21,7 +21,7 @@ export default function RegionForm({ form }) {
     <div className="regional-variant">
       {console.log("REGIONAL FORM: ", form)}
       <h1>Regional Variant</h1>
-      <PokemonCard altPokemon={form.id} />
+      <PokemonCard altPokemon={RegionalData} />
     </div>
   );
 }
