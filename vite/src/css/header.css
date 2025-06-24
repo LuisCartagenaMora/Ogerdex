@@ -1,11 +1,11 @@
 .header-component {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-content: center;
   background-color: #ee1515;
 }
 
-.header-component > * {
+.header-component > button {
   font-size: large;
   margin: 10px 5px 10px 0px;
   border: solid 2px;

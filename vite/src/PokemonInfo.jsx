@@ -1,5 +1,5 @@
-// import { useParams } from "react-router-dom";
-// import { useState, useEffect } from "react";
+import { useEffect, useContext } from "react";
+import { DataContext } from "./DataContext";
 import { useQuery } from "@tanstack/react-query";
 import getPokemon from "../node/Ogerpon.js";
 import PokemonCard from "../src/components/PokemonCard.jsx";
@@ -16,18 +16,15 @@ function PokemonInfo({ pokemon }) {
   if (error) return <p>Error: {error.message}</p>;
 
   function numberOfEvolutions() {
-    const PokemonEvolutions = Object.values(data?.evo);
- 
-    return PokemonEvolutions.map((evo, i) => (
-      <PokemonCard key={i} pokemon={evo?.id} />
+    const PokemonEvolutions = Object.values(data?.evo || {});
+    return PokemonEvolutions.map((pokemon, i) => (
+      <PokemonCard key={i} pokemonId={pokemon.id} />
     ));
   }
-
 
   return (
     <>
       <div className="pokemon-cards-section">{numberOfEvolutions()}</div>
-      {/* <div className="pokemon-cards-section">{numberOfForms()}</div> */}
     </>
   );
 }

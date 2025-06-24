@@ -1,6 +1,12 @@
+import LoadingIcon from "../components/LoadingIcon.jsx";
 import goldStar from "../assets/star.png";
+import { useContext } from "react";
+import { DataContext } from "../DataContext.jsx";
 
-function Ability({ data, color }) {
+export default function Ability({ data, color }) {
+  if (!data) {
+    return null; // or just return null
+  }
   return (
     <div className="pokemon-abilities-section">
       <div className="pokemon-abilities-box">
@@ -79,5 +85,3 @@ function Ability({ data, color }) {
     </div>
   );
 }
-
-export default Ability;

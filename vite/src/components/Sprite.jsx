@@ -1,3 +1,4 @@
+import LoadingIcon from "../components/LoadingIcon.jsx";
 import { useState } from "react";
 
 function toggleImages(state, data) {
@@ -18,6 +19,10 @@ function toggleImages(state, data) {
 
 function Sprite({ data }) {
   const [toggle, setToggle] = useState(true);
+
+  if (!data) {
+    return null; // or just return null
+  }
   return (
     data?.sprite && (
       <div

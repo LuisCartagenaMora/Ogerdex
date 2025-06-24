@@ -38,6 +38,7 @@ function PokeViewer() {
     labels: [],
     values: [],
   });
+
   const { pokemonId, pokemonName } = useParams();
   const pokemon = pokemonId ?? pokemonName;
 
@@ -224,7 +225,7 @@ function PokeViewer() {
         <Evolution data={data} />
       </div>
       <div className="poke-alt-forms">
-        <AltForm forms={data.forms} />
+        <AltForm forms={data?.forms} />
       </div>
 
       <MoveList moves={data?.moves} />

@@ -10,7 +10,9 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-        <PokeRouter />
+      
+          <PokeRouter />
+   
       </QueryClientProvider>
     </BrowserRouter>
   </StrictMode>

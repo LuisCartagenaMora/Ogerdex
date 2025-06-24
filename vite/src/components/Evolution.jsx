@@ -1,6 +1,4 @@
 import Arrow from "../assets/arrow.svg";
-import Sprite from "./Sprite.jsx";
-import React from "react";
 
 function groupByEvolvesFrom(evolutions) {
   return Object.values(
@@ -13,7 +11,7 @@ function groupByEvolvesFrom(evolutions) {
 }
 
 function Evolution({ data }) {
-  const groupedEvo = groupByEvolvesFrom(data.evo);
+  const groupedEvo = groupByEvolvesFrom(data?.evo);
 
   return (
     groupedEvo.flat().length > 1 && (

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import getPokemon from "../../node/Ogerpon.js";
+import LoadingIcon from "../components/LoadingIcon.jsx";
 import Sprite from "./Sprite.jsx";
 import Type from "./Type.jsx";
 import Ability from "./Ability.jsx";
@@ -20,32 +21,27 @@ const linearGradient = (color1, color2) => {
   return `linear-gradient(${color1}, ${color2})`;
 };
 
-export default function PokemonCard({ pokemon, altPokemon }) {
+export default function PokemonCard({ pokemonId }) {
   const [chartDetails, setChartDetails] = useState({
     labels: [],
     values: [],
   });
 
-  // Use altPokemon if provided, otherwise fetch with useQuery
-  const shouldUseAlt = !!altPokemon;
-  const { data, error } = useQuery({
-    queryKey: ["pokemon", pokemon],
-    queryFn: () => getPokemon(pokemon),
-    enabled: !shouldUseAlt, // Don't fetch if altPokemon is present
+  const { data: pokemon, error } = useQuery({
+    queryKey: ["pokemonId", pokemonId],
+    queryFn: () => getPokemon(pokemonId),
   });
 
-  const displayData = data ?? altPokemon;
-
   useEffect(() => {
-    if (displayData && displayData.stats) {
+    if (pokemon && pokemon.stats) {
       setChartDetails({
-        labels: Object.keys(displayData.stats),
-        values: Object.values(displayData.stats),
+        labels: Object.keys(pokemon.stats),
+        values: Object.values(pokemon.stats),
       });
     }
-  }, [displayData]);
+  }, [pokemon]);
 
-  if (!displayData) return null;
+  if (!pokemon) return <LoadingIcon />;
   if (error) return <p>Error: {error.message}</p>;
 
   return (
@@ -53,19 +49,16 @@ export default function PokemonCard({ pokemon, altPokemon }) {
       <div
         className="pokedex-background"
         style={{
-          backgroundImage: borderColor(displayData),
+          backgroundImage: borderColor(pokemon),
         }}
       >
         <div className="details-card">
-          <Sprite data={displayData} />
+          <Sprite data={pokemon} />
           <div className="pokemon-details-box">
-            <div className="pokemon-name">{displayData?.name ?? "N/A"}</div>
-            <Type data={displayData} />
-            <Ability data={displayData} color={borderColor(displayData)} />
-            <a
-              className="pokemon-link"
-              href={`/pokemon/view/${displayData?.id}`}
-            >
+            <div className="pokemon-name">{pokemon?.name ?? "N/A"}</div>
+            <Type data={pokemon} />
+            <Ability data={pokemon} color={borderColor(pokemon)} />
+            <a className="pokemon-link" href={`/pokemon/view/${pokemon?.id}`}>
               More about this pokemon
             </a>
           </div>

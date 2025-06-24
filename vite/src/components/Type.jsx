@@ -1,5 +1,7 @@
 import typeIcons from "../assets/typeIcons.jsx";
-import { useState, useEffect } from "react";
+import LoadingIcon from "../components/LoadingIcon.jsx";
+import { useState, useEffect, useContext } from "react";
+import { DataContext } from "../DataContext.jsx";
 
 // ======================================
 // Offensive Type Info
@@ -51,7 +53,6 @@ function getNoDamageTo(data) {
 // Defensive Type Info
 
 function getWeakFrom(data) {
-  console.log("weakness: ", data);
   const weaknesessInfo1 =
     data?.typeChart[0]?.damage_relations?.double_damage_from.map((type) => {
       return type.name;
@@ -166,6 +167,10 @@ function Type({ data }) {
       immuneFrom: processed.immuneFrom,
     });
   }, [data]);
+
+  if (!data) {
+    return <LoadingIcon />; // or just return null
+  }
 
   return (
     <>

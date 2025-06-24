@@ -35,7 +35,7 @@ async function fetchTypeInfo(types) {
         throw new Error("Pokemon's type information could not be found");
       }
       const firstTypeData = await firstTypeRes.json();
-      console.log([firstTypeData]);
+
       return [firstTypeData];
     } catch (e) {
       console.error(e);
@@ -79,7 +79,7 @@ function getPokemonFlavorText(pokeData) {
   const englishEntries = pokeData?.flavor_text_entries.filter((text_entry) => {
     return text_entry.language.name === "en";
   });
-  console.log(englishEntries);
+
   return englishEntries[englishEntries.length - 1].flavor_text;
 }
 
@@ -124,7 +124,6 @@ function getPokemonId(speciesData) {
 }
 
 function getPokemonSprite(pokeData) {
-  console.log(pokeData);
   return [
     pokeData?.sprites?.other?.showdown?.front_default ??
       pokeData?.sprites?.front_default,
@@ -347,7 +346,7 @@ async function getAltPokemon(pokemon) {
 
 async function getPokemonForms(data) {
   // Each form will be an object: { name, isMega, isGmax }
-  console.log("Inside Pokemon Forms:", data.varieties);
+
   return (data?.varieties ?? [])
     .map((form) => {
       const formName = form.pokemon.name.toLowerCase();
@@ -446,7 +445,6 @@ export default async function getPokemon(pokemon) {
   const evo = await getEvolutionV2(speciesData);
   const forms = await getPokemonForms(speciesData, true);
 
-  console.log(ability);
   return {
     id,
     name,
@@ -462,11 +460,10 @@ export default async function getPokemon(pokemon) {
 }
 
 async function getItem(id) {
-  console.log(id);
   const response = await fetch(`https://pokeapi.co/api/v2/item/${id}/`);
-  console.log("Response: ", response);
+
   const itemData = await response.json();
-  console.log("ItemData: ", itemData);
+
   return itemData;
 }
 
