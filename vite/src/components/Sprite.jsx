@@ -4,8 +4,10 @@ import PokeBallGIF from "../assets/pokeball.gif";
 
 function toggleImages(state, data) {
   const imgStyle = {
-    width: "140px",
+    width: "auto",
+    maxWidth: "200px",
     height: "auto",
+    maxWidth: "200px",
     imageRendering: "pixelated",
     display: "block",
     margin: "0 auto",
