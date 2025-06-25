@@ -1,9 +1,10 @@
 import { useState } from "react";
+import "../css/loading.css";
+import PokeBallGIF from "../assets/pokeball.gif";
 
 function toggleImages(state, data) {
-  const isBaby = data?.isBaby;
   const imgStyle = {
-    width: isBaby ? "70px" : "120px", // Baby Pokémon are smaller
+    width: "140px",
     height: "auto",
     imageRendering: "pixelated",
     display: "block",
@@ -37,19 +38,21 @@ function Sprite({ data }) {
   const [toggle, setToggle] = useState(true);
 
   if (!data) {
-    return null; // or just return null
-  }
-  return (
-    data?.sprite && (
-      <div
-        className="sprite-box"
-        onClick={() => {
-          setToggle(toggle ? false : true);
-        }}
-      >
-        {toggleImages(toggle, data)}
+    return (
+      <div className="sprite-box">
+        <img className="pokeball-gif" src={PokeBallGIF} alt="Loading..." />
       </div>
-    )
+    );
+  }
+
+  return (
+    <div
+      className="sprite-box"
+      onClick={() => setToggle((prev) => !prev)}
+      style={{ cursor: "pointer" }}
+    >
+      {toggleImages(toggle, data)}
+    </div>
   );
 }
 

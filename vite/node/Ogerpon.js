@@ -14,15 +14,21 @@ async function fetchInfo(id) {
     return [pokemonData, speciesData];
   } catch (e) {
     console.error(e);
+    return null;
   }
 }
 
 async function fetchAltInfo(id) {
-  const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`);
-  if (!response.ok) {
-    throw new Error("Pokémon not found");
+  try {
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`);
+    if (!response.ok) {
+      throw new Error("Pokémon not found");
+    }
+    return await response.json();
+  } catch (e) {
+    console.error(e);
+    return null;
   }
-  return await response.json();
 }
 
 async function fetchTypeInfo(types) {
@@ -39,6 +45,7 @@ async function fetchTypeInfo(types) {
       return [firstTypeData];
     } catch (e) {
       console.error(e);
+      return null;
     }
   } else {
     const type1 = await fetch(`https://pokeapi.co/api/v2/type/${types[0]}/`);
@@ -54,12 +61,13 @@ async function fetchTypeInfo(types) {
       return [firstTypeData, secondTypeData];
     } catch (e) {
       console.error(e);
+      return null;
     }
   }
 }
 
 function calcBaseStat(...args) {
-  return args.reduce((total, stat) => total + stat, 0);
+  return args.reduce((total, stat) => total + stat, 0) || null;
 }
 
 function getPokemonName(pokeData) {
@@ -80,13 +88,13 @@ function getPokemonFlavorText(pokeData) {
     return text_entry.language.name === "en";
   });
 
-  return englishEntries[englishEntries.length - 1].flavor_text;
+  return englishEntries[englishEntries.length - 1].flavor_text || "N/A";
 }
 
 function getPokemonMass(pokeData) {
   const height = pokeData?.height;
   const weight = pokeData?.weight;
-  return [height, weight];
+  return [height, weight] || ["N/A", "N/A"];
 }
 
 function getPokemonBaseHappines(pokeData) {
@@ -94,11 +102,11 @@ function getPokemonBaseHappines(pokeData) {
 }
 
 function getPokemonEggGroup(pokeData) {
-  return pokeData?.egg_groups;
+  return pokeData?.egg_groups || null;
 }
 
 function getPokemonEggCycle(speciesData) {
-  return speciesData?.hatch_counter;
+  return speciesData?.hatch_counter || null;
 }
 
 function getPokemonCaptureRate(pokeData) {
@@ -132,17 +140,13 @@ function getPokemonSprite(pokeData) {
   ];
 }
 
-function getPokemonBabyStatus(speciesData) {
-  return speciesData.is_baby || null;
-}
-
 function getPokemonType(pokeData) {
-  return pokeData?.types.map((p) => p?.type?.name);
+  return pokeData?.types.map((p) => p?.type?.name) || null;
 }
 
 async function getTypeEffectiveness(types) {
   const typeData = await fetchTypeInfo(types);
-  return typeData;
+  return typeData || null;
 }
 
 function pokemonStats(pokeData) {
@@ -402,7 +406,6 @@ export async function getPokemonDetailed(pokemon) {
   const heldItems = await getPokemonHeldItem(pokemonData);
   const moves = await getPokemonMoves(pokemonData);
   const sprite = getPokemonSprite(pokemonData);
-  const isBaby = getPokemonBabyStatus(speciesData);
   const types = await getPokemonType(pokemonData);
   const typeChart = await getTypeEffectiveness(types);
   const ability = await getPokemonAbilities(pokemonData);
@@ -428,7 +431,6 @@ export async function getPokemonDetailed(pokemon) {
     type: types,
     typeChart,
     sprite,
-    isBaby,
     ability,
     stats,
     totalStat,
@@ -443,8 +445,7 @@ export default async function getPokemon(pokemon) {
 
   const id = await getPokemonId(speciesData);
   const name = await getPokemonName(pokemonData);
-  const sprite = await getPokemonSprite(pokemonData);
-  const isBaby = getPokemonBabyStatus(speciesData);
+  const sprite = getPokemonSprite(pokemonData);
   const types = await getPokemonType(pokemonData);
   const typeChart = await getTypeEffectiveness(types);
   const ability = await getPokemonAbilities(pokemonData);
@@ -459,7 +460,6 @@ export default async function getPokemon(pokemon) {
     type: types,
     typeChart,
     sprite,
-    isBaby,
     ability,
     stats,
     totalStat,

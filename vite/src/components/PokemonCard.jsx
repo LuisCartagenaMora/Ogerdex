@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 import getPokemon from "../../node/Ogerpon.js";
 import LoadingIcon from "../components/LoadingIcon.jsx";
 import Sprite from "./Sprite.jsx";
 import Type from "./Type.jsx";
 import Ability from "./Ability.jsx";
 import StatChart from "./StatChart.jsx";
+import Error from "./Error.jsx";
 import "../css/details.css";
 import typeIcons from "../assets/typeIcons.jsx";
 
@@ -25,6 +27,7 @@ export default function PokemonCard({ pokemon, altPokemon }) {
     labels: [],
     values: [],
   });
+  // const navigate = useNavigate();
 
   // If altPokemon is provided, use it directly. Otherwise, fetch with useQuery.
   const shouldUseAlt = !!altPokemon;
@@ -45,8 +48,8 @@ export default function PokemonCard({ pokemon, altPokemon }) {
     }
   }, [displayData]);
 
-  if (!displayData) return <LoadingIcon />;
-  if (error) return <p>Error: {error.message}</p>;
+  if (isLoading || !displayData) return <LoadingIcon />;
+  if (error) return <Error error={"Pokemon Not Found"} />;
 
   return (
     <div

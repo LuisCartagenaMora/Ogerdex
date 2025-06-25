@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { getPokemonDetailed } from "../node/Ogerpon";
 import Sprite from "./components/Sprite.jsx";
 import Type from "./components/Type.jsx";
@@ -13,6 +14,7 @@ import LoadingIcon from "./components/LoadingIcon.jsx";
 import typeIcons from "./assets/typeIcons.jsx";
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
+import Error from "./components/Error.jsx";
 import "./css/characteristics.css";
 import CryIcon from "./assets/Speaker_Icon.svg";
 
@@ -39,6 +41,8 @@ function PokeViewer() {
     values: [],
   });
 
+  const navigate = useNavigate();
+
   const { pokemonId, pokemonName } = useParams();
   const pokemon = pokemonId ?? pokemonName;
 
@@ -57,7 +61,7 @@ function PokeViewer() {
   }, [data]);
 
   if (isLoading) return <LoadingIcon />;
-  if (error) return <p>Error: {error.message}</p>;
+  if (error) return <Error error={"Pokemon Not Found"} />;
   return (
     <>
       <Header />

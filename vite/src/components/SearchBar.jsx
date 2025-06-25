@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Fuse from "fuse.js";
-import pokemonList from "../pokemonList.json"; // Your list of names/ids
+import pokemonList from "../pokemonList.json";
+import Error from "./Error.jsx";
 
 const fuse = new Fuse(pokemonList, {
   keys: ["name", "id"],
@@ -12,10 +13,12 @@ function SearchBar() {
   const navigate = useNavigate();
   const [suggestions, setSuggestions] = useState([]);
   const [input, setInput] = useState("");
+  const [showError, setShowError] = useState(false);
 
   function handleInputChange(e) {
     const value = e.target.value;
     setInput(value);
+    setShowError(false); // Reset error on input change
     if (value.length > 0) {
       const results = fuse
         .search(value)
@@ -45,8 +48,12 @@ function SearchBar() {
           if (e.key === "Enter" && suggestions.length > 0) {
             handleSelect(suggestions[0].name);
           }
+          if (e.key === "Enter" && suggestions.length === 0) {
+            setShowError(true);
+          }
         }}
       />
+      {showError && <Error error={"No Pokemon Found..."} />}
       {suggestions.length > 0 && (
         <ul className="autocomplete-list">
           {suggestions.map((p) => (
