@@ -7,7 +7,6 @@ function toggleImages(state, data) {
     width: "auto",
     maxWidth: "200px",
     height: "auto",
-    maxWidth: "200px",
     imageRendering: "pixelated",
     display: "block",
     margin: "0 auto",
