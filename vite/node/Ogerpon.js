@@ -132,10 +132,11 @@ function getPokemonId(speciesData) {
 }
 
 function getPokemonSprite(pokeData) {
+  console.log(pokeData?.sprites?.other?.home?.front_default)
   return [
-    pokeData?.sprites?.other?.showdown?.front_default ??
+    pokeData?.sprites?.other?.home?.front_default ??
       pokeData?.sprites?.front_default,
-    pokeData?.sprites?.other?.showdown?.front_shiny ??
+    pokeData?.sprites?.other?.home?.front_shiny ??
       pokeData?.sprites?.front_shiny,
   ];
 }
