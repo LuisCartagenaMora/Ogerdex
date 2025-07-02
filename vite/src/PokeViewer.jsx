@@ -1,3 +1,4 @@
+import { useLocation } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
@@ -36,6 +37,7 @@ function handleClick(cry) {
 }
 
 function PokeViewer() {
+    
   const [chartDetails, setChartDetails] = useState({
     labels: [],
     values: [],
@@ -43,13 +45,16 @@ function PokeViewer() {
 
   const navigate = useNavigate();
 
+  const location = useLocation();
+  const error = location.state?.error;
+
   const { pokemonId, pokemonName } = useParams();
   const pokemon = pokemonId ?? pokemonName;
 
-  const { data, error, isLoading } = useQuery({
-    queryKey: ["pokemon", pokemon],
-    queryFn: () => getPokemonDetailed(pokemon),
-  });
+  const { data, error: queryError, isLoading } = useQuery({
+  queryKey: ["pokemon", pokemon],
+  queryFn: () => getPokemonDetailed(pokemon),
+});
 
   useEffect(() => {
     if (data && data.stats) {
@@ -60,11 +65,22 @@ function PokeViewer() {
     }
   }, [data]);
 
+
+
+
+
   if (isLoading) return <LoadingIcon />;
-  if (error) return <Error error={"Pokemon Not Found"} />;
+  if (queryError) return <Error error={"Pokemon Not Found"} />;
   return (
     <>
       <Header />
+      {error && (
+        <div className="error-box" style={{zIndex: 10}}>
+          <img src={ErrorIcon} alt="Error icon" />
+          <span>Error: </span>
+          <span>{error}</span>
+        </div>
+      )}
       <div className="pokeview">
         <div className="poke-char-section">
           <div

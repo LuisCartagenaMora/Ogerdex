@@ -212,6 +212,7 @@ img {
   width: 100%;
   max-width: 1000px; /* Optional: cap the max width */
   margin: 0 auto;
+  border: solid 2px;
 }
 
 .stat-chart-box {
@@ -255,6 +256,7 @@ img {
   border-style: none none solid none;
   background-color: #fcfc55;
   font-weight: bold;
+  text-align: center;
 }
 
 .stat-chart-inner-box-stats {

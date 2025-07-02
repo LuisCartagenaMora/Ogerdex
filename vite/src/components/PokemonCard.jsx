@@ -38,6 +38,7 @@ export default function PokemonCard({ pokemon, altPokemon }) {
   });
 
   const displayData = shouldUseAlt ? altPokemon : data;
+  
 
   useEffect(() => {
     if (displayData && displayData.stats) {
