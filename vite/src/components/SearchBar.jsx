@@ -46,7 +46,7 @@ function SearchBar() {
         onChange={handleInputChange}
         onKeyDown={(e) => {
           if (e.key === "Enter" && suggestions.length > 0) {
-            handleSelect(suggestions[0].name);
+            handleSelect(suggestions[0].id);
           }
           if (e.key === "Enter" && suggestions.length === 0) {
             setShowError(true);
@@ -60,7 +60,7 @@ function SearchBar() {
             <li
               key={p.id}
               style={{ padding: "4px", cursor: "pointer" }}
-              onClick={() => handleSelect(p.name)}
+              onClick={() => handleSelect(p.id)}
             >
               #{p.id} {p.name.charAt(0).toUpperCase() + p.name.slice(1)}
             </li>
